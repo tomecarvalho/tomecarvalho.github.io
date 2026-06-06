@@ -1,0 +1,29 @@
+---
+import type { LanguageOption } from "../i18n/utils";
+
+export interface Props {
+  options: LanguageOption[];
+}
+
+const { options } = Astro.props;
+---
+
+<label class="language-select">
+  <select data-language-select aria-label="Language">
+    {
+      options.map(({ label, href, current }) => (
+        <option value={href} selected={current}>
+          {label}
+        </option>
+      ))
+    }
+  </select>
+</label>
+
+<script>
+  for (const select of document.querySelectorAll("[data-language-select]"))
+    select.addEventListener("change", ({ target }) => {
+      if (target instanceof HTMLSelectElement && target.value)
+        window.location.href = target.value;
+    });
+</script>

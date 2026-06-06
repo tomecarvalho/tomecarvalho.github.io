@@ -1,24 +1,33 @@
 ---
+import type { Props as LanguageSelectProps } from "./LanguageSelect.astro";
+import LanguageSelect from "./LanguageSelect.astro";
 import type { Props as NavProps } from "./Nav.astro";
 import Nav from "./Nav.astro";
 
-export type Props = Pick<NavProps, "routes"> & { title: string };
+export type Props = Pick<NavProps, "routes"> & {
+  title: string;
+  homeHref: string;
+  languageOptions: LanguageSelectProps["options"];
+};
 
-const { routes, title } = Astro.props;
+const { routes, title, homeHref, languageOptions } = Astro.props;
 ---
 
 <header class="header">
-  <a href="/">{title}</a>
-  <button class="menu-button" aria-label="Toggle menu" aria-expanded="false">
-    ≡
-  </button>
-  <Nav routes={routes} />
+  <a href={homeHref}>{title}</a>
+  <div class="header-controls">
+    <LanguageSelect options={languageOptions} />
+    <button class="menu-button" aria-label="Toggle menu" aria-expanded="false">
+      ≡
+    </button>
+    <Nav routes={routes} />
+  </div>
 </header>
 
 <script>
   const menuButton = document.querySelector(".menu-button");
   const nav = document.querySelector(".nav");
-  const navLinks = nav?.querySelectorAll("a");
+  const navLinks = nav?.querySelectorAll("a") ?? [];
 
   menuButton?.addEventListener("click", () => {
     const isOpen = menuButton.getAttribute("aria-expanded") === "true";
@@ -26,12 +35,11 @@ const { routes, title } = Astro.props;
     nav?.classList.toggle("open");
   });
 
-  navLinks?.forEach((link) => {
+  for (const link of navLinks)
     link.addEventListener("click", () => {
       menuButton?.setAttribute("aria-expanded", "false");
       nav?.classList.remove("open");
     });
-  });
 
   document.addEventListener("click", ({ target }) => {
     if (target instanceof Element && !target.closest("header")) {
@@ -49,6 +57,12 @@ const { routes, title } = Astro.props;
     padding: 1rem 2rem;
     border-bottom: 1px solid black;
     position: relative;
+  }
+
+  .header-controls {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
   }
 
   .menu-button {

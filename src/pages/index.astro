@@ -1,9 +1,16 @@
 ---
+import { useTranslations } from "../i18n/utils";
 import Layout from "../layouts/Layout.astro";
+import { site } from "../site";
+
+const t = useTranslations(Astro.currentLocale);
+const about = t("about", { capitalize: true });
+
+const title = `${about} - ${site.name}`;
 ---
 
-<Layout title="About - Tomé Carvalho">
+<Layout title={title}>
   <div class="about-container">
-    <h1>Tomé Carvalho</h1>
+    <h1>{site.name}</h1>
   </div>
 </Layout>

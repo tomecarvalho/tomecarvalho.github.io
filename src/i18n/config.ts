@@ -1,13 +1,13 @@
 import type { AstroUserConfig } from "astro";
 
-const locales = {
+export const localeLabels = {
   en: "English",
   pt: "Português",
 } as const;
 
-export type LocaleKey = keyof typeof locales;
+export type LocaleKey = keyof typeof localeLabels;
 
-const localesArray = Object.keys(locales) as LocaleKey[];
+const localesArray = Object.keys(localeLabels) as LocaleKey[];
 
 export const i18nConfig = {
   locales: localesArray,
