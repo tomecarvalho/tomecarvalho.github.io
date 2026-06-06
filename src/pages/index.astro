@@ -1,16 +1,14 @@
 ---
 import { useTranslations } from "../i18n/utils";
 import Layout from "../layouts/Layout.astro";
-import { site } from "../site";
+import { appendSiteName } from "../site/utils";
 
 const t = useTranslations(Astro.currentLocale);
-const about = t("about", { capitalize: true });
+const title = t("aboutMe", { capitalize: true });
 
-const title = `${about} - ${site.name}`;
+const layoutTitle = appendSiteName(title);
 ---
 
-<Layout title={title}>
-  <div class="about-container">
-    <h1>{site.name}</h1>
-  </div>
+<Layout title={layoutTitle}>
+  <h1>{title}</h1>
 </Layout>

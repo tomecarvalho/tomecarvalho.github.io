@@ -8,7 +8,13 @@ export interface NavRoute {
 
 export type TranslatedNavRoute = Overwrite<NavRoute, { label: string }>;
 
-export const navRoutes: NavRoute[] = [
-  { label: "about", path: "/" },
-  { label: "projects", path: "/projects" },
-] as const;
+export const navRoutes = {
+  aboutMe: { label: "aboutMe", path: "/" },
+  projects: { label: "projects", path: "/projects" },
+} as const satisfies Record<LocaleString, NavRoute>;
+
+/** `navRoutes` entries ordered by the order they should appear in the nav component. */
+export const navRoutesArray = [
+  navRoutes.aboutMe,
+  navRoutes.projects,
+] as const satisfies NavRoute[];

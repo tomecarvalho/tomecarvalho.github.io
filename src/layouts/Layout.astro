@@ -1,10 +1,14 @@
 ---
 import type { Props as HeaderProps } from "../components/Header.astro";
 import Header from "../components/Header.astro";
-import { getRelativeLocaleUrl } from "astro:i18n";
-import { getLanguageOptions, getLocale, useTranslations } from "../i18n/utils";
-import { navRoutes } from "../routes/nav-routes";
-import { site } from "../site";
+import {
+  getLanguageOptions,
+  getLocale,
+  toLocalePath,
+  useTranslations,
+} from "../i18n/utils";
+import { navRoutes, navRoutesArray } from "../routes/nav-routes";
+import siteConfig from "../site/config";
 
 type Props = Pick<HeaderProps, "title">;
 
@@ -18,13 +22,12 @@ const languageOptions = getLanguageOptions(
   Astro.currentLocale,
 );
 
-const toLocalePath = (path: string) =>
-  getRelativeLocaleUrl(locale, path === "/" ? "" : path.replace(/^\//, ""));
-
-const translatedNavRoutes: HeaderProps["routes"] = navRoutes.map((route) => ({
-  path: toLocalePath(route.path),
-  label: t(route.label, { capitalize: true }),
-}));
+const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
+  (route) => ({
+    path: toLocalePath(locale, route.path),
+    label: t(route.label, { capitalize: true }),
+  }),
+);
 ---
 
 <!doctype html>
@@ -63,8 +66,8 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutes.map((route) => ({
   <body class="body">
     <Header
       routes={translatedNavRoutes}
-      title={site.name}
-      homeHref={toLocalePath("/")}
+      title={siteConfig.name}
+      homeHref={toLocalePath(locale, navRoutes.aboutMe.path)}
       languageOptions={languageOptions}
     />
     <main class="main">

@@ -1,7 +1,7 @@
 import type { LocaleKey } from "./config";
 
 const en = {
-  about: "about",
+  aboutMe: "about me",
   projects: "projects",
 };
 
@@ -22,7 +22,7 @@ type Ui = {
 } & Record<NonDefaultLocaleKeys, PartialLocaleStrings>;
 
 const pt: PartialLocaleStrings = {
-  about: "sobre",
+  aboutMe: "sobre mim",
   projects: "projetos",
 };
 

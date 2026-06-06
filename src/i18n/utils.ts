@@ -22,6 +22,9 @@ export const getLocale = (currentLocale: CurrentLocale): LocaleKey =>
     ? (currentLocale as LocaleKey)
     : defaultLocale;
 
+export const toLocalePath = (locale: LocaleKey, path: string) =>
+  getRelativeLocaleUrl(locale, path === "/" ? "" : path.replace(/^\//, ""));
+
 const getPathWithoutLocale = (pathname: string): string => {
   for (const locale of locales) {
     if (locale === defaultLocale) continue;

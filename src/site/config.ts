@@ -1,4 +1,4 @@
-export const site = {
+const siteConfig = {
   handle: "tomecarvalho",
   name: "Tomé Carvalho",
   email: "tomecarvalho01@gmail.com",
@@ -8,3 +8,5 @@ export const site = {
     linkedin: "https://www.linkedin.com/in/tomecarvalho",
   },
 };
+
+export default siteConfig;
