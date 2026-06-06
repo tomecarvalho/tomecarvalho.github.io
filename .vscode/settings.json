@@ -4,5 +4,6 @@
   "eslint.validate": ["javascript", "typescript", "astro"],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
-  }
+  },
+  "cSpell.language": "en,en-GB,pt"
 }
