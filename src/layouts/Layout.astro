@@ -1,11 +1,19 @@
 ---
 import type { Props as HeaderProps } from "../components/Header.astro";
 import Header from "../components/Header.astro";
-import { NAV_ROUTES } from "../config/nav-routes";
+import { useTranslations } from "../i18n/utils";
+import { navRoutes } from "../routes/nav-routes";
 
 type Props = Pick<HeaderProps, "title">;
 
 const { title } = Astro.props;
+
+const t = useTranslations(Astro.currentLocale);
+
+const translatedNavRoutes: HeaderProps["routes"] = navRoutes.map((route) => ({
+  ...route,
+  label: t(route.label, { capitalize: true }),
+}));
 ---
 
 <!doctype html>
@@ -42,7 +50,7 @@ const { title } = Astro.props;
     </style>
   </head>
   <body class="body">
-    <Header routes={NAV_ROUTES} title="tomecarvalho" />
+    <Header routes={translatedNavRoutes} title="tomecarvalho" />
     <main class="main">
       <slot />
     </main>

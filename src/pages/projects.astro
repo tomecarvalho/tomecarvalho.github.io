@@ -1,7 +1,12 @@
 ---
+import { useTranslations } from "../i18n/utils";
 import Layout from "../layouts/Layout.astro";
+
+const t = useTranslations(Astro.currentLocale);
+
+const title = t("projects", { capitalize: true });
 ---
 
 <Layout title="Projects - Tomé Carvalho">
-  <h1>Projects</h1>
+  <h1>{title}</h1>
 </Layout>
