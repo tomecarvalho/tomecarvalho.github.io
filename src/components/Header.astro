@@ -1,23 +1,18 @@
 ---
-import { NAV_ROUTES } from "../config/nav-routes";
+import type { Props as NavProps } from "./Nav.astro";
+import Nav from "./Nav.astro";
 
-const { pathname } = Astro.url;
+export type Props = Pick<NavProps, "routes"> & { title: string };
+
+const { routes, title } = Astro.props;
 ---
 
 <header class="header">
-  <a href="/">tomecarvalho</a>
+  <a href="/">{title}</a>
   <button class="menu-button" aria-label="Toggle menu" aria-expanded="false">
     ≡
   </button>
-  <nav class="nav">
-    {
-      NAV_ROUTES.map(({ path, label }) => (
-        <a href={path} class:list={[{ active: pathname === path }]}>
-          {label}
-        </a>
-      ))
-    }
-  </nav>
+  <Nav routes={routes} />
 </header>
 
 <script>
@@ -65,41 +60,9 @@ const { pathname } = Astro.url;
     font-size: 1.5rem;
   }
 
-  .nav {
-    display: flex;
-    gap: 2rem;
-  }
-
-  .nav a {
-    white-space: nowrap;
-  }
-
-  .nav a.active {
-    font-weight: 500;
-  }
-
   @media (max-width: 640px) {
     .menu-button {
       display: flex;
-    }
-
-    .nav {
-      position: absolute;
-      top: 85%;
-      right: 1rem;
-      background-color: white;
-      border: 1px solid black;
-      display: none;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .nav.open {
-      display: flex;
-    }
-
-    .nav a {
-      padding: 1rem 1.5rem;
     }
   }
 </style>
