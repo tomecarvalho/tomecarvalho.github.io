@@ -1,0 +1,105 @@
+---
+import { NAV_ROUTES } from "../config/nav-routes";
+
+const { pathname } = Astro.url;
+---
+
+<header class="header">
+  <a href="/">tomecarvalho</a>
+  <button class="menu-button" aria-label="Toggle menu" aria-expanded="false">
+    ≡
+  </button>
+  <nav class="nav">
+    {
+      NAV_ROUTES.map(({ path, label }) => (
+        <a href={path} class:list={[{ active: pathname === path }]}>
+          {label}
+        </a>
+      ))
+    }
+  </nav>
+</header>
+
+<script>
+  const menuButton = document.querySelector(".menu-button");
+  const nav = document.querySelector(".nav");
+  const navLinks = nav?.querySelectorAll("a");
+
+  menuButton?.addEventListener("click", () => {
+    const isOpen = menuButton.getAttribute("aria-expanded") === "true";
+    menuButton.setAttribute("aria-expanded", (!isOpen).toString());
+    nav?.classList.toggle("open");
+  });
+
+  navLinks?.forEach((link) => {
+    link.addEventListener("click", () => {
+      menuButton?.setAttribute("aria-expanded", "false");
+      nav?.classList.remove("open");
+    });
+  });
+
+  document.addEventListener("click", ({ target }) => {
+    if (target instanceof Element && !target.closest("header")) {
+      menuButton?.setAttribute("aria-expanded", "false");
+      nav?.classList.remove("open");
+    }
+  });
+</script>
+
+<style>
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid black;
+    position: relative;
+  }
+
+  .menu-button {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: 1.5rem;
+  }
+
+  .nav {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .nav a {
+    white-space: nowrap;
+  }
+
+  .nav a.active {
+    font-weight: 500;
+  }
+
+  @media (max-width: 640px) {
+    .menu-button {
+      display: flex;
+    }
+
+    .nav {
+      position: absolute;
+      top: 85%;
+      right: 1rem;
+      background-color: white;
+      border: 1px solid black;
+      display: none;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .nav.open {
+      display: flex;
+    }
+
+    .nav a {
+      padding: 1rem 1.5rem;
+    }
+  }
+</style>
