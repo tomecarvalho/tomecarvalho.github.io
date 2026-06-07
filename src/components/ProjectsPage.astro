@@ -1,0 +1,20 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { appendSiteName } from "../site/utils";
+
+export interface Props {
+  text: {
+    title: string;
+  };
+}
+
+const {
+  text: { title },
+} = Astro.props;
+
+const layoutTitle = appendSiteName(title);
+---
+
+<Layout title={layoutTitle}>
+  <h1>{title}</h1>
+</Layout>

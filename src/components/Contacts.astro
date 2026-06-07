@@ -1,0 +1,32 @@
+---
+import Contact from "./Contact.astro";
+import type { Props as ContactProps } from "./Contact.astro";
+
+export interface Props {
+  contacts: ContactProps["contact"][];
+}
+
+const { contacts } = Astro.props;
+---
+
+<ul class="contacts">
+  {
+    contacts.map((contact) => (
+      <li>
+        <Contact contact={contact} />
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .contacts {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .contacts > li {
+    list-style: none;
+  }
+</style>

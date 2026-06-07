@@ -1,14 +1,11 @@
 ---
+import type { Props as ProjectsPageProps } from "../components/ProjectsPage.astro";
+import ProjectsPage from "../components/ProjectsPage.astro";
 import { useTranslations } from "../i18n/utils";
-import Layout from "../layouts/Layout.astro";
-import { appendSiteName } from "../site/utils";
 
 const t = useTranslations(Astro.currentLocale);
-const title = t("projects", { capitalize: true });
 
-const layoutTitle = appendSiteName(title);
+const text: ProjectsPageProps["text"] = { title: t("nav.projects") };
 ---
 
-<Layout title={layoutTitle}>
-  <h1>{title}</h1>
-</Layout>
+<ProjectsPage text={text} />

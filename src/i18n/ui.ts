@@ -1,8 +1,12 @@
 import type { LocaleKey } from "./config";
 
 const en = {
-  aboutMe: "about me",
-  projects: "projects",
+  "nav.aboutMe": "About Me",
+  "nav.projects": "Projects",
+  "terms.softwareDeveloper": "Software Developer",
+  "terms.portugal": "Portugal",
+  "aboutMe.description.tomecarvalho":
+    "I'm a computer science professional with a passion for exploring technologies that allow me to build clean solutions across the full stack: from robust back-end services to user-friendly interfaces, with DevOps practices and automation in mind to ensure reliability and efficiency.",
 };
 
 type FullLocaleStrings = typeof en;
@@ -22,8 +26,12 @@ type Ui = {
 } & Record<NonDefaultLocaleKeys, PartialLocaleStrings>;
 
 const pt: PartialLocaleStrings = {
-  aboutMe: "sobre mim",
-  projects: "projetos",
+  "nav.aboutMe": "Sobre Mim",
+  "nav.projects": "Projetos",
+  "terms.softwareDeveloper": "Desenvolvedor de Software",
+  "terms.portugal": "Portugal",
+  "aboutMe.description.tomecarvalho":
+    "Sou um profissional de engenharia informática com uma paixão por explorar tecnologias que me permitem construir soluções sólidas em toda a stack tecnológica: desde serviços de back-end robustos a interfaces intuitivas, tendo sempre em mente práticas de DevOps e automatização para garantir fiabilidade e eficiência.",
 };
 
 export const ui: Ui = { en, pt } as const;

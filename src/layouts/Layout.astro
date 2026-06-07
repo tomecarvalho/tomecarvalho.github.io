@@ -42,8 +42,15 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
     <style is:global>
       * {
         margin: 0;
-        padding: 0;
         box-sizing: border-box;
+      }
+
+      p {
+        margin-bottom: 1rem;
+      }
+
+      ul {
+        padding: 0;
       }
     </style>
     <style>
@@ -52,6 +59,7 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
         display: flex;
         flex-direction: column;
         min-height: 100vh;
+        margin: 0;
       }
 
       .main {

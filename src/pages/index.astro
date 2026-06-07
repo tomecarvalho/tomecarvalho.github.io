@@ -1,14 +1,18 @@
 ---
+import type { Props as IndexPageProps } from "../components/IndexPage.astro";
+import IndexPage from "../components/IndexPage.astro";
 import { useTranslations } from "../i18n/utils";
-import Layout from "../layouts/Layout.astro";
-import { appendSiteName } from "../site/utils";
+import siteConfig from "../site/config";
 
 const t = useTranslations(Astro.currentLocale);
-const title = t("aboutMe", { capitalize: true });
 
-const layoutTitle = appendSiteName(title);
+const text: IndexPageProps["text"] = {
+  title: t("nav.aboutMe"),
+  name: siteConfig.name,
+  role: t(siteConfig.i18n.role),
+  location: t(siteConfig.i18n.location),
+  description: t(siteConfig.i18n.aboutMeDescription),
+} as const;
 ---
 
-<Layout title={layoutTitle}>
-  <h1>{title}</h1>
-</Layout>
+<IndexPage text={text} contacts={siteConfig.contacts} />

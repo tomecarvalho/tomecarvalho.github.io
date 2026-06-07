@@ -1,0 +1,45 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { appendSiteName } from "../site/utils";
+import type { Props as ContactsProps } from "./Contacts.astro";
+import Contacts from "./Contacts.astro";
+
+export interface Props {
+  text: {
+    title: string;
+    name: string;
+    role: string;
+    location: string;
+    description: string;
+  };
+  contacts: ContactsProps["contacts"];
+}
+
+const {
+  text: { title, name, role, location, description },
+  contacts,
+} = Astro.props;
+
+const layoutTitle = appendSiteName(title);
+
+const roleAndLocation = `${role} - ${location}`;
+---
+
+<Layout title={layoutTitle}>
+  <section>
+    <h1 class="name">{name}</h1>
+    <h3 class="role-and-location">{roleAndLocation}</h3>
+    <p>{description}</p>
+    <Contacts contacts={contacts} />
+  </section>
+</Layout>
+
+<style>
+  .name {
+    margin-bottom: 0.25rem;
+  }
+
+  .role-and-location {
+    margin-bottom: 1rem;
+  }
+</style>

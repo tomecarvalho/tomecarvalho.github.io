@@ -1,0 +1,22 @@
+---
+import type { Contact } from "../types/Contact";
+
+export interface Props {
+  contact: Contact;
+}
+
+const {
+  contact: { label, value, href },
+} = Astro.props;
+---
+
+<a class="contact" href={href}>{`${label}: ${value}`}</a>
+
+<style>
+  .contact {
+    display: inline-block;
+    border: 1px solid black;
+    padding: 0.5rem 1rem;
+    text-wrap: nowrap;
+  }
+</style>
