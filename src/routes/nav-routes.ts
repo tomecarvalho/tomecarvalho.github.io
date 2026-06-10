@@ -1,5 +1,5 @@
 import type { LocaleString } from "../i18n/ui";
-import type { Overwrite } from "../types/Overwrite";
+import type { Overwrite } from "../types/util/Overwrite";
 
 export interface NavRoute {
   label: LocaleString;
