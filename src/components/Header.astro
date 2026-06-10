@@ -17,7 +17,6 @@ const { routes, title, homeHref, languageOptions } = Astro.props;
   <div class="header-content">
     <a href={homeHref}>{title}</a>
     <div class="header-controls">
-      <LanguageSelect options={languageOptions} />
       <button
         class="menu-button"
         aria-label="Toggle menu"
@@ -26,6 +25,7 @@ const { routes, title, homeHref, languageOptions } = Astro.props;
         ≡
       </button>
       <Nav routes={routes} />
+      <LanguageSelect options={languageOptions} />
     </div>
   </div>
 </header>
@@ -75,7 +75,7 @@ const { routes, title, homeHref, languageOptions } = Astro.props;
   .header-controls {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 2rem;
   }
 
   .menu-button {

@@ -1,4 +1,5 @@
 ---
+import { Icon } from "astro-icon/components";
 import type { LanguageOption } from "../i18n/utils";
 
 export interface Props {
@@ -9,6 +10,7 @@ const { options } = Astro.props;
 ---
 
 <label class="language-select">
+  <Icon name="mdi:language" />
   <select data-language-select aria-label="Language">
     {
       options.map(({ label, href, current }) => (
@@ -27,3 +29,11 @@ const { options } = Astro.props;
         window.location.href = target.value;
     });
 </script>
+
+<style>
+  .language-select {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+</style>
