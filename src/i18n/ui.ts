@@ -3,8 +3,14 @@ import type { LocaleKey } from "./config";
 const en = {
   "nav.aboutMe": "About Me",
   "nav.projects": "Projects",
+
   "terms.softwareDeveloper": "Software Developer",
   "terms.portugal": "Portugal",
+  "terms.universityCoursework": "University Coursework",
+  "terms.year": "Year {year}",
+  "terms.semesters.1": "1st Semester",
+  "terms.semesters.2": "2nd Semester",
+
   "aboutMe.description.tomecarvalho":
     "I'm a computer science professional with a passion for exploring technologies that allow me to build clean solutions across the full stack: from robust back-end services to user-friendly interfaces, with DevOps practices and automation in mind to ensure reliability and efficiency.",
 
@@ -48,7 +54,7 @@ const en = {
   "projects.cookAndGo": "Cook and Go",
   "projects.netCafeWebApplicationForManagementOfAnInternetCafeFranchise":
     "NetCafe: Web application for management of an Internet Café franchise",
-  "projects.weWereHacked": "We were hacked",
+  "projects.weWereHacked": "We were Hacked",
   "projects.uapAuthentication": "UAP Authentication",
   "projects.vulnerableWebApp": "Vulnerable Web App",
   "projects.buyAndSellWebsite": "Buy & Sell Website",
@@ -63,7 +69,7 @@ const en = {
     "Anatomy of a Web Connection: A Brief Analysis",
   "projects.analysisOfTheSignalProtocol": "Analysis of the Signal Protocol",
   "projects.digitalMarketplaceForLastMileDeliveries":
-    "Digital marketplace for last-mile deliveries",
+    "Digital Marketplace for Last-Mile Deliveries",
 
   "topics.c": "C",
   "topics.algorithms": "Algorithms",
@@ -156,8 +162,14 @@ type Ui = {
 const pt: PartialLocaleStrings = {
   "nav.aboutMe": "Sobre Mim",
   "nav.projects": "Projetos",
+
   "terms.softwareDeveloper": "Desenvolvedor de Software",
   "terms.portugal": "Portugal",
+  "terms.universityCoursework": "Trabalhos Universitários",
+  "terms.year": "{year}º Ano",
+  "terms.semesters.1": "1º Semestre",
+  "terms.semesters.2": "2º Semestre",
+
   "aboutMe.description.tomecarvalho":
     "Sou um profissional de engenharia informática com uma paixão por explorar tecnologias que me permitem construir soluções sólidas em toda a stack tecnológica: desde serviços de back-end robustos a interfaces intuitivas, tendo sempre em mente práticas de DevOps e automatização para garantir fiabilidade e eficiência.",
 
@@ -200,7 +212,7 @@ const pt: PartialLocaleStrings = {
   "projects.cookAndGo": "Cook and Go",
   "projects.netCafeWebApplicationForManagementOfAnInternetCafeFranchise":
     "NetCafe: Aplicação web para gestão de uma franquia de cibercafé",
-  "projects.weWereHacked": "Fomos hackeados",
+  "projects.weWereHacked": "Fomos Hacked",
   "projects.uapAuthentication": "Autenticação UAP",
   "projects.vulnerableWebApp": "Aplicação Web Vulnerável",
   "projects.buyAndSellWebsite": "Website de Compra e Venda",
@@ -215,7 +227,7 @@ const pt: PartialLocaleStrings = {
     "Anatomia de uma Ligação Web: Uma Breve Análise",
   "projects.analysisOfTheSignalProtocol": "Análise do Protocolo Signal",
   "projects.digitalMarketplaceForLastMileDeliveries":
-    "Mercado digital para entregas de última milha",
+    "Mercado Digital para Entregas de Último Quilómetro",
 
   "topics.c": "C",
   "topics.algorithms": "Algoritmos",

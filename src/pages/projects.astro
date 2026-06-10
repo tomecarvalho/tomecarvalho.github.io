@@ -2,10 +2,37 @@
 import type { Props as ProjectsPageProps } from "../components/ProjectsPage.astro";
 import ProjectsPage from "../components/ProjectsPage.astro";
 import { useTranslations } from "../i18n/utils";
+import siteConfig from "../site/config";
 
 const t = useTranslations(Astro.currentLocale);
 
-const text: ProjectsPageProps["text"] = { title: t("nav.projects") };
+const semesterTitles: Record<number, string> = {
+  1: t("terms.semesters.1"),
+  2: t("terms.semesters.2"),
+};
+
+const coursework: ProjectsPageProps["coursework"] = siteConfig.coursework.map(
+  (yearEntry) => ({
+    title: t("terms.year").replace("{year}", yearEntry.year.toString()),
+    semesters: yearEntry.semesters.map((semester) => ({
+      title: semesterTitles[semester.number] ?? semester.number.toString(),
+      subjects: semester.subjects.map((subject) => ({
+        name: t(subject.name),
+        href: subject.href,
+        projects: subject.projects.map((project) => ({
+          name: t(project.name),
+          href: project.href,
+          topics: project.topics.map((topic) => t(topic)),
+        })),
+      })),
+    })),
+  }),
+);
+
+const text: ProjectsPageProps["text"] = {
+  title: t("nav.projects"),
+  coursework: t("terms.universityCoursework"),
+};
 ---
 
-<ProjectsPage text={text} />
+<ProjectsPage text={text} coursework={coursework} />

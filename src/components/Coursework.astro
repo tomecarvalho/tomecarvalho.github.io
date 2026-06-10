@@ -1,0 +1,59 @@
+---
+import type { Props as CourseworkSemesterProps } from "./CourseworkSemester.astro";
+import CourseworkSemester from "./CourseworkSemester.astro";
+
+export interface Props {
+  coursework: {
+    title: string;
+    semesters: CourseworkSemesterProps["semester"][];
+  }[];
+}
+
+const { coursework } = Astro.props;
+---
+
+<div class="coursework">
+  {
+    coursework.map((year) => (
+      <article class="year">
+        <h3 class="year-title">{year.title}</h3>
+        <div class="semesters">
+          {year.semesters.map((semester) => (
+            <CourseworkSemester semester={semester} />
+          ))}
+        </div>
+      </article>
+    ))
+  }
+</div>
+
+<style>
+  .coursework {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .year {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .year-title {
+    font-size: 1.25rem;
+  }
+
+  .semesters {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  /* Two columns on wide windows. Single column on narrow windows. */
+  @media (min-width: 900px) {
+    .semesters {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>
