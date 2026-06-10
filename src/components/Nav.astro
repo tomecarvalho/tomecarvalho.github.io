@@ -33,11 +33,12 @@ const { pathname } = Astro.url;
     font-weight: 500;
   }
 
+  /* Narrow windows: Nav links are displayed in a dropdown menu. */
   @media (max-width: 640px) {
     .nav {
       position: absolute;
-      top: 85%;
-      right: 1rem;
+      top: 125%;
+      right: 0;
       background-color: white;
       border: 1px solid black;
       display: none;
