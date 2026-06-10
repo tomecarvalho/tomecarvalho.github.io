@@ -18,7 +18,9 @@
     "check": "pnpm lint && pnpm format:check && pnpm typecheck && pnpm knip"
   },
   "dependencies": {
-    "astro": "^6.4.4"
+    "@iconify-json/mdi": "^1.2.3",
+    "astro": "^6.4.4",
+    "astro-icon": "^1.1.5"
   },
   "devDependencies": {
     "@types/node": "^25.9.1",

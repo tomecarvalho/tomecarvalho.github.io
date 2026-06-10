@@ -21,20 +21,23 @@ const siteConfig = {
   contacts: [
     {
       id: "email",
+      icon: "mdi:email",
       label: "Email",
       value: "tomecarvalho01@gmail.com",
       href: "mailto:tomecarvalho01@gmail.com",
     },
     {
       id: "github",
+      icon: "mdi:github",
       label: "GitHub",
-      value: "tomecarvalho",
+      value: "",
       href: "https://github.com/tomecarvalho",
     },
     {
       id: "linkedin",
+      icon: "mdi:linkedin",
       label: "LinkedIn",
-      value: "tomecarvalho",
+      value: "",
       href: "https://www.linkedin.com/in/tomecarvalho",
     },
   ],

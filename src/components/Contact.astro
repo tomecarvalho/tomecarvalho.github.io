@@ -1,22 +1,64 @@
 ---
 import type { Contact } from "../types/Contact";
+import { Icon } from "astro-icon/components";
 
 export interface Props {
   contact: Contact;
 }
 
 const {
-  contact: { label, value, href },
+  contact: { id, icon, label, value, href },
 } = Astro.props;
 ---
 
-<a class="contact" href={href}>{`${label}: ${value}`}</a>
+{
+  value ? (
+    <div class="contact">
+      <a class="contactAnchor" href={href} title={label}>
+        <Icon name={icon} size="1.5rem" />
+        {value}
+      </a>
+      <button
+        type="button"
+        aria-label="Copy to clipboard"
+        title="Copy to clipboard"
+        data-copy-value={value}
+        id={id}
+      >
+        <Icon name="mdi:content-copy" size="1rem" />
+      </button>
+    </div>
+  ) : (
+    <a class="contact contactAnchor" href={href} title={label}>
+      <Icon name={icon} size="1.5rem" />
+    </a>
+  )
+}
+
+<script>
+  document.addEventListener("click", async ({ target }) => {
+    if (!(target instanceof Element)) return;
+
+    const button = target.closest(".contact button");
+    const copyValue = button?.getAttribute("data-copy-value");
+
+    if (copyValue) await navigator.clipboard.writeText(copyValue);
+  });
+</script>
 
 <style>
   .contact {
-    display: inline-block;
+    display: inline-flex;
     border: 1px solid black;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0.75rem;
     text-wrap: nowrap;
+    gap: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .contactAnchor {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 </style>
