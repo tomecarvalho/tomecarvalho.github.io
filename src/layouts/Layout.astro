@@ -40,6 +40,11 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <style is:global>
+      :root {
+        --content-max-width: 800px;
+        --content-padding-x: 2rem;
+      }
+
       * {
         margin: 0;
         box-sizing: border-box;
@@ -64,10 +69,9 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
 
       .main {
         flex: 1;
-        max-width: 800px;
         margin: 0 auto;
-        padding: 2rem;
-        width: 100%;
+        padding: 2rem var(--content-padding-x);
+        width: min(100%, var(--content-max-width));
       }
     </style>
   </head>

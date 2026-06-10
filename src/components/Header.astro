@@ -14,13 +14,19 @@ const { routes, title, homeHref, languageOptions } = Astro.props;
 ---
 
 <header class="header">
-  <a href={homeHref}>{title}</a>
-  <div class="header-controls">
-    <LanguageSelect options={languageOptions} />
-    <button class="menu-button" aria-label="Toggle menu" aria-expanded="false">
-      ≡
-    </button>
-    <Nav routes={routes} />
+  <div class="header-content">
+    <a href={homeHref}>{title}</a>
+    <div class="header-controls">
+      <LanguageSelect options={languageOptions} />
+      <button
+        class="menu-button"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
+        ≡
+      </button>
+      <Nav routes={routes} />
+    </div>
   </div>
 </header>
 
@@ -50,13 +56,20 @@ const { routes, title, homeHref, languageOptions } = Astro.props;
 </script>
 
 <style>
-  .header {
+  .header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 0 var(--content-padding-x);
+    width: min(100%, var(--content-max-width));
+  }
+
+  .header {
+    padding: 1rem 0;
     border-bottom: 1px solid black;
     position: relative;
+    display: flex;
+    justify-content: center;
   }
 
   .header-controls {
