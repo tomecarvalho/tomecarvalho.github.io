@@ -1,24 +1,24 @@
-import type { LocaleString } from "../../../i18n/ui";
+import type { Translatable } from "../../../i18n/types";
 
 interface CourseworkProject {
-  name: LocaleString;
+  name: Translatable;
   href: string;
-  topics: LocaleString[];
+  topics: Translatable[];
 }
 
 interface CourseworkSubject {
-  name: LocaleString;
+  name: Translatable;
   href: string;
   projects: CourseworkProject[];
 }
 
 interface CourseworkSemester {
-  number: number;
+  title: Translatable;
   subjects: CourseworkSubject[];
 }
 
 interface CourseworkYear {
-  year: number;
+  title: Translatable;
   semesters: CourseworkSemester[];
 }
 

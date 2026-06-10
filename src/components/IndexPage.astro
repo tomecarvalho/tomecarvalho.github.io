@@ -3,6 +3,8 @@ import Layout from "../layouts/Layout.astro";
 import { appendSiteName } from "../site/utils";
 import type { Props as ContactsProps } from "./Contacts.astro";
 import Contacts from "./Contacts.astro";
+import type { Props as ParagraphsProps } from "./Paragraphs.astro";
+import Paragraphs from "./Paragraphs.astro";
 
 export interface Props {
   text: {
@@ -10,7 +12,7 @@ export interface Props {
     name: string;
     role: string;
     location: string;
-    description: string;
+    description: ParagraphsProps["paragraphs"];
   };
   contacts: ContactsProps["contacts"];
 }
@@ -29,7 +31,7 @@ const roleAndLocation = `${role} - ${location}`;
   <section>
     <h1 class="name">{name}</h1>
     <h3 class="role-and-location">{roleAndLocation}</h3>
-    <p>{description}</p>
+    <Paragraphs paragraphs={description} />
     <Contacts contacts={contacts} />
   </section>
 </Layout>

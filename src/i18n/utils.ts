@@ -1,11 +1,10 @@
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { capitalize } from "../utils/string";
 import { i18nConfig, localeLabels, type LocaleKey } from "./config";
+import { isTranslations, type Translatable } from "./types";
 import { ui } from "./ui";
 
 const { defaultLocale, locales } = i18nConfig;
-
-type UiKey = keyof (typeof ui)[typeof defaultLocale];
 
 /** `Astro.currentLocale` is of this type. */
 export type CurrentLocale = string | undefined;
@@ -60,8 +59,10 @@ export const getLanguageOptions = (
 export const useTranslations = (currentLocale: CurrentLocale) => {
   const locale = getLocale(currentLocale);
 
-  return (key: UiKey, options?: { capitalize?: boolean }) => {
-    let string = ui[locale][key] || ui[defaultLocale][key];
+  return (value: Translatable, options?: { capitalize?: boolean }) => {
+    let string = isTranslations(value)
+      ? (value[locale] ?? value.en)
+      : ui[locale][value] || ui[defaultLocale][value];
 
     if (options?.capitalize) string = capitalize(string);
 

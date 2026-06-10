@@ -6,16 +6,11 @@ import siteConfig from "../site/config";
 
 const t = useTranslations(Astro.currentLocale);
 
-const semesterTitles: Record<number, string> = {
-  1: t("terms.semesters.1"),
-  2: t("terms.semesters.2"),
-};
-
 const coursework: ProjectsPageProps["coursework"] = siteConfig.coursework.map(
   (yearEntry) => ({
-    title: t("terms.year").replace("{year}", yearEntry.year.toString()),
+    title: t(yearEntry.title),
     semesters: yearEntry.semesters.map((semester) => ({
-      title: semesterTitles[semester.number] ?? semester.number.toString(),
+      title: t(semester.title),
       subjects: semester.subjects.map((subject) => ({
         name: t(subject.name),
         href: subject.href,

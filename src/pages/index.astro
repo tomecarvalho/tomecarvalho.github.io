@@ -3,6 +3,7 @@ import type { Props as IndexPageProps } from "../components/IndexPage.astro";
 import IndexPage from "../components/IndexPage.astro";
 import { useTranslations } from "../i18n/utils";
 import siteConfig from "../site/config";
+import { splitParagraphs } from "../utils/string";
 
 const t = useTranslations(Astro.currentLocale);
 
@@ -11,7 +12,7 @@ const text: IndexPageProps["text"] = {
   name: siteConfig.name,
   role: t(siteConfig.i18n.role),
   location: t(siteConfig.i18n.location),
-  description: t(siteConfig.i18n.aboutMeDescription),
+  description: splitParagraphs(t(siteConfig.i18n.aboutMeDescription)),
 } as const;
 ---
 
