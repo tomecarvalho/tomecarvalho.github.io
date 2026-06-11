@@ -1,0 +1,20 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = Omit<HTMLAttributes<"button">, "type"> & {
+  type?: "button" | "submit" | "reset";
+};
+
+const { type = "button", ...rest } = Astro.props;
+---
+
+<button type={type} {...rest}>
+  <slot />
+</button>
+
+<style>
+  button {
+    all: unset;
+    cursor: pointer;
+  }
+</style>

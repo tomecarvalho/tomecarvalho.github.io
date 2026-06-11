@@ -43,11 +43,48 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
       :root {
         --content-max-width: 900px;
         --content-padding-x: 2rem;
+
+        /* Adwaita base */
+
+        --button-align-items: center;
+        --button-border-radius: var(--paper-border-radius);
+        --button-border: none;
+        --button-box-shadow: var(--paper-box-shadow);
+        --button-cursor: pointer;
+        --button-display: inline-flex;
+        --button-font-color: inherit;
+        --button-font-size: 1rem;
+        --button-padding: var(--paper-padding);
+        --button-transition: background-color var(--transition-duration);
+        --button-width: fit-content;
+
+        --paper-border-radius: 12px;
+        --paper-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        --paper-padding: 1rem 1.25rem;
+
+        --transition-duration: 0.2s;
+
+        --text-secondary-font-size: 0.875rem;
+
+        /* Adwaita dark */
+
+        --bg-color-dark: #1d1d20;
+
+        --paper-bg-color-dark: #333337;
+
+        --button-bg-color-dark: #333337;
+        --button-bg-color-hover-dark: #39393d;
+
+        --font-color-dark: #f0f0f0;
+        --font-color-secondary-dark: #9f9fa1;
+
+        --header-bg-color-dark: #2e2e32;
       }
 
       * {
         margin: 0;
         box-sizing: border-box;
+        color: var(--font-color-dark);
       }
 
       p {
@@ -60,6 +97,37 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
 
       a {
         text-decoration: none;
+        transition: text-decoration var(--transition-duration);
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      button,
+      .button {
+        background-color: var(--button-bg-color-dark);
+        border-radius: var(--button-border-radius);
+        color: var(--button-font-color);
+        border: var(--button-border);
+        box-shadow: var(--button-box-shadow);
+        padding: var(--button-padding);
+        font-size: var(--button-font-size);
+        cursor: var(--button-cursor);
+        width: var(--button-width);
+        display: var(--button-display);
+        align-items: var(--button-align-items);
+      }
+
+      button:hover,
+      .button:hover {
+        background-color: var(--button-bg-color-hover-dark);
+        transition: var(--button-transition);
+      }
+
+      .text-secondary {
+        font-size: var(--text-secondary-font-size);
+        color: var(--font-color-secondary-dark);
       }
     </style>
   </head>
@@ -84,6 +152,7 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    background-color: var(--bg-color-dark);
   }
 
   .main {

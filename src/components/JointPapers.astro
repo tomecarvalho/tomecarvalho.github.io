@@ -1,0 +1,40 @@
+---
+import type { AsProp } from "../types/component/AsProp";
+
+type Props = {
+  class?: string;
+} & AsProp;
+
+const { class: className, as: Tag = "div" } = Astro.props;
+---
+
+<Tag class:list={["joint-papers", className]}>
+  <slot />
+</Tag>
+
+<style is:global>
+  .joint-papers {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .joint-papers > .paper {
+    border-radius: 0;
+    box-shadow: none;
+    border-bottom: 1px solid #212125;
+  }
+
+  .joint-papers > .paper:first-child {
+    border-radius: 12px 12px 0 0;
+  }
+
+  .joint-papers > .paper:last-child {
+    border-radius: 0 0 12px 12px;
+    border-bottom: none;
+  }
+
+  .joint-papers > .paper:only-child {
+    border-radius: 12px;
+    border-bottom: none;
+  }
+</style>

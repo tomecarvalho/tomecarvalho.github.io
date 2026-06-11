@@ -20,7 +20,7 @@ const { subject } = Astro.props;
   <h5 class="subject-title">
     <a href={subject.href}>{subject.name}</a>
   </h5>
-  <ul class="projects">
+  <Stack as="ul" class="projects" gap={2}>
     {
       subject.projects.map(({ name, href, topics }) => {
         const topicsString = topics.join(", ");
@@ -29,13 +29,13 @@ const { subject } = Astro.props;
           <Fragment>
             <Stack as="li" gap={0.5}>
               <a href={href}>{name}</a>
-              <p class="topics">{topicsString}</p>
+              <span class="text-secondary">{topicsString}</span>
             </Stack>
           </Fragment>
         );
       })
     }
-  </ul>
+  </Stack>
 </Stack>
 
 <style>
@@ -45,9 +45,5 @@ const { subject } = Astro.props;
 
   .projects {
     list-style: none;
-  }
-
-  .topics {
-    font-size: 0.875rem;
   }
 </style>

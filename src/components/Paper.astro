@@ -1,0 +1,22 @@
+---
+import type { AsProp } from "../types/component/AsProp";
+
+type Props = {
+  class?: string;
+} & AsProp;
+
+const { class: className, as: Tag = "div" } = Astro.props;
+---
+
+<Tag class:list={["paper", className]}>
+  <slot />
+</Tag>
+
+<style>
+  .paper {
+    background-color: var(--paper-bg-color-dark);
+    box-shadow: var(--paper-box-shadow);
+    padding: var(--paper-padding);
+    border-radius: var(--paper-border-radius);
+  }
+</style>
