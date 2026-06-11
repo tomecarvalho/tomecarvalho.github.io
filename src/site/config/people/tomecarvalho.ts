@@ -1,5 +1,5 @@
-import type { Translations } from "../../../i18n/types";
 import type { SiteConfig } from "..";
+import type { Translations } from "../../../i18n/types";
 
 const topics = {
   algorithms: { en: "Algorithms", pt: "Algoritmos" },

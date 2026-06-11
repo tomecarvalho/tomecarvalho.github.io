@@ -5,6 +5,7 @@ import type { Props as ContactsProps } from "./Contacts.astro";
 import Contacts from "./Contacts.astro";
 import type { Props as ParagraphsProps } from "./Paragraphs.astro";
 import Paragraphs from "./Paragraphs.astro";
+import Stack from "./Stack.astro";
 
 export interface Props {
   text: {
@@ -28,20 +29,14 @@ const roleAndLocation = `${role} - ${location}`;
 ---
 
 <Layout title={layoutTitle}>
-  <section>
-    <h1 class="name">{name}</h1>
-    <h3 class="role-and-location">{roleAndLocation}</h3>
-    <Paragraphs paragraphs={description} />
-    <Contacts contacts={contacts} />
-  </section>
+  <Stack gap={4} as="section">
+    <Stack gap={0.5}>
+      <h1 class="name">{name}</h1>
+      <h3 class="role-and-location">{roleAndLocation}</h3>
+    </Stack>
+    <Stack gap={2}>
+      <Paragraphs paragraphs={description} />
+      <Contacts contacts={contacts} />
+    </Stack>
+  </Stack>
 </Layout>
-
-<style>
-  .name {
-    margin-bottom: 0.25rem;
-  }
-
-  .role-and-location {
-    margin-bottom: 1rem;
-  }
-</style>

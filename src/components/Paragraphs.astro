@@ -6,4 +6,6 @@ export interface Props {
 const { paragraphs } = Astro.props;
 ---
 
-{paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+<div>
+  {paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+</div>

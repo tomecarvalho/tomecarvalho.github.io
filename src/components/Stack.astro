@@ -1,0 +1,29 @@
+---
+import type { Spacing } from "../style/theme";
+import type { AsProp } from "../types/component/AsProp";
+import { toStyle } from "../utils/style";
+
+type Props = {
+  gap?: Spacing;
+  class?: string;
+  direction?: "row" | "column";
+} & AsProp;
+
+const { gap, class: className, direction, as: Tag = "div" } = Astro.props;
+const horizontal = direction === "row";
+const style = toStyle({ gap });
+---
+
+<Tag class:list={["stack", className, { horizontal }]} style={style}>
+  <slot />
+</Tag>
+
+<style>
+  .stack {
+    display: flex;
+    flex-direction: column;
+  }
+  .stack.horizontal {
+    flex-direction: row;
+  }
+</style>
