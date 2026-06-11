@@ -1,6 +1,7 @@
 ---
 import type { Props as CourseworkSemesterProps } from "./CourseworkSemester.astro";
 import CourseworkSemester from "./CourseworkSemester.astro";
+import Stack from "./Stack.astro";
 
 export interface Props {
   coursework: {
@@ -12,34 +13,22 @@ export interface Props {
 const { coursework } = Astro.props;
 ---
 
-<div class="coursework">
+<Stack gap={2}>
   {
     coursework.map((year) => (
-      <article class="year">
+      <Stack as="article" gap={2}>
         <h3 class="year-title">{year.title}</h3>
         <div class="semesters">
           {year.semesters.map((semester) => (
             <CourseworkSemester semester={semester} />
           ))}
         </div>
-      </article>
+      </Stack>
     ))
   }
-</div>
+</Stack>
 
 <style>
-  .coursework {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .year {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
   .year-title {
     font-size: 1.25rem;
   }

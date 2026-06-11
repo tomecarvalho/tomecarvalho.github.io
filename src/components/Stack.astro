@@ -7,11 +7,20 @@ type Props = {
   gap?: Spacing;
   class?: string;
   direction?: "row" | "column";
+  alignItems?: CSSStyleDeclaration["alignItems"];
 } & AsProp;
 
-const { gap, class: className, direction, as: Tag = "div" } = Astro.props;
+const {
+  gap,
+  class: className,
+  direction,
+  alignItems,
+  as: Tag = "div",
+} = Astro.props;
+
 const horizontal = direction === "row";
-const style = toStyle({ gap });
+
+const style = toStyle({ gap, alignItems });
 ---
 
 <Tag class:list={["stack", className, { horizontal }]} style={style}>

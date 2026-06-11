@@ -1,6 +1,7 @@
 ---
 import type { Props as HeaderProps } from "../components/Header.astro";
 import Header from "../components/Header.astro";
+import Stack from "../components/Stack.astro";
 import {
   getLanguageOptions,
   getLocale,
@@ -61,8 +62,6 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
     <style>
       .body {
         font-family: system-ui, sans-serif;
-        display: flex;
-        flex-direction: column;
         min-height: 100vh;
         margin: 0;
       }
@@ -75,7 +74,7 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
       }
     </style>
   </head>
-  <body class="body">
+  <Stack as="body" class="body">
     <Header
       routes={translatedNavRoutes}
       title={siteConfig.name}
@@ -85,5 +84,5 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
     <main class="main">
       <slot />
     </main>
-  </body>
+  </Stack>
 </html>

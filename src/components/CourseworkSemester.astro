@@ -1,6 +1,7 @@
 ---
 import type { Props as CourseworkSubjectProps } from "./CourseworkSubject.astro";
 import CourseworkSubject from "./CourseworkSubject.astro";
+import Stack from "./Stack.astro";
 
 export interface Props {
   semester: {
@@ -14,24 +15,18 @@ const { semester } = Astro.props;
 
 <section class="semester">
   <h4 class="semester-title">{semester.title}</h4>
-  <div class="subjects">
+  <Stack gap={4}>
     {
       semester.subjects.map((subject) => (
         <CourseworkSubject subject={subject} />
       ))
     }
-  </div>
+  </Stack>
 </section>
 
 <style>
   .semester-title {
     margin-bottom: 1.25rem;
     font-size: 1rem;
-  }
-
-  .subjects {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
   }
 </style>

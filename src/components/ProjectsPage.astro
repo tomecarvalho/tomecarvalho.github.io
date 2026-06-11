@@ -4,6 +4,7 @@ import Layout from "../layouts/Layout.astro";
 import { appendSiteName } from "../site/utils";
 import type { Props as CourseworkProps } from "./Coursework.astro";
 import Coursework from "./Coursework.astro";
+import Stack from "./Stack.astro";
 
 export interface Props {
   text: {
@@ -22,30 +23,16 @@ const layoutTitle = appendSiteName(title);
 ---
 
 <Layout title={layoutTitle}>
-  <h1>{title}</h1>
-  <div class="sections">
-    <section>
-      <h2 class="coursework-title">
-        <Icon name="mdi:university" />
-        {courseworkTitle}
-      </h2>
-      <Coursework coursework={coursework} />
-    </section>
-  </div>
+  <Stack gap={4}>
+    <h1>{title}</h1>
+    <Stack gap={4}>
+      <Stack as="section" gap={2}>
+        <Stack as="h2" direction="row" gap={1} alignItems="center">
+          <Icon name="mdi:university" />
+          {courseworkTitle}
+        </Stack>
+        <Coursework coursework={coursework} />
+      </Stack>
+    </Stack>
+  </Stack>
 </Layout>
-
-<style>
-  .sections {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    margin-top: 2rem;
-  }
-
-  .coursework-title {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-  }
-</style>

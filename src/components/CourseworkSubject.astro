@@ -1,4 +1,6 @@
 ---
+import Stack from "./Stack.astro";
+
 export interface Props {
   subject: {
     name: string;
@@ -14,7 +16,7 @@ export interface Props {
 const { subject } = Astro.props;
 ---
 
-<div class="subject">
+<Stack class="subject" gap={1.5}>
   <h5 class="subject-title">
     <a href={subject.href}>{subject.name}</a>
   </h5>
@@ -25,31 +27,24 @@ const { subject } = Astro.props;
 
         return (
           <Fragment>
-            <li class="project">
+            <Stack as="li" gap={0.5}>
               <a href={href}>{name}</a>
               <p class="topics">{topicsString}</p>
-            </li>
+            </Stack>
           </Fragment>
         );
       })
     }
   </ul>
-</div>
+</Stack>
 
 <style>
   .subject-title {
     font-size: 1rem;
-    margin-bottom: 0.5rem;
   }
 
   .projects {
     list-style: none;
-  }
-
-  .project {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
   }
 
   .topics {
