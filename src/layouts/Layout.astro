@@ -1,7 +1,6 @@
 ---
 import type { Props as HeaderProps } from "../components/Header.astro";
 import Header from "../components/Header.astro";
-import Stack from "../components/Stack.astro";
 import {
   getLanguageOptions,
   getLocale,
@@ -59,22 +58,8 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
         padding: 0;
       }
     </style>
-    <style>
-      .body {
-        font-family: system-ui, sans-serif;
-        min-height: 100vh;
-        margin: 0;
-      }
-
-      .main {
-        flex: 1;
-        margin: 0 auto;
-        padding: 4rem var(--content-padding-x);
-        width: min(100%, var(--content-max-width));
-      }
-    </style>
   </head>
-  <Stack as="body" class="body">
+  <body class="body">
     <Header
       routes={translatedNavRoutes}
       title={siteConfig.name}
@@ -84,5 +69,25 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
     <main class="main">
       <slot />
     </main>
-  </Stack>
+  </body>
 </html>
+
+<style>
+  .body {
+    font-family: system-ui, sans-serif;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .main {
+    flex: 1;
+    min-height: 0;
+    margin: 0 auto;
+    padding: 4rem var(--content-padding-x);
+    width: min(100%, var(--content-max-width));
+    overflow-y: auto;
+  }
+</style>
