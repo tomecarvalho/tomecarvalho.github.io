@@ -1,4 +1,14 @@
 ---
+/**
+ * Route navigation component.
+ * On wide windows:
+ * - Routes arranged horizontally.
+ * - Current route highlighted through its background colour.
+ * On narrow windows:
+ * - Routes collapsed into a dropdown menu.
+ * - Current route highlighted through a check icon.
+ */
+
 import type { TranslatedNavRoute } from "../routes/nav-routes";
 import { Icon } from "astro-icon/components";
 
@@ -12,12 +22,21 @@ const { pathname } = Astro.url;
 
 <nav class="nav">
   {
-    routes.map(({ path, label, icon, originalPath }) => (
-      <a href={path} class:list={[{ current: pathname === originalPath }]}>
-        {!!icon && <Icon name={icon} />}
-        {label}
-      </a>
-    ))
+    routes.map(({ path, label, icon, originalPath }) => {
+      const current = pathname === originalPath;
+
+      const iconEl = !!icon && <Icon name={icon} />;
+
+      return (
+        <a href={path} class:list={[{ current }]}>
+          <span>
+            {iconEl}
+            {label}
+          </span>
+          <Icon name="mdi:check" class:list={["check", { current }]} />
+        </a>
+      );
+    })
   }
 </nav>
 
@@ -27,7 +46,7 @@ const { pathname } = Astro.url;
     gap: 0.25rem;
   }
 
-  .nav a {
+  .nav > a {
     font-weight: bold;
     text-decoration: none;
     white-space: nowrap;
@@ -36,24 +55,35 @@ const { pathname } = Astro.url;
     transition: background-color var(--transition-duration);
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 0.5rem;
   }
 
-  .nav a:hover {
+  .nav > a:hover {
     background-color: var(--nav-bg-color-hover-dark);
   }
-  .nav a:active {
+  .nav > a:active {
     background-color: var(--nav-bg-color-active-dark);
   }
 
-  .nav a.current {
+  .nav > a.current {
     background-color: var(--nav-bg-color-current-dark);
   }
-  .nav a.current:hover {
+  .nav > a.current:hover {
     background-color: var(--nav-bg-color-current-hover-dark);
   }
-  .nav a.current:active {
+  .nav > a.current:active {
     background-color: var(--nav-bg-color-current-active-dark);
+  }
+
+  .nav > a > span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .check {
+    display: none;
   }
 
   /* Narrow windows: Nav links are displayed in a dropdown menu. */
@@ -62,8 +92,10 @@ const { pathname } = Astro.url;
       position: absolute;
       top: 125%;
       right: 0;
-      /* background-color: var(--dropdown-bg-color-dark); */
-      /* border-radius: var(--dropdown-border-radius); */
+      background-color: var(--dropdown-bg-color-dark);
+      border-radius: var(--dropdown-border-radius);
+      box-shadow: var(--dropdown-box-shadow);
+      padding: 0.5rem;
       display: none;
       flex-direction: column;
       gap: 0;
@@ -73,8 +105,28 @@ const { pathname } = Astro.url;
       display: flex;
     }
 
-    .nav a {
-      padding: 1rem 1.5rem;
+    .nav > a {
+      padding: 0.75rem 1rem;
+      background-color: var(--dropdown-item-bg-color-dark);
+    }
+    .nav > a:hover {
+      background-color: var(--dropdown-item-bg-color-hover-dark);
+    }
+    .nav > a:active {
+      background-color: var(--dropdown-item-bg-color-active-dark);
+    }
+
+    .nav > a.current {
+      background-color: var(--dropdown-item-bg-color-dark);
+    }
+
+    .check {
+      /* Render invisible check icon for other routes, keeping width consistent. */
+      display: block;
+      opacity: 0;
+    }
+    .check.current {
+      opacity: 1;
     }
   }
 </style>

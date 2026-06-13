@@ -49,18 +49,19 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
         /* Adwaita base */
 
         --button-align-items: center;
-        --button-border-radius: var(--paper-border-radius);
+        --button-border-radius: 8px;
         --button-border: none;
         --button-box-shadow: var(--paper-box-shadow);
         --button-cursor: pointer;
         --button-display: inline-flex;
         --button-font-color: inherit;
         --button-font-size: 1rem;
-        --button-padding: var(--paper-padding);
+        --button-padding: 0.25rem;
         --button-transition: background-color var(--transition-duration);
         --button-width: fit-content;
 
         --dropdown-border-radius: var(--button-border-radius);
+        --dropdown-box-shadow: var(--paper-box-shadow);
 
         --nav-border-radius: 8px;
 
@@ -84,6 +85,12 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
 
         --dropdown-bg-color-dark: #36363a;
 
+        --dropdown-item-selected-bg-color-dark: #4a4a4d;
+        --dropdown-item-selected-bg-color-active-dark: #5c5c5f;
+        --dropdown-item-bg-color-hover-dark: #4a4a4d;
+        --dropdown-item-bg-color-active-dark: #5c5c5f;
+        --dropdown-item-bg-color-dark: var(--dropdown-bg-color-dark);
+
         --nav-bg-color-hover-dark: #323235;
         --nav-bg-color-active-dark: #464649;
         --nav-bg-color-current-dark: #38383b;
@@ -101,6 +108,26 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
         margin: 0;
         box-sizing: border-box;
         color: var(--font-color-dark);
+        font-family: system-ui, sans-serif;
+
+        scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+      }
+
+      *::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      *::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      *::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+      }
+
+      *::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.35);
       }
 
       p {
@@ -147,6 +174,14 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
         transition: var(--button-transition);
       }
 
+      /* Text buttons have no background, border or box-shadow unless hovered/active. */
+      button.text,
+      .button.text {
+        background: none;
+        border: none;
+        box-shadow: none;
+      }
+
       select {
         background-color: transparent;
         border: none;
@@ -183,7 +218,6 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
 
 <style>
   .body {
-    font-family: system-ui, sans-serif;
     height: 100vh;
     margin: 0;
     overflow: hidden;
@@ -199,5 +233,6 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
     padding: 4rem var(--content-padding-x);
     width: min(100%, var(--content-max-width));
     overflow-y: auto;
+    background-color: var(--bg-color-dark);
   }
 </style>

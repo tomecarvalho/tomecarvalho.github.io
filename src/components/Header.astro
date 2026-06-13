@@ -19,7 +19,7 @@ const { routes, title, homeHref, languageOptions } = Astro.props;
       <LanguageSelect options={languageOptions} />
       <div class="menu">
         <button
-          class="menu-button"
+          class="menu-button text"
           aria-label="Toggle menu"
           aria-expanded="false"
         >
@@ -41,6 +41,7 @@ const { routes, title, homeHref, languageOptions } = Astro.props;
     const isOpen = menuButton.getAttribute("aria-expanded") === "true";
     menuButton.setAttribute("aria-expanded", (!isOpen).toString());
     nav?.classList.toggle("open");
+    menuButton.classList.toggle("open");
   });
 
   for (const link of navLinks)
@@ -103,11 +104,17 @@ const { routes, title, homeHref, languageOptions } = Astro.props;
 
   .menu-button {
     display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
     font-size: 1.5rem;
+    border-radius: var(--button-border-radius);
+    padding: var(--button-padding);
+  }
+
+  .menu-button:hover {
+    background-color: var(--button-bg-color-hover-dark);
+  }
+  .menu-button:active,
+  .menu-button.open {
+    background-color: var(--button-bg-color-active-dark);
   }
 
   @media (max-width: 640px) {
