@@ -25,6 +25,7 @@ const languageOptions = getLanguageOptions(
 const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
   (route) => ({
     ...route,
+    originalPath: route.path,
     path: toLocalePath(locale, route.path),
     label: t(route.label, { capitalize: true }),
   }),
@@ -59,6 +60,8 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
         --button-transition: background-color var(--transition-duration);
         --button-width: fit-content;
 
+        --dropdown-border-radius: var(--button-border-radius);
+
         --nav-border-radius: 8px;
 
         --paper-border-radius: 12px;
@@ -79,11 +82,16 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
         --button-bg-color-hover-dark: #39393d;
         --button-bg-color-active-dark: #434347;
 
+        --dropdown-bg-color-dark: #36363a;
+
         --nav-bg-color-hover-dark: #323235;
         --nav-bg-color-active-dark: #464649;
         --nav-bg-color-current-dark: #38383b;
         --nav-bg-color-current-hover-dark: #3f3f42;
         --nav-bg-color-current-active-dark: #4c4c4f;
+
+        --select-bg-color-hover-dark: var(--nav-bg-color-hover-dark);
+        --select-bg-color-active-dark: var(--nav-bg-color-active-dark);
 
         --font-color-dark: #f0f0f0;
         --font-color-secondary-dark: #9f9fa1;
@@ -137,6 +145,21 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
       .button:active {
         background-color: var(--button-bg-color-active-dark);
         transition: var(--button-transition);
+      }
+
+      select {
+        background-color: transparent;
+        border: none;
+        padding: 0.25rem;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: background-color var(--transition-duration);
+      }
+      select:hover {
+        background-color: var(--select-bg-color-hover-dark);
+      }
+      select:active {
+        background-color: var(--select-bg-color-active-dark);
       }
 
       .text-secondary {

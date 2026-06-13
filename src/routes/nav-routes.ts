@@ -7,11 +7,13 @@ export interface NavRoute {
   icon?: string;
 }
 
-export type TranslatedNavRoute = Overwrite<NavRoute, { label: string }>;
+export type TranslatedNavRoute = Overwrite<NavRoute, { label: string }> & {
+  originalPath: string;
+};
 
 export const navRoutes = {
   aboutMe: { label: "nav.aboutMe", path: "/", icon: "mdi:home" },
-  projects: { label: "nav.projects", path: "/projects", icon: "mdi:folder" },
+  projects: { label: "nav.projects", path: "/projects/", icon: "mdi:folder" },
 } as const satisfies Record<string, NavRoute>;
 
 /** `navRoutes` entries ordered by the order they should appear in the nav component. */

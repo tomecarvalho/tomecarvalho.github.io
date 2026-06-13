@@ -12,8 +12,8 @@ const { pathname } = Astro.url;
 
 <nav class="nav">
   {
-    routes.map(({ path, label, icon }) => (
-      <a href={path} class:list={[{ current: pathname === path }]}>
+    routes.map(({ path, label, icon, originalPath }) => (
+      <a href={path} class:list={[{ current: pathname === originalPath }]}>
         {!!icon && <Icon name={icon} />}
         {label}
       </a>
@@ -62,8 +62,8 @@ const { pathname } = Astro.url;
       position: absolute;
       top: 125%;
       right: 0;
-      background-color: white;
-      border: 1px solid black;
+      /* background-color: var(--dropdown-bg-color-dark); */
+      /* border-radius: var(--dropdown-border-radius); */
       display: none;
       flex-direction: column;
       gap: 0;
