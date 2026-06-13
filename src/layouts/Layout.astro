@@ -24,6 +24,7 @@ const languageOptions = getLanguageOptions(
 
 const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
   (route) => ({
+    ...route,
     path: toLocalePath(locale, route.path),
     label: t(route.label, { capitalize: true }),
   }),
