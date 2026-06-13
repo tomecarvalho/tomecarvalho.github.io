@@ -1,0 +1,13 @@
+---
+import type { Props as InterestsPageProps } from "../components/InterestsPage.astro";
+import InterestsPage from "../components/InterestsPage.astro";
+import { useTranslations } from "../i18n/utils";
+
+const t = useTranslations(Astro.currentLocale);
+
+const text: InterestsPageProps["text"] = {
+  title: t("nav.interests"),
+};
+---
+
+<InterestsPage text={text} />

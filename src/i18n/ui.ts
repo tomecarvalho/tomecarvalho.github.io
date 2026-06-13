@@ -3,6 +3,7 @@ import type { LocaleKey } from "./config";
 const en = {
   "nav.aboutMe": "About Me",
   "nav.projects": "Projects",
+  "nav.interests": "Interests",
 
   "terms.universityCoursework": "University Coursework",
 };
@@ -26,6 +27,7 @@ type Ui = {
 const pt: PartialLocaleStrings = {
   "nav.aboutMe": "Sobre Mim",
   "nav.projects": "Projetos",
+  "nav.interests": "Interesses",
 
   "terms.universityCoursework": "Trabalhos Universitários",
 };
