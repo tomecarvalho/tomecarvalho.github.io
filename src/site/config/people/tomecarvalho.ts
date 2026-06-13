@@ -31,6 +31,7 @@ const topics = {
 } as const satisfies Record<string, Translations>;
 
 const tomecarvalho = {
+  site: "https://tomecarvalho.github.io",
   handle: "tomecarvalho",
   name: "Tomé Carvalho",
   contacts: [
