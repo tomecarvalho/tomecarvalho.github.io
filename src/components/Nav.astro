@@ -12,7 +12,7 @@ const { pathname } = Astro.url;
 <nav class="nav">
   {
     routes.map(({ path, label }) => (
-      <a href={path} class:list={[{ active: pathname === path }]}>
+      <a href={path} class:list={[{ current: pathname === path }]}>
         {label}
       </a>
     ))
@@ -22,15 +22,32 @@ const { pathname } = Astro.url;
 <style>
   .nav {
     display: flex;
-    gap: 1.5rem;
+    gap: 1rem;
   }
 
   .nav a {
+    text-decoration: none;
     white-space: nowrap;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--nav-border-radius);
+    transition: background-color var(--transition-duration);
   }
 
-  .nav a.active {
-    font-weight: bold;
+  .nav a:hover {
+    background-color: var(--nav-bg-color-hover-dark);
+  }
+  .nav a:active {
+    background-color: var(--nav-bg-color-active-dark);
+  }
+
+  .nav a.current {
+    background-color: var(--nav-bg-color-current-dark);
+  }
+  .nav a.current:hover {
+    background-color: var(--nav-bg-color-current-hover-dark);
+  }
+  .nav a.current:active {
+    background-color: var(--nav-bg-color-current-active-dark);
   }
 
   /* Narrow windows: Nav links are displayed in a dropdown menu. */

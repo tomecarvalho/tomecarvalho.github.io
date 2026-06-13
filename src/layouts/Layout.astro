@@ -58,6 +58,8 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
         --button-transition: background-color var(--transition-duration);
         --button-width: fit-content;
 
+        --nav-border-radius: 8px;
+
         --paper-border-radius: 12px;
         --paper-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         --paper-padding: 1rem 1.25rem;
@@ -74,11 +76,16 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
 
         --button-bg-color-dark: #333337;
         --button-bg-color-hover-dark: #39393d;
+        --button-bg-color-active-dark: #434347;
+
+        --nav-bg-color-hover-dark: #323235;
+        --nav-bg-color-active-dark: #464649;
+        --nav-bg-color-current-dark: #38383b;
+        --nav-bg-color-current-hover-dark: #3f3f42;
+        --nav-bg-color-current-active-dark: #4c4c4f;
 
         --font-color-dark: #f0f0f0;
         --font-color-secondary-dark: #9f9fa1;
-
-        --header-bg-color-dark: #2e2e32;
       }
 
       * {
@@ -122,6 +129,12 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
       button:hover,
       .button:hover {
         background-color: var(--button-bg-color-hover-dark);
+        transition: var(--button-transition);
+      }
+
+      button:active,
+      .button:active {
+        background-color: var(--button-bg-color-active-dark);
         transition: var(--button-transition);
       }
 

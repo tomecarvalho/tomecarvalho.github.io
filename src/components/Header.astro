@@ -4,13 +4,11 @@ import LanguageSelect from "./LanguageSelect.astro";
 import type { Props as NavProps } from "./Nav.astro";
 import Nav from "./Nav.astro";
 import { Icon } from "astro-icon/components";
-
 export type Props = Pick<NavProps, "routes"> & {
   title: string;
   homeHref: string;
   languageOptions: LanguageSelectProps["options"];
 };
-
 const { routes, title, homeHref, languageOptions } = Astro.props;
 ---
 
@@ -37,6 +35,7 @@ const { routes, title, homeHref, languageOptions } = Astro.props;
   const menuButton = document.querySelector(".menu-button");
   const nav = document.querySelector(".nav");
   const navLinks = nav?.querySelectorAll("a") ?? [];
+  const header = document.querySelector(".header");
 
   menuButton?.addEventListener("click", () => {
     const isOpen = menuButton.getAttribute("aria-expanded") === "true";
@@ -56,6 +55,17 @@ const { routes, title, homeHref, languageOptions } = Astro.props;
       nav?.classList.remove("open");
     }
   });
+
+  const scrollContainer = document.querySelector("main");
+
+  const updateHeaderShadow = () => {
+    header?.classList.toggle("scrolled", (scrollContainer?.scrollTop ?? 0) > 0);
+  };
+
+  scrollContainer?.addEventListener("scroll", updateHeaderShadow, {
+    passive: true,
+  });
+  updateHeaderShadow();
 </script>
 
 <style>
@@ -69,10 +79,14 @@ const { routes, title, homeHref, languageOptions } = Astro.props;
 
   .header {
     padding: 1rem 0;
-    background-color: var(--header-bg-color-dark);
     position: relative;
     display: flex;
     justify-content: center;
+    transition: box-shadow 0.2s ease;
+  }
+
+  .header.scrolled {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
   }
 
   .header-controls {
@@ -83,8 +97,6 @@ const { routes, title, homeHref, languageOptions } = Astro.props;
 
   .menu {
     position: relative;
-
-    /*  */
     order: -1;
   }
 
@@ -97,12 +109,6 @@ const { routes, title, homeHref, languageOptions } = Astro.props;
     font-size: 1.5rem;
   }
 
-  /* 
-  Narrow windows.
-  - Nav links are collapsed into the menu button.
-  - Menu button is displayed.
-  - Order of elements is reversed (language select before menu button). 
-  */
   @media (max-width: 640px) {
     .menu {
       order: 0;
