@@ -1,0 +1,31 @@
+---
+import Paper from "./Paper.astro";
+import Stack from "./Stack.astro";
+
+export interface Props {
+  name: string;
+  description: string;
+  href: string;
+  imageUrl?: string;
+}
+
+const { name, description, href, imageUrl } = Astro.props;
+---
+
+<Paper>
+  <Stack direction="row" gap={1}>
+    <Stack gap={1}>
+      <a href={href}>{name}</a>
+      <p>{description}</p>
+    </Stack>
+    <img src={imageUrl} alt="" class="project-image" />
+  </Stack>
+</Paper>
+
+<style>
+  .project-image {
+    max-width: 250px;
+    max-height: 100%;
+    object-fit: contain;
+  }
+</style>

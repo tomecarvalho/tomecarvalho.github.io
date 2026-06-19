@@ -569,6 +569,24 @@ Fique à vontade para dar uma vista de olhos! Veja os meus projetos ou passatemp
       ],
     },
   ],
+  projects: [
+    {
+      name: { en: "Miscellaneous", pt: "Diversos" },
+      icon: "mdi:file-code",
+      projects: [
+        {
+          name: { en: "US-PT Keyboard Layout", pt: "Layout de Teclado US-PT" },
+          description: {
+            en: 'A superset of the US keyboard layout created for Lusophones. In contrast to alternatives like the "US International" layout, it retains all original keybindings of the US keyboard layout, expanding upon it exclusively through AltGr keybindings. Includes Linux (XKB) and Windows (MSKLC) versions.',
+            pt: 'Um superset do layout de teclado US criado para lusófonos. Ao contrário de alternativas como o layout "US International", retém todo mapeamento original do layout US, expandindo-o exclusivamente através de novos mapeamentos com a tecla AltGr. Inclui versões para Linux (XKB) e Windows (MSKLC).',
+          },
+          href: "https://github.com/tomecarvalho/us-pt-keyboard-layout",
+          imageUrl:
+            "https://github.com/tomecarvalho/us-pt-keyboard-layout/raw/main/docs/layout.jpg",
+        },
+      ],
+    },
+  ],
 } as const satisfies SiteConfig;
 
 export default tomecarvalho;

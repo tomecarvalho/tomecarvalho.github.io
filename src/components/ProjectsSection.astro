@@ -1,0 +1,19 @@
+---
+import { Icon } from "astro-icon/components";
+import Stack from "./Stack.astro";
+
+interface Props {
+  name: string;
+  icon: string;
+}
+
+const { name, icon } = Astro.props;
+---
+
+<Stack as="section" gap={2}>
+  <Stack as="h2" direction="row" gap={2} alignItems="center">
+    <Icon name={icon} />
+    {name}
+  </Stack>
+  <slot />
+</Stack>
