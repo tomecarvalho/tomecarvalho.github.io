@@ -32,8 +32,8 @@ const layoutTitle = appendSiteName(title);
     <h1>{title}</h1>
     <Stack gap={4}>
       {
-        projectCategories?.map(({ name, icon, projects }) => (
-          <ProjectsSection name={name} icon={icon}>
+        projectCategories?.map(({ id, name, icon, projects }) => (
+          <ProjectsSection id={id} name={name} icon={icon}>
             {projects.map((project) => (
               <Project {...project} />
             ))}
@@ -42,7 +42,11 @@ const layoutTitle = appendSiteName(title);
       }
       {
         !!coursework && (
-          <ProjectsSection name={courseworkTitle} icon="mdi:university">
+          <ProjectsSection
+            id="coursework"
+            name={courseworkTitle}
+            icon="mdi:university"
+          >
             <Coursework coursework={coursework} />
           </ProjectsSection>
         )

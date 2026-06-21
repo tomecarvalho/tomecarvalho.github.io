@@ -1,22 +1,16 @@
 ---
-import { Icon } from "astro-icon/components";
-import Stack from "./Stack.astro";
+import CollapsibleSection, {
+  type Props as CollapsibleSectionProps,
+} from "./CollapsibleSection.astro";
 import JointPapers from "./JointPapers.astro";
 
-interface Props {
-  name: string;
-  icon: string;
-}
+type Props = CollapsibleSectionProps;
 
-const { name, icon } = Astro.props;
+const props = Astro.props;
 ---
 
-<Stack as="section" gap={2}>
-  <Stack as="h2" direction="row" gap={2} alignItems="center">
-    <Icon name={icon} />
-    {name}
-  </Stack>
+<CollapsibleSection {...props}>
   <JointPapers>
     <slot />
   </JointPapers>
-</Stack>
+</CollapsibleSection>

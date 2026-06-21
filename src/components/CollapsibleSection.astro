@@ -1,0 +1,62 @@
+---
+import { Icon } from "astro-icon/components";
+import Stack from "./Stack.astro";
+import UnstyledButton from "./UnstyledButton.astro";
+
+export interface Props {
+  id: string;
+  name: string;
+  icon: string;
+  defaultOpen?: boolean;
+}
+
+const { id, name, icon, defaultOpen = true } = Astro.props;
+const sectionId = `collapsible-${id}`;
+---
+
+<Stack as="section" gap={2}>
+  <UnstyledButton
+    id={`${sectionId}-trigger`}
+    aria-expanded={defaultOpen}
+    aria-controls={sectionId}
+  >
+    <Stack direction="row" justifyContent="space-between">
+      <Stack as="h2" direction="row" gap={2} alignItems="center">
+        <Icon name={icon} />
+        {name}
+      </Stack>
+      <Icon
+        name="mdi:chevron-down"
+        size="1.75rem"
+        id={`${sectionId}-icon`}
+        style={defaultOpen ? "" : "transform: rotate(-90deg)"}
+      />
+    </Stack>
+  </UnstyledButton>
+  <div id={sectionId} style={defaultOpen ? "" : "display: none"}>
+    <slot />
+  </div>
+</Stack>
+
+<style>
+  [id$="-icon"] {
+    transition: transform var(--transition-duration);
+  }
+</style>
+
+<script is:inline define:vars={{ sectionId, defaultOpen }}>
+  const content = document.getElementById(sectionId);
+  const trigger = document.getElementById(`${sectionId}-trigger`);
+  const icon = document.getElementById(`${sectionId}-icon`);
+
+  let open = defaultOpen;
+
+  const toggle = () => {
+    open = !open;
+    content.style.display = open ? "" : "none";
+    icon.style.transform = open ? "" : "rotate(-90deg)";
+    trigger.setAttribute("aria-expanded", open);
+  };
+
+  trigger.addEventListener("click", toggle);
+</script>

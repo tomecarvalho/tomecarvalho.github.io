@@ -571,6 +571,7 @@ Fique à vontade para dar uma vista de olhos! Veja os meus projetos ou passatemp
   ],
   projects: [
     {
+      id: "miscellaneous",
       name: { en: "Miscellaneous", pt: "Diversos" },
       icon: "mdi:file-code",
       projects: [

@@ -8,6 +8,7 @@ type Props = {
   class?: string;
   direction?: "row" | "column";
   alignItems?: CSSStyleDeclaration["alignItems"];
+  justifyContent?: CSSStyleDeclaration["justifyContent"];
 } & AsProp;
 
 const {
@@ -15,12 +16,13 @@ const {
   class: className,
   direction,
   alignItems,
+  justifyContent,
   as: Tag = "div",
 } = Astro.props;
 
 const horizontal = direction === "row";
 
-const style = toStyle({ gap, alignItems });
+const style = toStyle({ gap, alignItems, justifyContent });
 ---
 
 <Tag class:list={["stack", className, { horizontal }]} style={style}>
