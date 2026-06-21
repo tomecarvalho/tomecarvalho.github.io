@@ -2,7 +2,7 @@ import type { SiteConfig } from "../..";
 import contacts from "./contacts";
 import coursework from "./coursework";
 import intro from "./intro";
-import projects from "./projects";
+import projectCategories from "./project-categories";
 
 const tomecarvalho = {
   site: "https://tomecarvalho.github.io",
@@ -11,7 +11,7 @@ const tomecarvalho = {
   intro,
   contacts,
   coursework,
-  projects,
+  projectCategories,
 } as const satisfies SiteConfig;
 
 export default tomecarvalho;

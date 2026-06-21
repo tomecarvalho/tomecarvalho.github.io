@@ -14,7 +14,7 @@ export type SiteConfig = {
   name: string;
   intro: Intro;
   contacts: Contact[];
-  projects: ProjectCategory[];
+  projectCategories: ProjectCategory[];
   coursework: Coursework;
 };
 
