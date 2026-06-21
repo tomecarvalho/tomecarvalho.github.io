@@ -1,28 +1,43 @@
 ---
+import { Icon } from "astro-icon/components";
+import type { Translated } from "../i18n/types";
+import type { Project } from "../types/data/projects/Project";
+import ConditionalLink from "./ConditionalLink.astro";
 import Paper from "./Paper.astro";
 import Paragraphs from "./Paragraphs.astro";
 import Stack from "./Stack.astro";
 
-interface Props {
-  name: string;
-  description: string;
-  href: string;
-  imageUrl?: string;
-}
+type Props = Translated<Project>;
 
-const { name, description, href, imageUrl } = Astro.props;
+const { name, description, href, imageUrl, links } = Astro.props;
+
+const hasLinks = !!links?.length;
+
+/** The whole paper is clickable if there are no other clickable links. */
+const paperClickable = !hasLinks && !!href;
 ---
 
-<Paper class="paper" hoverable>
-  <a href={href} class="anchor">
+<Paper class="paper" hoverable={paperClickable}>
+  <ConditionalLink href={href} condition={paperClickable} class="anchor">
     <Stack direction="row" gap={2}>
       <Stack gap={2}>
         <h3>{name}</h3>
         <Paragraphs paragraphs={description} />
+        {
+          hasLinks && (
+            <Stack direction="row" gap={1} justifyContent="flex-end">
+              {links?.map(({ icon, href, label }) => (
+                <a href={href} class="button text bright">
+                  <Icon name={icon} size="1.5rem" title={label} />
+                </a>
+              ))}
+            </Stack>
+          )
+        }
       </Stack>
       {!!imageUrl && <img src={imageUrl} alt="" class="project-image" />}
     </Stack>
-  </a>
+  </ConditionalLink>
 </Paper>
 
 <style>
@@ -32,11 +47,7 @@ const { name, description, href, imageUrl } = Astro.props;
     object-fit: contain;
   }
 
-  .anchor:hover {
+  :global(.anchor:hover) {
     text-decoration: none;
-  }
-
-  .paper:hover {
-    background-color: red !important;
   }
 </style>

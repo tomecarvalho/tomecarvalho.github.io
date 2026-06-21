@@ -30,7 +30,7 @@ const layoutTitle = appendSiteName(title);
 <Layout title={layoutTitle}>
   <Stack gap={4}>
     <h1>{title}</h1>
-    <Stack gap={4}>
+    <Stack gap={6}>
       {
         projectCategories?.map(({ id, name, icon, projects }) => (
           <ProjectsSection id={id} name={name} icon={icon}>
