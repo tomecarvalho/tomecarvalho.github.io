@@ -9,9 +9,9 @@ const t = useTranslations(Astro.currentLocale);
 const text: IndexPageProps["text"] = {
   title: t("nav.aboutMe"),
   name: siteConfig.name,
-  role: t(siteConfig.i18n.role),
-  location: t(siteConfig.i18n.location),
-  description: t(siteConfig.i18n.aboutMeDescription),
+  role: t(siteConfig.intro.role),
+  location: t(siteConfig.intro.location),
+  description: t(siteConfig.intro.description),
 } as const;
 ---
 

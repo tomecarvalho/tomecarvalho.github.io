@@ -19,7 +19,7 @@ const paperClickable = !hasLinks && !!href;
 
 <Paper class="paper" hoverable={paperClickable}>
   <ConditionalLink href={href} condition={paperClickable} class="anchor">
-    <Stack direction="row" gap={2}>
+    <div class="layout">
       <Stack gap={2}>
         <h3>{name}</h3>
         <Paragraphs paragraphs={description} />
@@ -35,19 +35,50 @@ const paperClickable = !hasLinks && !!href;
           )
         }
       </Stack>
-      {!!imageUrl && <img src={imageUrl} alt="" class="project-image" />}
-    </Stack>
+      {
+        !!imageUrl && (
+          <Stack direction="row" justifyContent="center">
+            <div
+              class="project-image"
+              style={{ backgroundImage: `url("${imageUrl}")` }}
+              aria-hidden="true"
+            />
+          </Stack>
+        )
+      }
+    </div>
   </ConditionalLink>
 </Paper>
 
 <style>
   .project-image {
-    max-width: 250px;
-    max-height: 100%;
-    object-fit: contain;
+    width: 275px;
+    max-width: 100%;
+    aspect-ratio: 4 / 3;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    flex-shrink: 0;
   }
 
   :global(.anchor:hover) {
     text-decoration: none;
+  }
+
+  .layout {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+  }
+
+  @media (max-width: 900px) {
+    .layout {
+      flex-direction: column;
+    }
+
+    .project-image {
+      width: 100%;
+      max-height: 175px;
+    }
   }
 </style>
