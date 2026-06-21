@@ -78,9 +78,12 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
         --bg-color-dark: #1d1d20;
 
         --paper-bg-color-dark: #333337;
+        --paper-hoverable-bg-color-hover-dark: #39393d;
 
         --button-bg-color-dark: #333337;
-        --button-bg-color-hover-dark: #39393d;
+        --button-bg-color-hover-dark: var(
+          --paper-hoverable-bg-color-hover-dark
+        );
         --button-bg-color-active-dark: #434347;
 
         --dropdown-bg-color-dark: #36363a;

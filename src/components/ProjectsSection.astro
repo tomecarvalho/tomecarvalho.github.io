@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import Stack from "./Stack.astro";
+import JointPapers from "./JointPapers.astro";
 
 interface Props {
   name: string;
@@ -15,5 +16,7 @@ const { name, icon } = Astro.props;
     <Icon name={icon} />
     {name}
   </Stack>
-  <slot />
+  <JointPapers>
+    <slot />
+  </JointPapers>
 </Stack>

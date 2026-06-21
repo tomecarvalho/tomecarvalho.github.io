@@ -1,8 +1,9 @@
 ---
 import Paper from "./Paper.astro";
+import Paragraphs from "./Paragraphs.astro";
 import Stack from "./Stack.astro";
 
-export interface Props {
+interface Props {
   name: string;
   description: string;
   href: string;
@@ -12,14 +13,16 @@ export interface Props {
 const { name, description, href, imageUrl } = Astro.props;
 ---
 
-<Paper>
-  <Stack direction="row" gap={1}>
-    <Stack gap={1}>
-      <a href={href}>{name}</a>
-      <p>{description}</p>
+<Paper class="paper" hoverable>
+  <a href={href} class="anchor">
+    <Stack direction="row" gap={2}>
+      <Stack gap={2}>
+        <h3>{name}</h3>
+        <Paragraphs paragraphs={description} />
+      </Stack>
+      {!!imageUrl && <img src={imageUrl} alt="" class="project-image" />}
     </Stack>
-    <img src={imageUrl} alt="" class="project-image" />
-  </Stack>
+  </a>
 </Paper>
 
 <style>
@@ -27,5 +30,13 @@ const { name, description, href, imageUrl } = Astro.props;
     max-width: 250px;
     max-height: 100%;
     object-fit: contain;
+  }
+
+  .anchor:hover {
+    text-decoration: none;
+  }
+
+  .paper:hover {
+    background-color: red !important;
   }
 </style>

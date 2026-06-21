@@ -1,11 +1,15 @@
 ---
+import { splitParagraphs, type SplitParagraphsInput } from "../utils/string";
+
 export interface Props {
-  paragraphs: string[];
+  paragraphs: SplitParagraphsInput;
 }
 
 const { paragraphs } = Astro.props;
+
+const paragraphsArray = splitParagraphs(paragraphs);
 ---
 
 <div>
-  {paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+  {paragraphsArray.map((paragraph) => <p>{paragraph}</p>)}
 </div>
