@@ -1,0 +1,16 @@
+---
+import CollapsibleSection, {
+  type Props as CollapsibleSectionProps,
+} from "./CollapsibleSection.astro";
+import JointPapers from "./JointPapers.astro";
+
+type Props = CollapsibleSectionProps;
+
+const props = Astro.props;
+---
+
+<CollapsibleSection {...props}>
+  <JointPapers>
+    <slot />
+  </JointPapers>
+</CollapsibleSection>

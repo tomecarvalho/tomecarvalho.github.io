@@ -1,6 +1,13 @@
-/** Split a string into paragraphs separated by blank lines. */
-export const splitParagraphs = (text: string): string[] =>
-  text.split(/\n\s*\n/).map((paragraph) => paragraph.trim());
+export type SplitParagraphsInput = string | string[];
+
+/**
+ * Split a string into paragraphs separated by blank lines.
+ * @param Paragraphs separated by blank lines, or already as an array of paragraphs (unmodified).
+ */
+export const splitParagraphs = (text: SplitParagraphsInput): string[] =>
+  Array.isArray(text)
+    ? text
+    : text.split(/\n\s*\n/).map((paragraph) => paragraph.trim());
 
 /** Capitalize the first character of a string. */
 export const capitalize = (string: string): string => {

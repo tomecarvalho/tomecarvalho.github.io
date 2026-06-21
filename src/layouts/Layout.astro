@@ -54,9 +54,10 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
         --button-box-shadow: var(--paper-box-shadow);
         --button-cursor: pointer;
         --button-display: inline-flex;
+        --button-gap: 0.5rem;
         --button-font-color: inherit;
         --button-font-size: 1rem;
-        --button-padding: 0.25rem;
+        --button-padding: 0.375rem 0.5rem;
         --button-transition: background-color var(--transition-duration);
         --button-width: fit-content;
 
@@ -78,10 +79,17 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
         --bg-color-dark: #1d1d20;
 
         --paper-bg-color-dark: #333337;
+        --paper-hoverable-bg-color-hover-dark: #39393d;
 
+        --button-font-color-hover-dark: white;
         --button-bg-color-dark: #333337;
-        --button-bg-color-hover-dark: #39393d;
+        --button-bg-color-hover-dark: var(
+          --paper-hoverable-bg-color-hover-dark
+        );
         --button-bg-color-active-dark: #434347;
+        /* Strong versions: for use in lighter backgrounds, like Paper's. */
+        --button-bg-color-hover-dark-strong: #424246;
+        --button-bg-color-active-dark-strong: #555559;
 
         --dropdown-bg-color-dark: #36363a;
 
@@ -160,6 +168,7 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
         width: var(--button-width);
         display: var(--button-display);
         align-items: var(--button-align-items);
+        gap: var(--button-gap);
       }
 
       button:hover,
@@ -180,6 +189,20 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
         background: none;
         border: none;
         box-shadow: none;
+        text-decoration: none;
+      }
+
+      .button.text:hover,
+      .button.text:active {
+        background-color: var(--button-bg-color-hover-dark);
+        color: var(--button-font-color-hover-dark);
+      }
+
+      .button.text.bright:hover {
+        background-color: var(--button-bg-color-hover-dark-strong);
+      }
+      .button.text.bright:active {
+        background-color: var(--button-bg-color-active-dark-strong);
       }
 
       select {
@@ -206,7 +229,7 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
   <body class="body">
     <Header
       routes={translatedNavRoutes}
-      title={siteConfig.name}
+      title={siteConfig.handle}
       homeHref={toLocalePath(locale, navRoutes.aboutMe.path)}
       languageOptions={languageOptions}
     />

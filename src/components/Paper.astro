@@ -3,12 +3,13 @@ import type { AsProp } from "../types/component/AsProp";
 
 type Props = {
   class?: string;
+  hoverable?: boolean;
 } & AsProp;
 
-const { class: className, as: Tag = "div" } = Astro.props;
+const { class: className, as: Tag = "div", hoverable = false } = Astro.props;
 ---
 
-<Tag class:list={["paper", className]}>
+<Tag class:list={["paper", , { hoverable }, className]}>
   <slot />
 </Tag>
 
@@ -18,5 +19,10 @@ const { class: className, as: Tag = "div" } = Astro.props;
     box-shadow: var(--paper-box-shadow);
     padding: var(--paper-padding);
     border-radius: var(--paper-border-radius);
+    transition: background-color var(--transition-duration);
+  }
+
+  .paper.hoverable:hover {
+    background-color: var(--paper-hoverable-bg-color-hover-dark);
   }
 </style>

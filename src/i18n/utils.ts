@@ -1,7 +1,8 @@
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { capitalize } from "../utils/string";
 import { i18nConfig, localeLabels, type LocaleKey } from "./config";
-import { isTranslations, type Translatable } from "./types";
+import { type Translated } from "./types";
+import { type Translatable, type Translations } from "./types";
 import { ui } from "./ui";
 
 const { defaultLocale, locales } = i18nConfig;
@@ -15,6 +16,12 @@ export type LanguageOption = {
   href: string;
   current: boolean;
 };
+
+const isTranslations = (value: Translatable): value is Translations =>
+  typeof value === "object";
+
+const isTranslatable = (value: unknown): value is Translatable =>
+  typeof value === "object" && value !== null && "en" in value;
 
 export const getLocale = (currentLocale: CurrentLocale): LocaleKey =>
   currentLocale && currentLocale in ui
@@ -68,4 +75,38 @@ export const useTranslations = (currentLocale: CurrentLocale) => {
 
     return string;
   };
+};
+
+const translateValue = (value: Translatable, locale: LocaleKey): string =>
+  isTranslations(value)
+    ? (value[locale] ?? value.en)
+    : ui[locale][value] || ui[defaultLocale][value];
+
+/**
+ * Translates objects recursively.
+ * @param obj Object to translate.
+ * @param currentLocale Current locale.
+ * @returns Translated object.
+ */
+export const translate = <T>(
+  obj: T,
+  currentLocale: CurrentLocale,
+): Translated<T> => {
+  const locale = getLocale(currentLocale);
+
+  const recurse = (value: unknown): unknown => {
+    if (isTranslatable(value)) return translateValue(value, locale);
+
+    if (Array.isArray(value)) return value.map(recurse);
+
+    if (typeof value === "object" && value !== null) {
+      return Object.fromEntries(
+        Object.entries(value).map(([k, v]) => [k, recurse(v)]),
+      );
+    }
+
+    return value;
+  };
+
+  return recurse(obj) as Translated<T>;
 };

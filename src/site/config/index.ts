@@ -1,7 +1,7 @@
-import type { Translatable } from "../../i18n/types";
 import type { Contact } from "../../types/data/about-me/Contact";
+import type { Intro } from "../../types/data/about-me/Intro";
 import type { Coursework } from "../../types/data/projects/Coursework";
-import type { RecursiveObject } from "../../types/util/RecursiveObject";
+import type { ProjectCategory } from "../../types/data/projects/ProjectCategory";
 import tomecarvalho from "./people/tomecarvalho";
 
 /**
@@ -9,10 +9,14 @@ import tomecarvalho from "./people/tomecarvalho";
  * For non-translatable strings, any string is allowed.
  */
 export type SiteConfig = {
-  i18n: RecursiveObject<Translatable>;
+  site: string;
+  handle: string;
+  name: string;
+  intro: Intro;
   contacts: Contact[];
+  projectCategories: ProjectCategory[];
   coursework: Coursework;
-} & Record<string, unknown>;
+};
 
 /** Site configuration (personal information, URLs, etc.). */
 const siteConfig = tomecarvalho;

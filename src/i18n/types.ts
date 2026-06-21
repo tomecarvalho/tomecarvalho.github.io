@@ -11,5 +11,23 @@ export type Translations = {
 /** A shared UI key or inline translations defined in site config. */
 export type Translatable = LocaleString | Translations;
 
-export const isTranslations = (value: Translatable): value is Translations =>
-  typeof value === "object";
+/**
+ * @example
+ * // Turns
+ * {
+ *   n: number;
+ *   name: Translatable;
+ *   list: { foo: Translatable };
+ * }
+ * // Into
+ * {
+ *   n: number;
+ *   name: string;
+ *   list: { foo: string };
+ * }
+ */
+export type Translated<T> = T extends Translatable
+  ? string
+  : T extends object
+    ? { [K in keyof T]: Translated<T[K]> }
+    : T;

@@ -1,0 +1,19 @@
+---
+type Props = {
+  href?: string;
+  condition: boolean;
+  class?: string;
+};
+
+const { href, condition, class: className } = Astro.props;
+---
+
+{
+  condition ? (
+    <a href={href} class={className}>
+      <slot />
+    </a>
+  ) : (
+    <slot />
+  )
+}
