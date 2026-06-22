@@ -1,4 +1,4 @@
-import type { LocaleKey } from "./config";
+import type { localeLabels } from "./config";
 import type en from "./locales/en";
 
 export type FullLocaleStrings = typeof en;
@@ -47,3 +47,15 @@ export type Translated<T> = T extends Translatable
   : T extends object
     ? { [K in keyof T]: Translated<T[K]> }
     : T;
+
+/** `Astro.currentLocale` is of this type. */
+export type CurrentLocale = string | undefined;
+
+export type LocaleKey = keyof typeof localeLabels;
+
+export type LanguageOption = {
+  locale: LocaleKey;
+  label: (typeof localeLabels)[LocaleKey];
+  href: string;
+  current: boolean;
+};

@@ -1,21 +1,17 @@
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { capitalize } from "../utils/string";
-import { i18nConfig, localeLabels, type LocaleKey } from "./config";
-import { type Translated } from "./types";
-import { type Translatable, type Translations } from "./types";
+import { i18nConfig, localeLabels } from "./config";
+import {
+  type CurrentLocale,
+  type LanguageOption,
+  type LocaleKey,
+  type Translatable,
+  type Translated,
+  type Translations,
+} from "./types";
 import { ui } from "./ui";
 
 const { defaultLocale, locales } = i18nConfig;
-
-/** `Astro.currentLocale` is of this type. */
-export type CurrentLocale = string | undefined;
-
-export type LanguageOption = {
-  locale: LocaleKey;
-  label: (typeof localeLabels)[LocaleKey];
-  href: string;
-  current: boolean;
-};
 
 const isTranslations = (value: Translatable): value is Translations =>
   typeof value === "object";
@@ -99,11 +95,10 @@ export const translate = <T>(
 
     if (Array.isArray(value)) return value.map(recurse);
 
-    if (typeof value === "object" && value !== null) {
+    if (typeof value === "object" && value !== null)
       return Object.fromEntries(
         Object.entries(value).map(([k, v]) => [k, recurse(v)]),
       );
-    }
 
     return value;
   };
