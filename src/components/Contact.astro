@@ -17,8 +17,8 @@ const {
     <div class="contact button">
       <a class="contactAnchor" href={href} title={label}>
         <Icon name={icon} size="1.5rem" />
-        {value}
       </a>
+      <hr class="divider" />
       <UnstyledButton
         type="button"
         aria-label="Copy to clipboard"
@@ -54,12 +54,18 @@ const {
     text-wrap: nowrap;
     gap: 0.5rem;
     font-size: 1rem;
-    align-items: end;
+    align-items: center;
   }
 
   .contactAnchor {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+  }
+
+  .divider {
+    height: 1.5rem;
+    color: var(--divider-color-dark);
+    width: 1px;
   }
 </style>

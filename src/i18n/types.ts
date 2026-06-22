@@ -1,7 +1,23 @@
 import type { LocaleKey } from "./config";
-import type { LocaleString } from "./ui";
+import type en from "./locales/en";
+
+export type FullLocaleStrings = typeof en;
+
+type PartialLocaleStrings = Partial<FullLocaleStrings>;
+
+type NonDefaultLocaleKeys = Exclude<LocaleKey, "en">;
 
 type NonDefaultLocaleKey = Exclude<LocaleKey, "en">;
+
+export type LocaleString = keyof FullLocaleStrings;
+
+/**
+ * `ui` requires all the locale strings for the default locale (English),
+ * but not for the other locales.
+ */
+export type Ui = {
+  en: FullLocaleStrings;
+} & Record<NonDefaultLocaleKeys, PartialLocaleStrings>;
 
 /** Inline translations for site-config-specific strings. English is required. */
 export type Translations = {

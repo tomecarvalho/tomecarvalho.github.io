@@ -13,13 +13,14 @@ export interface Props {
     name: string;
     role: string;
     location: string;
+    explore: string;
     description: ParagraphsProps["paragraphs"];
   };
   contacts: ContactsProps["contacts"];
 }
 
 const {
-  text: { title, name, role, location, description },
+  text: { title, name, role, location, explore, description },
   contacts,
 } = Astro.props;
 
@@ -29,14 +30,19 @@ const roleAndLocation = `${role} - ${location}`;
 ---
 
 <Layout title={layoutTitle}>
-  <Stack gap={4} as="section">
-    <Stack gap={0.5}>
-      <h1 class="name">{name}</h1>
-      <h3 class="role-and-location">{roleAndLocation}</h3>
+  <Stack gap={4}>
+    <Stack gap={4} as="section">
+      <Stack gap={0.5}>
+        <h1 class="name">{name}</h1>
+        <h3 class="role-and-location">{roleAndLocation}</h3>
+      </Stack>
+      <Stack gap={2}>
+        <Paragraphs paragraphs={description} />
+        <Contacts contacts={contacts} />
+      </Stack>
     </Stack>
-    <Stack gap={2}>
-      <Paragraphs paragraphs={description} />
-      <Contacts contacts={contacts} />
+    <Stack gap={4} as="section">
+      <h2>{explore}</h2>
     </Stack>
   </Stack>
 </Layout>

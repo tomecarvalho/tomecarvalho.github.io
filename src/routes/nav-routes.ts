@@ -1,4 +1,4 @@
-import type { LocaleString } from "../i18n/ui";
+import type { LocaleString } from "../i18n/types";
 import type { Overwrite } from "../types/util/Overwrite";
 
 export interface NavRoute {
