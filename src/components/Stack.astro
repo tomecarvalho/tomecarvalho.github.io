@@ -9,6 +9,7 @@ type Props = {
   direction?: "row" | "column";
   alignItems?: CSSStyleDeclaration["alignItems"];
   justifyContent?: CSSStyleDeclaration["justifyContent"];
+  wrap?: boolean;
 } & AsProp;
 
 const {
@@ -17,6 +18,7 @@ const {
   direction,
   alignItems,
   justifyContent,
+  wrap,
   as: Tag = "div",
 } = Astro.props;
 
@@ -25,7 +27,7 @@ const horizontal = direction === "row";
 const style = toStyle({ gap, alignItems, justifyContent });
 ---
 
-<Tag class:list={["stack", className, { horizontal }]} style={style}>
+<Tag class:list={["stack", className, { horizontal, wrap }]} style={style}>
   <slot />
 </Tag>
 
@@ -36,5 +38,8 @@ const style = toStyle({ gap, alignItems, justifyContent });
   }
   .stack.horizontal {
     flex-direction: row;
+  }
+  .stack.wrap {
+    flex-wrap: wrap;
   }
 </style>

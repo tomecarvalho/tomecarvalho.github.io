@@ -1,0 +1,29 @@
+---
+import { Icon } from "astro-icon/components";
+import type { TranslatedNavRoute } from "../routes/nav-routes";
+import Paper from "./Paper.astro";
+import Stack from "./Stack.astro";
+
+type Props = TranslatedNavRoute;
+
+const { path, label, description, icon } = Astro.props;
+---
+
+<a class="explore-card" href={path}>
+  <Paper hoverable>
+    <Stack direction="row" gap={2}>
+      <Stack gap={1}>
+        <h3>{label}</h3>
+        <p>{description}</p>
+      </Stack>
+      <Icon name={icon} size="5rem" />
+    </Stack>
+  </Paper>
+</a>
+
+<style>
+  .explore-card {
+    text-decoration: none;
+    width: 350px;
+  }
+</style>

@@ -12,15 +12,16 @@ import siteConfig from "../site/config";
 
 type Props = Pick<HeaderProps, "title">;
 
-const { title } = Astro.props;
+const {
+  currentLocale,
+  url: { pathname },
+  props: { title },
+} = Astro;
 
-const locale = getLocale(Astro.currentLocale);
-const t = useTranslations(Astro.currentLocale);
+const locale = getLocale(currentLocale);
+const t = useTranslations(currentLocale);
 
-const languageOptions = getLanguageOptions(
-  Astro.url.pathname,
-  Astro.currentLocale,
-);
+const languageOptions = getLanguageOptions(pathname, currentLocale);
 
 const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
   (route) => ({
@@ -28,6 +29,7 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
     originalPath: route.path,
     path: toLocalePath(locale, route.path),
     label: t(route.label, { capitalize: true }),
+    description: "description" in route ? t(route.description) : undefined,
   }),
 );
 ---

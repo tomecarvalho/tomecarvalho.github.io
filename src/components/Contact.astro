@@ -25,8 +25,9 @@ const {
         title="Copy to clipboard"
         data-copy-value={value}
         id={id}
+        class="clipboard-button"
       >
-        <Icon name="mdi:content-copy" size="1rem" />
+        <Icon name="mdi:content-copy" size="1.25rem" />
       </UnstyledButton>
     </div>
   ) : (
@@ -67,5 +68,9 @@ const {
     height: 1.5rem;
     color: var(--divider-color-dark);
     width: 1px;
+  }
+
+  .clipboard-button {
+    display: flex;
   }
 </style>

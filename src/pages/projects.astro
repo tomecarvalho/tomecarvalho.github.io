@@ -4,21 +4,23 @@ import ProjectsPage from "../components/ProjectsPage.astro";
 import { translate, useTranslations } from "../i18n/utils";
 import siteConfig from "../site/config";
 
-const t = useTranslations(Astro.currentLocale);
+const { currentLocale } = Astro;
+
+const t = useTranslations(currentLocale);
 
 const coursework: ProjectsPageProps["coursework"] = translate(
   siteConfig.coursework,
-  Astro.currentLocale,
+  currentLocale,
 );
 
 const projectCategories: ProjectsPageProps["projectCategories"] = translate(
   siteConfig.projectCategories,
-  Astro.currentLocale,
+  currentLocale,
 );
 
 const text: ProjectsPageProps["text"] = {
   title: t("nav.projects"),
-  coursework: t("terms.universityCoursework"),
+  coursework: t("projects.titles.universityCoursework"),
 };
 ---
 

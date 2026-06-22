@@ -16,8 +16,14 @@ const { defaultLocale, locales } = i18nConfig;
 const isTranslations = (value: Translatable): value is Translations =>
   typeof value === "object";
 
+/**
+ * Checks if a value is translatable (known i18n UI key or inline translations object).
+ * @param value Value of unknown type.
+ * @returns Whether the value is translatable.
+ */
 const isTranslatable = (value: unknown): value is Translatable =>
-  typeof value === "object" && value !== null && "en" in value;
+  (typeof value === "string" && value in ui[defaultLocale]) ||
+  (typeof value === "object" && value !== null && "en" in value);
 
 export const getLocale = (currentLocale: CurrentLocale): LocaleKey =>
   currentLocale && currentLocale in ui

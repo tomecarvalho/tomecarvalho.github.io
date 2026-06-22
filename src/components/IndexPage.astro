@@ -1,8 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import type { TranslatedNavRoute } from "../routes/nav-routes";
 import { appendSiteName } from "../site/utils";
 import type { Props as ContactsProps } from "./Contacts.astro";
 import Contacts from "./Contacts.astro";
+import ExploreCard from "./ExploreCard.astro";
 import type { Props as ParagraphsProps } from "./Paragraphs.astro";
 import Paragraphs from "./Paragraphs.astro";
 import Stack from "./Stack.astro";
@@ -17,11 +19,13 @@ export interface Props {
     description: ParagraphsProps["paragraphs"];
   };
   contacts: ContactsProps["contacts"];
+  exploreRoutes: TranslatedNavRoute[];
 }
 
 const {
   text: { title, name, role, location, explore, description },
   contacts,
+  exploreRoutes,
 } = Astro.props;
 
 const layoutTitle = appendSiteName(title);
@@ -30,7 +34,7 @@ const roleAndLocation = `${role} - ${location}`;
 ---
 
 <Layout title={layoutTitle}>
-  <Stack gap={4}>
+  <Stack gap={5}>
     <Stack gap={4} as="section">
       <Stack gap={0.5}>
         <h1 class="name">{name}</h1>
@@ -41,8 +45,11 @@ const roleAndLocation = `${role} - ${location}`;
         <Contacts contacts={contacts} />
       </Stack>
     </Stack>
-    <Stack gap={4} as="section">
+    <Stack gap={2} as="section">
       <h2>{explore}</h2>
+      <Stack direction="row" gap={3} wrap>
+        {exploreRoutes.map((route) => <ExploreCard {...route} />)}
+      </Stack>
     </Stack>
   </Stack>
 </Layout>

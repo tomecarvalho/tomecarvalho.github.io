@@ -1,10 +1,13 @@
 ---
 import type { Props as IndexPageProps } from "../components/IndexPage.astro";
 import IndexPage from "../components/IndexPage.astro";
-import { useTranslations } from "../i18n/utils";
+import { translate, useTranslations } from "../i18n/utils";
+import { exploreRoutesArray } from "../routes/nav-routes";
 import siteConfig from "../site/config";
 
-const t = useTranslations(Astro.currentLocale);
+const { currentLocale } = Astro;
+
+const t = useTranslations(currentLocale);
 
 const text: IndexPageProps["text"] = {
   title: t("nav.aboutMe"),
@@ -14,6 +17,14 @@ const text: IndexPageProps["text"] = {
   description: t(siteConfig.intro.description),
   explore: t("index.titles.explore"),
 } as const;
+
+const exploreRoutes: IndexPageProps["exploreRoutes"] = exploreRoutesArray.map(
+  (route) => translate(route, currentLocale),
+);
 ---
 
-<IndexPage text={text} contacts={siteConfig.contacts} />
+<IndexPage
+  text={text}
+  contacts={siteConfig.contacts}
+  exploreRoutes={exploreRoutes}
+/>
