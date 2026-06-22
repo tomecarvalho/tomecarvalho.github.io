@@ -8,7 +8,6 @@ import ExploreCard from "./ExploreCard.astro";
 import type { Props as ParagraphsProps } from "./Paragraphs.astro";
 import Paragraphs from "./Paragraphs.astro";
 import Stack from "./Stack.astro";
-
 export interface Props {
   text: {
     title: string;
@@ -21,15 +20,12 @@ export interface Props {
   contacts: ContactsProps["contacts"];
   exploreRoutes: TranslatedNavRoute[];
 }
-
 const {
   text: { title, name, role, location, explore, description },
   contacts,
   exploreRoutes,
 } = Astro.props;
-
 const layoutTitle = appendSiteName(title);
-
 const roleAndLocation = `${role} - ${location}`;
 ---
 
@@ -45,11 +41,19 @@ const roleAndLocation = `${role} - ${location}`;
         <Contacts contacts={contacts} />
       </Stack>
     </Stack>
-    <Stack gap={2} as="section">
+    <Stack gap={3} as="section">
       <h2>{explore}</h2>
-      <Stack direction="row" gap={3} wrap>
+      <div class="explore-grid">
         {exploreRoutes.map((route) => <ExploreCard {...route} />)}
-      </Stack>
+      </div>
     </Stack>
   </Stack>
 </Layout>
+
+<style>
+  .explore-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+    gap: 1.5rem;
+  }
+</style>
