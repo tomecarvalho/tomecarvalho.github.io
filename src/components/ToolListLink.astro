@@ -1,0 +1,29 @@
+---
+import type { TranslatedToolLink } from "../types/data/tools/ToolLink";
+import Stack from "./Stack.astro";
+import Tooltip from "./Tooltip.astro";
+
+interface Props {
+  link: TranslatedToolLink;
+}
+
+const {
+  link: { text, href },
+} = Astro.props;
+---
+
+<Tooltip text={text.description ?? ""}>
+  <a href={href} class="link button">
+    <Stack gap={0.5} wrap>
+      <span>{text.primary}</span>
+      <span class="text-secondary">{text.secondary}</span>
+    </Stack>
+  </a>
+</Tooltip>
+
+<style>
+  .link {
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+  }
+</style>

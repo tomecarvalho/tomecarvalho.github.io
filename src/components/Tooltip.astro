@@ -1,0 +1,74 @@
+---
+type Props = {
+  text: string;
+};
+const { text } = Astro.props;
+---
+
+<span class="tooltip-wrapper">
+  <slot />
+  <span class="tooltip">{text}</span>
+</span>
+
+<style>
+  .tooltip-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+
+  .tooltip {
+    position: fixed;
+    background: #222;
+    color: #fff;
+    padding: 0.35rem 0.6rem;
+    border-radius: 0.3rem;
+    font-size: 0.8rem;
+    white-space: normal;
+    width: max-content;
+    max-width: min(20rem, 90vw);
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.15s ease;
+    z-index: 10;
+  }
+
+  .tooltip-wrapper:hover .tooltip,
+  .tooltip-wrapper:focus-visible .tooltip {
+    opacity: 1;
+    visibility: visible;
+  }
+</style>
+
+<script>
+  const wrappers = document.querySelectorAll(".tooltip-wrapper");
+
+  for (const wrapper of wrappers) {
+    const tooltip = wrapper.querySelector(".tooltip");
+    if (!(tooltip instanceof HTMLElement)) continue;
+
+    wrapper.addEventListener("mouseenter", () => {
+      const rect = wrapper.getBoundingClientRect();
+
+      // Temporarily make it visible so we can measure it.
+      tooltip.style.visibility = "visible";
+      tooltip.style.opacity = "0";
+
+      // Centre tooltip on the wrapper.
+      const centeredLeft = rect.left + rect.width / 2 - tooltip.offsetWidth / 2;
+
+      // Clamp within viewport.
+      const clamped = Math.min(
+        Math.max(centeredLeft, 8),
+        window.innerWidth - tooltip.offsetWidth - 8,
+      );
+
+      tooltip.style.top = `${rect.top - tooltip.offsetHeight - 8}px`;
+      tooltip.style.left = `${clamped}px`;
+
+      // Let CSS take over from here.
+      tooltip.style.visibility = "";
+      tooltip.style.opacity = "";
+    });
+  }
+</script>

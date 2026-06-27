@@ -2,6 +2,7 @@
 import type { TranslatedTool } from "../types/data/tools/Tool";
 import Paragraphs from "./Paragraphs.astro";
 import Stack from "./Stack.astro";
+import ToolListLink from "./ToolListLink.astro";
 
 export interface Props {
   tool: TranslatedTool;
@@ -10,19 +11,39 @@ export interface Props {
 const {
   self: Self,
   props: {
-    tool: { name, type, description, href, children },
+    tool: { name, type, description, href, children, links },
   },
 } = Astro;
+
+const hasChildren = !!children?.length;
+const hasLinks = !!links?.length;
 ---
 
 <li class="item">
   <Stack gap={1}>
-    <h3>{`${name} - ${type}`}</h3>
+    <a href={href}>
+      <h3>{`${name} - ${type}`}</h3>
+    </a>
     <Paragraphs paragraphs={description} />
   </Stack>
-  <ul class="children">
-    {children?.map((child) => <Self tool={child} />)}
-  </ul>
+  {
+    hasLinks && (
+      <Stack direction="row" gap={2} wrap>
+        {links.map((link) => (
+          <ToolListLink link={link} />
+        ))}
+      </Stack>
+    )
+  }
+  {
+    hasChildren && (
+      <ul class="children">
+        {children.map((child) => (
+          <Self tool={child} />
+        ))}
+      </ul>
+    )
+  }
 </li>
 
 <style>
