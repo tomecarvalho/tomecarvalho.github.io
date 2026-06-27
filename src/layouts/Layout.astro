@@ -66,6 +66,15 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
         --dropdown-border-radius: var(--button-border-radius);
         --dropdown-box-shadow: var(--paper-box-shadow);
 
+        --tooltip-border-radius: var(--button-border-radius);
+        --tooltip-box-shadow: var(--dropdown-box-shadow);
+        --tooltip-font-size: 0.8125rem;
+        --tooltip-max-width: min(20rem, 90vw);
+        --tooltip-offset: 8px;
+        --tooltip-padding: 0.375rem 0.625rem;
+        --tooltip-transition: opacity var(--transition-duration) ease;
+        --tooltip-z-index: 10;
+
         --nav-border-radius: 8px;
 
         --paper-border-radius: 12px;
@@ -114,6 +123,9 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
 
         --font-color-dark: #f0f0f0;
         --font-color-secondary-dark: #9f9fa1;
+
+        --tooltip-bg-color-dark: var(--dropdown-bg-color-dark);
+        --tooltip-font-color-dark: var(--font-color-dark);
       }
 
       * {
@@ -227,6 +239,35 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
       .text-secondary {
         font-size: var(--text-secondary-font-size);
         color: var(--font-color-secondary-dark);
+      }
+
+      .tooltip-wrapper {
+        position: relative;
+        display: inline-block;
+      }
+
+      .tooltip {
+        position: fixed;
+        background-color: var(--tooltip-bg-color-dark);
+        color: var(--tooltip-font-color-dark);
+        padding: var(--tooltip-padding);
+        border-radius: var(--tooltip-border-radius);
+        box-shadow: var(--tooltip-box-shadow);
+        font-size: var(--tooltip-font-size);
+        white-space: normal;
+        width: max-content;
+        max-width: var(--tooltip-max-width);
+        pointer-events: none;
+        opacity: 0;
+        visibility: hidden;
+        transition: var(--tooltip-transition);
+        z-index: var(--tooltip-z-index);
+      }
+
+      .tooltip-wrapper:hover .tooltip,
+      .tooltip-wrapper:focus-visible .tooltip {
+        opacity: 1;
+        visibility: visible;
       }
 
       @media (max-width: 700px) {

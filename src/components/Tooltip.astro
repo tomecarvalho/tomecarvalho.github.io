@@ -10,37 +10,15 @@ const { text } = Astro.props;
   <span class="tooltip">{text}</span>
 </span>
 
-<style>
-  .tooltip-wrapper {
-    position: relative;
-    display: inline-block;
-  }
-
-  .tooltip {
-    position: fixed;
-    background: #222;
-    color: #fff;
-    padding: 0.35rem 0.6rem;
-    border-radius: 0.3rem;
-    font-size: 0.8rem;
-    white-space: normal;
-    width: max-content;
-    max-width: min(20rem, 90vw);
-    pointer-events: none;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.15s ease;
-    z-index: 10;
-  }
-
-  .tooltip-wrapper:hover .tooltip,
-  .tooltip-wrapper:focus-visible .tooltip {
-    opacity: 1;
-    visibility: visible;
-  }
-</style>
-
 <script>
+  const tooltipOffset =
+    parseInt(
+      getComputedStyle(document.documentElement).getPropertyValue(
+        "--tooltip-offset",
+      ),
+      10,
+    ) || 8;
+
   const wrappers = document.querySelectorAll(".tooltip-wrapper");
 
   for (const wrapper of wrappers) {
@@ -59,11 +37,11 @@ const { text } = Astro.props;
 
       // Clamp within viewport.
       const clamped = Math.min(
-        Math.max(centeredLeft, 8),
-        window.innerWidth - tooltip.offsetWidth - 8,
+        Math.max(centeredLeft, tooltipOffset),
+        window.innerWidth - tooltip.offsetWidth - tooltipOffset,
       );
 
-      tooltip.style.top = `${rect.top - tooltip.offsetHeight - 8}px`;
+      tooltip.style.top = `${rect.top - tooltip.offsetHeight - tooltipOffset}px`;
       tooltip.style.left = `${clamped}px`;
 
       // Let CSS take over from here.
