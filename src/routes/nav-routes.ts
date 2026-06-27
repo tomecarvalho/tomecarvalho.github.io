@@ -20,6 +20,15 @@ export const navRoutes = {
       pt: "Visão geral dos projetos que desenvolvi ou para os quais contribui.",
     },
   },
+  tools: {
+    label: "nav.tools",
+    path: "/tools/",
+    icon: "mdi:tools",
+    description: {
+      en: "Tools I use and recommend.",
+      pt: "Ferramentas que uso e recomendo.",
+    },
+  },
   interests: {
     label: "nav.interests",
     path: "/interests/",
@@ -35,11 +44,13 @@ export const navRoutes = {
 export const navRoutesArray = [
   navRoutes.aboutMe,
   navRoutes.projects,
+  navRoutes.tools,
   navRoutes.interests,
 ] as const satisfies NavRoute[];
 
 /** `navRoutes` entries that should appear in the Explore section of the index page. */
 export const exploreRoutesArray = [
   navRoutes.projects,
+  navRoutes.tools,
   navRoutes.interests,
 ] as const satisfies NavRoute[];

@@ -1,0 +1,40 @@
+---
+import type { TranslatedTool } from "../types/data/tools/Tool";
+import Paragraphs from "./Paragraphs.astro";
+import Stack from "./Stack.astro";
+
+export interface Props {
+  tool: TranslatedTool;
+}
+
+const {
+  self: Self,
+  props: {
+    tool: { name, type, description, href, children },
+  },
+} = Astro;
+---
+
+<li class="item">
+  <Stack gap={1}>
+    <h3>{`${name} - ${type}`}</h3>
+    <Paragraphs paragraphs={description} />
+  </Stack>
+  <ul class="children">
+    {children?.map((child) => <Self tool={child} />)}
+  </ul>
+</li>
+
+<style>
+  .item {
+    list-style: none;
+  }
+
+  .children {
+    margin-left: 1rem;
+  }
+
+  .children > li {
+    list-style: disc;
+  }
+</style>

@@ -1,0 +1,36 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { appendSiteName } from "../site/utils";
+import type { TranslatedToolCategory } from "../types/data/tools/ToolCategory";
+import Stack from "./Stack.astro";
+import ToolCategory from "./ToolCategory.astro";
+
+export interface Props {
+  text: {
+    title: string;
+    description: string;
+  };
+  toolCategories: TranslatedToolCategory[];
+}
+
+const {
+  text: { title, description },
+  toolCategories,
+} = Astro.props;
+
+const layoutTitle = appendSiteName(title);
+---
+
+<Layout title={layoutTitle}>
+  <Stack gap={4}>
+    <h1>{title}</h1>
+    <p>{description}</p>
+    <Stack gap={3}>
+      {
+        toolCategories?.map((toolCategory) => (
+          <ToolCategory toolCategory={toolCategory} />
+        ))
+      }
+    </Stack>
+  </Stack>
+</Layout>

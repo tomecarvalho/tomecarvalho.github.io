@@ -1,0 +1,18 @@
+---
+import type { TranslatedToolCategory } from "../types/data/tools/ToolCategory";
+import Stack from "./Stack.astro";
+import ToolListItem from "./ToolListItem.astro";
+
+export interface Props {
+  toolCategory: TranslatedToolCategory;
+}
+
+const { toolCategory } = Astro.props;
+---
+
+<Stack as="section" gap={2}>
+  <h2>{toolCategory.name}</h2>
+  <Stack gap={2}>
+    {toolCategory.tools.map((tool) => <ToolListItem tool={tool} />)}
+  </Stack>
+</Stack>

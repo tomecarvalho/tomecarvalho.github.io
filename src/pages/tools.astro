@@ -1,0 +1,22 @@
+---
+import type { Props as ToolsPageProps } from "../components/ToolsPage.astro";
+import ToolsPage from "../components/ToolsPage.astro";
+import { translate, useTranslations } from "../i18n/utils";
+import siteConfig from "../site/config";
+
+const { currentLocale } = Astro;
+
+const t = useTranslations(currentLocale);
+
+const text: ToolsPageProps["text"] = {
+  title: t("nav.tools"),
+  description: t("tools.description"),
+};
+
+const toolCategories: ToolsPageProps["toolCategories"] = translate(
+  siteConfig.toolCategories,
+  currentLocale,
+);
+---
+
+<ToolsPage text={text} toolCategories={toolCategories} />

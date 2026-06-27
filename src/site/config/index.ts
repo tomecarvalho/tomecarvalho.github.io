@@ -2,6 +2,7 @@ import type { Contact } from "../../types/data/about-me/Contact";
 import type { Intro } from "../../types/data/about-me/Intro";
 import type { Coursework } from "../../types/data/projects/Coursework";
 import type { ProjectCategory } from "../../types/data/projects/ProjectCategory";
+import type { ToolCategory } from "../../types/data/tools/ToolCategory";
 import tomecarvalho from "./people/tomecarvalho";
 
 /**
@@ -12,10 +13,15 @@ export type SiteConfig = {
   site: string;
   handle: string;
   name: string;
+
   intro: Intro;
+
   contacts: Contact[];
-  projectCategories: ProjectCategory[];
+
   coursework: Coursework;
+  projectCategories: ProjectCategory[];
+
+  toolCategories: ToolCategory[];
 };
 
 /** Site configuration (personal information, URLs, etc.). */

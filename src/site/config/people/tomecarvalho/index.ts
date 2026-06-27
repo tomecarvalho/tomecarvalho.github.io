@@ -3,6 +3,7 @@ import contacts from "./contacts";
 import coursework from "./coursework";
 import intro from "./intro";
 import projectCategories from "./project-categories";
+import toolCategories from "./tool-categories";
 
 const tomecarvalho = {
   site: "https://tomecarvalho.github.io",
@@ -12,6 +13,7 @@ const tomecarvalho = {
   contacts,
   coursework,
   projectCategories,
+  toolCategories,
 } as const satisfies SiteConfig;
 
 export default tomecarvalho;
