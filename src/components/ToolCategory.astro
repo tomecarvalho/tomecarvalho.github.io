@@ -12,7 +12,7 @@ const { toolCategory } = Astro.props;
 
 <Stack as="section" gap={2}>
   <h2>{toolCategory.name}</h2>
-  <Stack gap={2}>
+  <Stack gap={4}>
     {toolCategory.tools.map((tool) => <ToolListItem tool={tool} />)}
   </Stack>
 </Stack>
