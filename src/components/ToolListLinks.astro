@@ -12,11 +12,13 @@ const { links } = Astro.props;
 
 <div class="tool-list-links">
   <AutoGrid as="ul" minWidth="12rem" gap={2} columns="fit" stretch>
-    {links.map((link) => (
-      <li>
-        <ToolListLink link={link} />
-      </li>
-    ))}
+    {
+      links.map((link) => (
+        <li>
+          <ToolListLink link={link} />
+        </li>
+      ))
+    }
   </AutoGrid>
 </div>
 
