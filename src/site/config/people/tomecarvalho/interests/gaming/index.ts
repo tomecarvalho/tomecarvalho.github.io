@@ -18,7 +18,7 @@ Check out my favourite games below, or visit my Backloggd profile to snoop on wh
     
 Já passei muito tempo nos mundos e narrativas imersivas de jogos single-player, partidas intensas de multiplayer competitivo, e a brincar em jogos sandbox. Hoje, é o primeiro tipo que constitui a maior parte do meu tempo de jogo — a interatividade encontrada nos jogos mantém-se fascinante como sempre, mesmo que não seja o passatempo mais barato.
 
-Veja os meus jogos favoritos abaixo, ou visite o meu perfil no Backloggd para coscuvilhar o que tenho estado a jogar..`,
+Veja os meus jogos favoritos abaixo, ou visite o meu perfil no Backloggd para coscuvilhar o que tenho estado a jogar.`,
   },
   icon: "mdi:controller",
   links: [
