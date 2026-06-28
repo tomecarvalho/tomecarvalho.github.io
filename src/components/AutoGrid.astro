@@ -6,6 +6,7 @@ import { toStyle } from "../utils/style";
 
 type Props = {
   minWidth?: Spacing;
+  maxWidth?: Spacing;
   gap?: Spacing;
   /** Whether extra columns collapse (`fit`) or stay open (`fill`). */
   columns?: "fill" | "fit";
@@ -15,6 +16,7 @@ type Props = {
 
 const {
   minWidth = "12rem",
+  maxWidth,
   gap = 2,
   columns = "fill",
   stretch = false,
@@ -22,14 +24,25 @@ const {
   as: Tag = "div",
 } = Astro.props;
 
-const style = `${toStyle({ gap })} --auto-grid-min-width: ${spacingToPx(minWidth)};`;
+const style = [
+  toStyle({ gap }),
+  `--auto-grid-min-width: ${spacingToPx(minWidth)};`,
+  maxWidth && `--auto-grid-max-width: ${spacingToPx(maxWidth)};`,
+]
+  .filter(Boolean)
+  .join(" ");
 ---
 
 <Tag
   class:list={[
     "auto-grid",
     className,
-    { stretch, "columns-fit": columns === "fit", list: Tag === "ul" },
+    {
+      stretch,
+      "columns-fit": columns === "fit",
+      "has-max-width": !!maxWidth,
+      list: Tag === "ul",
+    },
   ]}
   style={style}
 >
@@ -49,6 +62,26 @@ const style = `${toStyle({ gap })} --auto-grid-min-width: ${spacingToPx(minWidth
     grid-template-columns: repeat(
       auto-fit,
       minmax(min(100%, var(--auto-grid-min-width, 12rem)), 1fr)
+    );
+  }
+
+  .auto-grid.has-max-width {
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(
+        min(100%, var(--auto-grid-min-width, 12rem)),
+        min(100%, var(--auto-grid-max-width))
+      )
+    );
+  }
+
+  .auto-grid.has-max-width.columns-fit {
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(
+        min(100%, var(--auto-grid-min-width, 12rem)),
+        min(100%, var(--auto-grid-max-width))
+      )
     );
   }
 

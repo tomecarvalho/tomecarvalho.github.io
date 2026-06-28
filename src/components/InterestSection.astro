@@ -1,17 +1,36 @@
 ---
 import type { TranslatedInterest } from "../types/data/interests/Interest";
+import AutoGrid from "./AutoGrid.astro";
 import CollapsibleSection from "./CollapsibleSection.astro";
+import InterestCard from "./InterestCard.astro";
+import InterestLinks from "./InterestLinks.astro";
 import Paragraphs from "./Paragraphs.astro";
+import Stack from "./Stack.astro";
 
 export interface Props {
   interest: TranslatedInterest;
 }
 
 const {
-  interest: { id, name, icon, description },
+  interest: { id, name, icon, description, links, cards },
 } = Astro.props;
+
+const hasLinks = !!links?.length;
+const hasCards = !!cards?.length;
 ---
 
 <CollapsibleSection id={id} name={name} icon={icon}>
-  <Paragraphs paragraphs={description} />
+  <Stack gap={2}>
+    <Paragraphs paragraphs={description} />
+    {hasLinks && <InterestLinks links={links} />}
+    {
+      hasCards && (
+        <AutoGrid minWidth="9.5rem" columns="fit" stretch>
+          {cards.map((card) => (
+            <InterestCard {...card} />
+          ))}
+        </AutoGrid>
+      )
+    }
+  </Stack>
 </CollapsibleSection>

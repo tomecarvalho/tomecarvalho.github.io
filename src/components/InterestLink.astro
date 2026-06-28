@@ -1,0 +1,24 @@
+---
+import { Icon } from "astro-icon/components";
+import type { TranslatedInterestLink } from "../types/data/interests/InterestLink";
+
+export interface Props {
+  link: TranslatedInterestLink;
+}
+
+const {
+  link: { icon, href, label },
+} = Astro.props;
+---
+
+<a class="link button" href={href}>
+  {!!icon && <Icon name={icon} size="1.5rem" />}
+  {label}
+</a>
+
+<style>
+  .link {
+    text-decoration: none;
+    text-wrap: nowrap;
+  }
+</style>

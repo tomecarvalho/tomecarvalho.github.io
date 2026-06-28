@@ -1,0 +1,64 @@
+---
+import type { TranslatedInterestCard } from "../types/data/interests/InterestCard";
+import Paper from "./Paper.astro";
+import Stack from "./Stack.astro";
+import Tooltip from "./Tooltip.astro";
+
+type Props = TranslatedInterestCard;
+
+const { text, href, imageUrl } = Astro.props;
+
+const hasImage = !!imageUrl;
+const hasPrimary = !!text.primary;
+const hasSecondary = !!text.secondary;
+const hasText = hasPrimary || hasSecondary;
+---
+
+<Tooltip text={text.tooltip ?? ""}>
+  <a class="interest-card" href={href}>
+    <Paper hoverable>
+      <Stack gap={1.5} alignItems="flex-start">
+        {
+          hasImage && (
+            <img class="thumbnail" src={imageUrl} alt={text.primary} />
+          )
+        }
+        {
+          hasText && (
+            <Stack gap={0.5} alignItems="flex-start">
+              {hasPrimary && <h3>{text.primary}</h3>}
+              {hasSecondary && <p class="text-secondary">{text.secondary}</p>}
+            </Stack>
+          )
+        }
+      </Stack>
+    </Paper>
+  </a>
+</Tooltip>
+
+<style>
+  .interest-card {
+    text-decoration: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    color: inherit;
+  }
+
+  .interest-card :global(.paper) {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .interest-card :global(.paper) > :global(.stack) {
+    flex: 1;
+  }
+
+  .thumbnail {
+    width: 100%;
+    object-fit: cover;
+    border-radius: calc(var(--paper-border-radius) * 0.75);
+  }
+</style>

@@ -1,8 +1,13 @@
-import type { Translatable } from "../../../i18n/types";
+import type { Translatable, Translated } from "../../../i18n/types";
 
 export interface InterestCard {
-  name: Translatable;
-  description: Translatable;
-  href: string;
-  imageUrl: string;
+  text: {
+    primary?: Translatable;
+    secondary?: Translatable;
+    tooltip?: Translatable;
+  };
+  href?: string;
+  imageUrl?: string;
 }
+
+export type TranslatedInterestCard = Translated<InterestCard>;

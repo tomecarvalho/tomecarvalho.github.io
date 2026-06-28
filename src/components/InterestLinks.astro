@@ -1,0 +1,31 @@
+---
+import InterestLink from "./InterestLink.astro";
+import type { Props as InterestLinkProps } from "./InterestLink.astro";
+
+export interface Props {
+  links: InterestLinkProps["link"][];
+}
+
+const { links } = Astro.props;
+---
+
+<ul class="interest-links">
+  {
+    links.map((link) => (
+      <li>
+        <InterestLink link={link} />
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .interest-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+</style>
