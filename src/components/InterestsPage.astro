@@ -1,16 +1,20 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { appendSiteName } from "../site/utils";
+import type { TranslatedInterest } from "../types/data/interests/Interest";
+import InterestSection from "./InterestSection.astro";
 import Stack from "./Stack.astro";
 
 export interface Props {
   text: {
     title: string;
   };
+  interests: TranslatedInterest[];
 }
 
 const {
   text: { title },
+  interests,
 } = Astro.props;
 
 const layoutTitle = appendSiteName(title);
@@ -19,6 +23,8 @@ const layoutTitle = appendSiteName(title);
 <Layout title={layoutTitle}>
   <Stack gap={4}>
     <h1>{title}</h1>
-    <p>Oops! This page is still under construction!</p>
+    <Stack gap={3}>
+      {interests.map((interest) => <InterestSection interest={interest} />)}
+    </Stack>
   </Stack>
 </Layout>

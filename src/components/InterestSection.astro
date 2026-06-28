@@ -1,0 +1,17 @@
+---
+import type { TranslatedInterest } from "../types/data/interests/Interest";
+import CollapsibleSection from "./CollapsibleSection.astro";
+import Paragraphs from "./Paragraphs.astro";
+
+export interface Props {
+  interest: TranslatedInterest;
+}
+
+const {
+  interest: { id, name, icon, description },
+} = Astro.props;
+---
+
+<CollapsibleSection id={id} name={name} icon={icon}>
+  <Paragraphs paragraphs={description} />
+</CollapsibleSection>

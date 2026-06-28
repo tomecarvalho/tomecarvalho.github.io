@@ -1,5 +1,6 @@
 import type { Contact } from "../../types/data/about-me/Contact";
 import type { Intro } from "../../types/data/about-me/Intro";
+import type { Interest } from "../../types/data/interests/Interest";
 import type { Coursework } from "../../types/data/projects/Coursework";
 import type { ProjectCategory } from "../../types/data/projects/ProjectCategory";
 import type { ToolCategory } from "../../types/data/tools/ToolCategory";
@@ -20,6 +21,8 @@ export type SiteConfig = {
 
   coursework: Coursework;
   projectCategories: ProjectCategory[];
+
+  interests: Interest[];
 
   toolCategories: ToolCategory[];
 };

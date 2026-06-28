@@ -1,0 +1,42 @@
+---
+import type { TranslatedToolLink } from "../types/data/tools/ToolLink";
+import AutoGrid from "./AutoGrid.astro";
+import ToolListLink from "./ToolListLink.astro";
+
+interface Props {
+  links: TranslatedToolLink[];
+}
+
+const { links } = Astro.props;
+---
+
+<div class="tool-list-links">
+  <AutoGrid as="ul" minWidth="12rem" gap={2} columns="fit" stretch>
+    {links.map((link) => (
+      <li>
+        <ToolListLink link={link} />
+      </li>
+    ))}
+  </AutoGrid>
+</div>
+
+<style>
+  .tool-list-links :global(.tooltip-wrapper),
+  .tool-list-links :global(.link) {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .tool-list-links :global(.tooltip-wrapper) {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  .tool-list-links :global(.link) {
+    box-sizing: border-box;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+</style>

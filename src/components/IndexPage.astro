@@ -4,6 +4,7 @@ import type { TranslatedNavRoute } from "../routes/nav-routes";
 import { appendSiteName } from "../site/utils";
 import type { Props as ContactsProps } from "./Contacts.astro";
 import Contacts from "./Contacts.astro";
+import AutoGrid from "./AutoGrid.astro";
 import ExploreCard from "./ExploreCard.astro";
 import type { Props as ParagraphsProps } from "./Paragraphs.astro";
 import Paragraphs from "./Paragraphs.astro";
@@ -43,17 +44,9 @@ const roleAndLocation = `${role} - ${location}`;
     </Stack>
     <Stack gap={3} as="section">
       <h2>{explore}</h2>
-      <div class="explore-grid">
+      <AutoGrid minWidth="300px" gap={3} stretch>
         {exploreRoutes.map((route) => <ExploreCard {...route} />)}
-      </div>
+      </AutoGrid>
     </Stack>
   </Stack>
 </Layout>
-
-<style>
-  .explore-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
-    gap: 1.5rem;
-  }
-</style>

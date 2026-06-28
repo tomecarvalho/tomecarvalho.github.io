@@ -1,13 +1,19 @@
 ---
 import type { Props as InterestsPageProps } from "../components/InterestsPage.astro";
 import InterestsPage from "../components/InterestsPage.astro";
-import { useTranslations } from "../i18n/utils";
+import { translate, useTranslations } from "../i18n/utils";
+import siteConfig from "../site/config";
 
 const t = useTranslations(Astro.currentLocale);
 
 const text: InterestsPageProps["text"] = {
   title: t("nav.interests"),
 };
+
+const interests: InterestsPageProps["interests"] = translate(
+  siteConfig.interests,
+  Astro.currentLocale,
+);
 ---
 
-<InterestsPage text={text} />
+<InterestsPage text={text} interests={interests} />

@@ -1,0 +1,67 @@
+---
+import type { Spacing } from "../style/theme";
+import { spacingToPx } from "../style/theme";
+import type { AsProp } from "../types/component/AsProp";
+import { toStyle } from "../utils/style";
+
+type Props = {
+  minWidth?: Spacing;
+  gap?: Spacing;
+  /** Whether extra columns collapse (`fit`) or stay open (`fill`). */
+  columns?: "fill" | "fit";
+  stretch?: boolean;
+  class?: string;
+} & AsProp;
+
+const {
+  minWidth = "12rem",
+  gap = 2,
+  columns = "fill",
+  stretch = false,
+  class: className,
+  as: Tag = "div",
+} = Astro.props;
+
+const style = `${toStyle({ gap })} --auto-grid-min-width: ${spacingToPx(minWidth)};`;
+---
+
+<Tag
+  class:list={[
+    "auto-grid",
+    className,
+    { stretch, "columns-fit": columns === "fit", list: Tag === "ul" },
+  ]}
+  style={style}
+>
+  <slot />
+</Tag>
+
+<style>
+  .auto-grid {
+    display: grid;
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(min(100%, var(--auto-grid-min-width, 12rem)), 1fr)
+    );
+  }
+
+  .auto-grid.columns-fit {
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(min(100%, var(--auto-grid-min-width, 12rem)), 1fr)
+    );
+  }
+
+  .auto-grid.list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .auto-grid.stretch > :global(*) {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    height: 100%;
+  }
+</style>

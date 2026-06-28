@@ -2,7 +2,7 @@
 import type { TranslatedTool } from "../types/data/tools/Tool";
 import Paragraphs from "./Paragraphs.astro";
 import Stack from "./Stack.astro";
-import ToolListLink from "./ToolListLink.astro";
+import ToolListLinks from "./ToolListLinks.astro";
 
 interface Props {
   tool: TranslatedTool;
@@ -26,17 +26,7 @@ const hasLinks = !!links?.length;
     </a>
     <Paragraphs paragraphs={description} />
   </Stack>
-  {
-    hasLinks && (
-      <ul class="links">
-        {links.map((link) => (
-          <li>
-            <ToolListLink link={link} />
-          </li>
-        ))}
-      </ul>
-    )
-  }
+  {hasLinks && <ToolListLinks links={links} />}
   {
     hasChildren && (
       <ul class="children">
@@ -59,38 +49,5 @@ const hasLinks = !!links?.length;
 
   .children > li {
     list-style: disc;
-  }
-
-  .links {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
-    gap: 1rem;
-    padding: 0;
-    margin: 0;
-  }
-
-  .links > li {
-    display: flex;
-    min-width: 0;
-  }
-
-  .links :global(.tooltip-wrapper),
-  .links :global(.link) {
-    width: 100%;
-    min-width: 0;
-  }
-
-  .links :global(.tooltip-wrapper) {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-  }
-
-  .links :global(.link) {
-    box-sizing: border-box;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
   }
 </style>
