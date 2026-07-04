@@ -15,7 +15,7 @@ const hasTertiary = !!text.tertiary;
 const hasText = hasPrimary || hasSecondary || hasTertiary;
 ---
 
-<Tooltip text={text.tooltip ?? ""}>
+<Tooltip text={text.tooltip}>
   <a class="interest-card" href={href}>
     <Paper hoverable>
       <Stack gap={1.5} center>

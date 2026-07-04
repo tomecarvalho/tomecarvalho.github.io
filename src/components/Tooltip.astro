@@ -1,13 +1,14 @@
 ---
-type Props = {
-  text: string;
-};
+interface Props {
+  text?: string;
+}
+
 const { text } = Astro.props;
 ---
 
 <span class="tooltip-wrapper">
   <slot />
-  <span class="tooltip">{text}</span>
+  {text && <span class="tooltip">{text}</span>}
 </span>
 
 <script>
