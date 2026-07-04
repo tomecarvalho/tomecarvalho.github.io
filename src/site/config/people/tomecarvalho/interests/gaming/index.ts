@@ -1,9 +1,9 @@
 import type { Interest } from "../../../../../../types/data/interests/Interest";
-import baldursGate3 from "./baldurs-gate-3";
-import bloodborne from "./bloodborne";
-import discoElysium from "./disco-elysium";
-import outerWilds from "./outer-wilds";
-import witcher3 from "./witcher-3";
+import baldursGate3 from "./games/baldurs-gate-3";
+import bloodborne from "./games/bloodborne";
+import discoElysium from "./games/disco-elysium";
+import outerWilds from "./games/outer-wilds";
+import theWitcher3 from "./games/the-witcher-3";
 
 const gaming = {
   id: "gaming",
@@ -28,7 +28,7 @@ Veja os meus jogos favoritos abaixo, ou visite o meu perfil no Backloggd para co
       href: "https://backloggd.com/u/tomecarvalho/",
     },
   ],
-  cards: [bloodborne, witcher3, outerWilds, discoElysium, baldursGate3],
+  cards: [bloodborne, theWitcher3, outerWilds, discoElysium, baldursGate3],
 } as const satisfies Interest;
 
 export default gaming;

@@ -1,4 +1,4 @@
-import type { InterestCard } from "../../../../../../types/data/interests/InterestCard";
+import type { InterestCard } from "../../../../../../../types/data/interests/InterestCard";
 
 const bloodborne = {
   text: { tooltip: { en: "Bloodborne" } },

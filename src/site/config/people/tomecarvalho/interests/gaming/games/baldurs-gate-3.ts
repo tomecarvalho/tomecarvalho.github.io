@@ -1,4 +1,4 @@
-import type { InterestCard } from "../../../../../../types/data/interests/InterestCard";
+import type { InterestCard } from "../../../../../../../types/data/interests/InterestCard";
 
 const baldursGate3 = {
   text: { tooltip: { en: "Baldur's Gate 3" } },
