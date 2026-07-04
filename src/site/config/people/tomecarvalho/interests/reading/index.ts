@@ -16,7 +16,7 @@ const reading = {
   links: [
     {
       label: { en: "Goodreads" },
-      icon: "mdi:link",
+      icon: "mdi:goodreads",
       href: " https://www.goodreads.com/tomecarvalho ",
     },
   ],

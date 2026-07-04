@@ -6,8 +6,8 @@ const contacts = [
     id: "email",
     icon: "mdi:email",
     label: "Email",
-    value: "tomecarvalho01@gmail.com",
-    href: "mailto:tomecarvalho01@gmail.com",
+    value: "tomecarv@gmail.com",
+    href: "mailto:tomecarv@gmail.com",
   },
   {
     id: "github",
