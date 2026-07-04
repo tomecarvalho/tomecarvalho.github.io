@@ -2,7 +2,9 @@ import type { InterestCard } from "../../../../../../../types/data/interests/Int
 
 const theWitcher = {
   text: {
-    tooltip: { en: "The Witcher (Series)" },
+    primary: { en: "The Witcher" },
+    secondary: { en: "Andrzej Sapkowski" },
+    tertiary: { en: "Series", pt: "Série" },
   },
   href: "https://www.goodreads.com/series/40911-the-witcher",
   imageUrl:

@@ -1,5 +1,5 @@
 import type { Interest } from "../../../../../../types/data/interests/Interest";
-import cosmere from "./books/cosmere";
+import theCosmere from "./books/the-cosmere";
 import lonesomeDove from "./books/lonesome-dove";
 import theCountOfMonteCristo from "./books/the-count-of-monte-cristo";
 import theDreamMachine from "./books/the-dream-machine";
@@ -21,7 +21,7 @@ const reading = {
     },
   ],
   cards: [
-    cosmere,
+    theCosmere,
     theWitcher,
     theCountOfMonteCristo,
     lonesomeDove,

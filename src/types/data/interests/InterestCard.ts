@@ -4,6 +4,7 @@ export interface InterestCard {
   text: {
     primary?: Translatable;
     secondary?: Translatable;
+    tertiary?: Translatable;
     tooltip?: Translatable;
   };
   href?: string;

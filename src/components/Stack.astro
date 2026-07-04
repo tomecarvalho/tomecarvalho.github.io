@@ -24,6 +24,7 @@ type Props = {
   direction?: "row" | "column";
   height?: CSSStyleDeclaration["height"];
   wrap?: boolean;
+  fullWidth?: boolean;
 } & AlignProps &
   AsProp;
 
@@ -34,6 +35,7 @@ const {
   direction,
   height,
   wrap,
+  fullWidth,
   as: Tag = "div",
 } = Astro.props;
 
@@ -46,7 +48,10 @@ const horizontal = direction === "row";
 const style = toStyle({ gap, alignItems, justifyContent, height });
 ---
 
-<Tag class:list={["stack", className, { horizontal, wrap }]} style={style}>
+<Tag
+  class:list={["stack", className, { horizontal, wrap, fullWidth }]}
+  style={style}
+>
   <slot />
 </Tag>
 
@@ -60,5 +65,8 @@ const style = toStyle({ gap, alignItems, justifyContent, height });
   }
   .stack.wrap {
     flex-wrap: wrap;
+  }
+  .stack.fullWidth {
+    width: 100%;
   }
 </style>

@@ -2,9 +2,10 @@ import type { InterestCard } from "../../../../../../../types/data/interests/Int
 
 const theDreamMachine = {
   text: {
-    tooltip: {
-      en: "The Dream Machine: J.C.R. Licklider and the Revolution That Made Computing Personal",
+    primary: {
+      en: "The Dream Machine",
     },
+    secondary: { en: "M. Mitchell Waldrop" },
   },
   href: "https://www.goodreads.com/book/show/722412.The_Dream_Machine",
   imageUrl:

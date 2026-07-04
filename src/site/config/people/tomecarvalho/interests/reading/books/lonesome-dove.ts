@@ -2,7 +2,8 @@ import type { InterestCard } from "../../../../../../../types/data/interests/Int
 
 const lonesomeDove = {
   text: {
-    tooltip: { en: "Lonesome Dove" },
+    primary: { en: "Lonesome Dove" },
+    secondary: { en: "Larry McMurtry" },
   },
   href: "https://www.goodreads.com/book/show/256008.Lonesome_Dove",
   imageUrl:
