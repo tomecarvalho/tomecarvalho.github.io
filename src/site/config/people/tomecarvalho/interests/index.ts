@@ -1,6 +1,10 @@
 import type { SiteConfig } from "../../..";
 import gaming from "./gaming";
+import strengthTraining from "./strength-training";
 
-const interests = [gaming] as const satisfies SiteConfig["interests"];
+const interests = [
+  gaming,
+  strengthTraining,
+] as const satisfies SiteConfig["interests"];
 
 export default interests;

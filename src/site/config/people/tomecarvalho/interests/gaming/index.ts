@@ -7,7 +7,7 @@ import witcher3 from "./witcher-3";
 
 const gaming = {
   id: "gaming",
-  name: { en: "Gaming", pt: "Jogos" },
+  name: { en: "Gaming", pt: "Videojogos" },
   description: {
     en: `Gaming is my oldest passion—I've been playing since my childhood, and I don't expect to ever stop.
 
