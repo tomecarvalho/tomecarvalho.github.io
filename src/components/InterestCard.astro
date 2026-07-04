@@ -17,7 +17,7 @@ const hasText = hasPrimary || hasSecondary;
 <Tooltip text={text.tooltip ?? ""}>
   <a class="interest-card" href={href}>
     <Paper hoverable>
-      <Stack gap={1.5} alignItems="flex-start">
+      <Stack gap={1.5} center>
         {
           hasImage && (
             <img class="thumbnail" src={imageUrl} alt={text.primary} />

@@ -3,26 +3,43 @@ import type { Spacing } from "../style/theme";
 import type { AsProp } from "../types/component/AsProp";
 import { toStyle } from "../utils/style";
 
+/** `alignItems` and/or `justifyContent`, or exclusively `center` (shorthand). */
+type AlignProps =
+  | {
+      center?: never;
+
+      alignItems?: CSSStyleDeclaration["alignItems"];
+      justifyContent?: CSSStyleDeclaration["justifyContent"];
+    }
+  | {
+      center?: true;
+
+      alignItems?: never;
+      justifyContent?: never;
+    };
+
 type Props = {
   gap?: Spacing;
   class?: string;
   direction?: "row" | "column";
-  alignItems?: CSSStyleDeclaration["alignItems"];
-  justifyContent?: CSSStyleDeclaration["justifyContent"];
   height?: CSSStyleDeclaration["height"];
   wrap?: boolean;
-} & AsProp;
+} & AlignProps &
+  AsProp;
 
 const {
   gap,
+  center,
   class: className,
   direction,
-  alignItems,
-  justifyContent,
   height,
   wrap,
   as: Tag = "div",
 } = Astro.props;
+
+const { alignItems, justifyContent } = center
+  ? { alignItems: "center", justifyContent: "center" }
+  : Astro.props;
 
 const horizontal = direction === "row";
 
