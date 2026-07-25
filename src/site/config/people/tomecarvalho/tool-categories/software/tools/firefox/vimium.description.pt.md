@@ -1,0 +1,1 @@
+Vimium oferece uma multitude de atalhos de teclado inspirados no Vim para navegação. Isto faz com que o utilizador não tenha de interromper o seu fluxo de trabalho via teclado sempre que quiser interagir com uma página web. Assim que nos habituamos, a navegação tradicional com o rato torna-se penosa, em comparação.

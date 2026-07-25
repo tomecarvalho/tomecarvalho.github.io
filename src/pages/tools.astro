@@ -10,7 +10,7 @@ const t = useTranslations(currentLocale);
 
 const text: ToolsPageProps["text"] = {
   title: t("nav.tools"),
-  description: t("tools.description"),
+  description: translate(siteConfig.toolsDescription, currentLocale),
 };
 
 const toolCategories: ToolsPageProps["toolCategories"] = translate(

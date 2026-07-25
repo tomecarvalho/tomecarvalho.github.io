@@ -5,6 +5,8 @@ import {
   type CurrentLocale,
   type LanguageOption,
   type LocaleKey,
+  type LocaleString,
+  type Localized,
   type Translatable,
   type Translated,
   type Translations,
@@ -16,14 +18,11 @@ const { defaultLocale, locales } = i18nConfig;
 const isTranslations = (value: Translatable): value is Translations =>
   typeof value === "object";
 
-/**
- * Checks if a value is translatable (known i18n UI key or inline translations object).
- * @param value Value of unknown type.
- * @returns Whether the value is translatable.
- */
-const isTranslatable = (value: unknown): value is Translatable =>
-  (typeof value === "string" && value in ui[defaultLocale]) ||
-  (typeof value === "object" && value !== null && "en" in value);
+const isLocaleString = (value: unknown): value is LocaleString =>
+  typeof value === "string" && value in ui[defaultLocale];
+
+const isLocalized = (value: unknown): value is Localized<unknown> =>
+  typeof value === "object" && value !== null && "en" in value;
 
 export const getLocale = (currentLocale: CurrentLocale): LocaleKey =>
   currentLocale && currentLocale in ui
@@ -79,13 +78,10 @@ export const useTranslations = (currentLocale: CurrentLocale) => {
   };
 };
 
-const translateValue = (value: Translatable, locale: LocaleKey): string =>
-  isTranslations(value)
-    ? (value[locale] ?? value.en)
-    : ui[locale][value] || ui[defaultLocale][value];
-
 /**
  * Translates objects recursively.
+ * Resolves UI locale keys, string translations, and other localized values
+ * (e.g. Markdown content components) with English as fallback.
  * @param obj Object to translate.
  * @param currentLocale Current locale.
  * @returns Translated object.
@@ -97,7 +93,10 @@ export const translate = <T>(
   const locale = getLocale(currentLocale);
 
   const recurse = (value: unknown): unknown => {
-    if (isTranslatable(value)) return translateValue(value, locale);
+    if (isLocaleString(value))
+      return ui[locale][value] || ui[defaultLocale][value];
+
+    if (isLocalized(value)) return value[locale] ?? value.en;
 
     if (Array.isArray(value)) return value.map(recurse);
 

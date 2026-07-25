@@ -1,0 +1,1 @@
+Vimium provides a plethora of Vim-inspired keyboard shortcuts for browsing. This makes it so the user doesn't have to interrupt their keyboard-driven desktop flow every time they want to interact with a webpage. Once you become accustomed to it, typical mouse-driven navigation feels cumbersome, in comparison.

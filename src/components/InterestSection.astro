@@ -4,7 +4,8 @@ import AutoGrid from "./AutoGrid.astro";
 import CollapsibleSection from "./CollapsibleSection.astro";
 import InterestCard from "./InterestCard.astro";
 import InterestLinks from "./InterestLinks.astro";
-import Paragraphs from "./Paragraphs.astro";
+import RichText from "./RichText.astro";
+import type { Props as RichTextProps } from "./RichText.astro";
 import Stack from "./Stack.astro";
 
 interface Props {
@@ -15,13 +16,14 @@ const {
   interest: { id, name, icon, description, links, cards },
 } = Astro.props;
 
+const Description: RichTextProps["Content"] = description;
 const hasLinks = !!links?.length;
 const hasCards = !!cards?.length;
 ---
 
 <CollapsibleSection id={id} name={name} icon={icon}>
   <Stack gap={2}>
-    <Paragraphs paragraphs={description} />
+    <RichText Content={Description} />
     {hasLinks && <InterestLinks links={links} />}
     {
       hasCards && (

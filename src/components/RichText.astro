@@ -1,0 +1,127 @@
+---
+import type { MarkdownContent } from "../i18n/types";
+
+export interface Props {
+  Content: MarkdownContent;
+}
+
+const { Content } = Astro.props;
+---
+
+<div class="rich-text">
+  <Content />
+</div>
+
+<style>
+  .rich-text :global(:first-child) {
+    margin-top: 0;
+  }
+
+  .rich-text :global(:last-child) {
+    margin-bottom: 0;
+  }
+
+  .rich-text :global(p),
+  .rich-text :global(ul),
+  .rich-text :global(ol),
+  .rich-text :global(blockquote),
+  .rich-text :global(pre),
+  .rich-text :global(table),
+  .rich-text :global(h1),
+  .rich-text :global(h2),
+  .rich-text :global(h3),
+  .rich-text :global(h4),
+  .rich-text :global(h5),
+  .rich-text :global(h6) {
+    margin-bottom: 1rem;
+  }
+
+  .rich-text :global(h1),
+  .rich-text :global(h2),
+  .rich-text :global(h3),
+  .rich-text :global(h4),
+  .rich-text :global(h5),
+  .rich-text :global(h6) {
+    margin-top: 1.5rem;
+    line-height: 1.25;
+  }
+
+  .rich-text :global(ul),
+  .rich-text :global(ol) {
+    padding-left: 1.5rem;
+  }
+
+  .rich-text :global(ul) {
+    list-style: disc;
+  }
+
+  .rich-text :global(ol) {
+    list-style: decimal;
+  }
+
+  .rich-text :global(li + li) {
+    margin-top: 0.35rem;
+  }
+
+  .rich-text :global(a) {
+    text-decoration: underline;
+  }
+
+  .rich-text :global(blockquote) {
+    border-left: 3px solid rgba(255, 255, 255, 0.25);
+    padding-left: 1rem;
+    color: var(--font-color-secondary-dark);
+  }
+
+  .rich-text :global(code) {
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    font-size: 0.9em;
+  }
+
+  .rich-text :global(:not(pre) > code) {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 0.25rem;
+    padding: 0.1em 0.35em;
+  }
+
+  .rich-text :global(pre) {
+    overflow-x: auto;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 0.5rem;
+    padding: 0.85rem 1rem;
+  }
+
+  .rich-text :global(pre code) {
+    background: none;
+    padding: 0;
+  }
+
+  .rich-text :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .rich-text :global(th),
+  .rich-text :global(td) {
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+  }
+
+  .rich-text :global(th) {
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .rich-text :global(hr) {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    margin: 1.5rem 0;
+  }
+
+  .rich-text :global(img) {
+    max-width: 100%;
+    height: auto;
+  }
+</style>

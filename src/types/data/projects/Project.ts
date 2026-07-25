@@ -1,4 +1,4 @@
-import type { Translatable } from "../../../i18n/types";
+import type { LocalizedMarkdown, Translatable } from "../../../i18n/types";
 
 interface ProjectLink {
   icon: string;
@@ -8,7 +8,7 @@ interface ProjectLink {
 
 export interface Project {
   name: Translatable;
-  description: Translatable;
+  description: LocalizedMarkdown;
   href?: string;
   imageUrl?: string;
   links?: ProjectLink[];

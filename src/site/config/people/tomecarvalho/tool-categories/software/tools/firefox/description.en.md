@@ -1,0 +1,1 @@
+It's FOSS, it supports extensions on Android, and Multi-Account Containers is a killer feature, especially for web development. I keep Brave/Brave Origin around in case I need a Chromium browser for something.

@@ -1,4 +1,6 @@
 import type { Tool } from "../../../../../../../../types/data/tools/Tool";
+import { Content as DescriptionEn } from "./description.en.md";
+import { Content as DescriptionPt } from "./description.pt.md";
 
 const localSend = {
   name: { en: "LocalSend", pt: "LocalSend" },
@@ -8,8 +10,8 @@ const localSend = {
   },
   href: "https://localsend.org/",
   description: {
-    en: "A cross-platform app that enables secure file and clipboard sharing between devices on a local network. It eliminates the need to rely platform-specific solutions of limited compatibility—simply install LocalSend everywhere and you're good to go.",
-    pt: "Uma aplicação multi-plataforma que permite a partilha seguro de ficheiros e da área de transferência entre dispositivos numa rede local. Elimina a necessidade de recorrer a soluções específicas a cada plataforma com compatibilidade limitada — basta instalar o LocalSend em todos os dispositivos e pronto.",
+    en: DescriptionEn,
+    pt: DescriptionPt,
   },
 } as const satisfies Tool;
 

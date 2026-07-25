@@ -1,0 +1,1 @@
+Navegar na web moderna sem um bloqueador de anúncios é uma experiência horrível. O uBlock Origin é o estado da arte no que diz respeito a bloqueadores de anúncios, e é a primeira extensão que qualquer utilizador do Firefox deve instalar.

@@ -1,0 +1,1 @@
+É FOSS, suporta extensões no Android, e Multi-Account Containers é uma funcionalidade imbatível, especialmente para desenvolvimento web. Mantenho o Brave/Brave Origin à mão em caso de necessidade de um navegador Chromium.

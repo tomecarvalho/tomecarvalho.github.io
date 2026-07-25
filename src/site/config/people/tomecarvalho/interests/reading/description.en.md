@@ -1,0 +1,1 @@
+I already liked reading as a kid, but it's a hobby I only rekindled a few years ago when I got an e-reader, thanks to its convenience. Now it's a mandatory part of routine. Also, it has done wonders for my sleep schedule: nothing knocks me out faster than reading in bed.

@@ -4,13 +4,15 @@ import type { Translated } from "../i18n/types";
 import type { Project } from "../types/data/projects/Project";
 import ConditionalLink from "./ConditionalLink.astro";
 import Paper from "./Paper.astro";
-import Paragraphs from "./Paragraphs.astro";
+import RichText from "./RichText.astro";
+import type { Props as RichTextProps } from "./RichText.astro";
 import Stack from "./Stack.astro";
 
 type Props = Translated<Project>;
 
 const { name, description, href, imageUrl, links } = Astro.props;
 
+const Description: RichTextProps["Content"] = description;
 const hasLinks = !!links?.length;
 
 /** The whole paper is clickable if there are no other clickable links. */
@@ -22,7 +24,7 @@ const paperClickable = !hasLinks && !!href;
     <div class="layout">
       <Stack gap={2}>
         <h3>{name}</h3>
-        <Paragraphs paragraphs={description} />
+        <RichText Content={Description} />
         {
           hasLinks && (
             <Stack direction="row" gap={1} justifyContent="flex-end">

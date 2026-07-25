@@ -7,9 +7,6 @@ const en = {
   "index.titles.explore": "Explore",
 
   "projects.titles.universityCoursework": "University Coursework",
-
-  "tools.description":
-    "These are some of the tools I use and recommend, and why I prefer them.",
 };
 
 export default en;
