@@ -4,4 +4,6 @@ Comecei a treinar em 2023, e só me arrependo de não ter começado mais cedo. N
 >
 > — <cite>[Keenan Malloy](https://vm.tiktok.com/ZGdxJRTtG/)</cite>
 
-O meu principal objetivo é ganhar músculo e, por extensão, força, de forma eficiente. Escolho exercícios estáveis que permitem progressão de carga a longo prazo para cada grupo muscular que treino, com base nas suas ações articulares. Faço a mesma sessão Full Body dia sim, dia não e foco-me em superar o desempenho passado. O meu intervalo de reps favorito é 5–8 com 0–2 RIR, que uso para progressão dupla.
+O meu principal objetivo é ganhar músculo e, por extensão, força, de forma eficiente. Escolho exercícios estáveis que permitem progressão de carga a longo prazo para cada grupo muscular que treino, com base nas suas ações articulares. Faço a mesma sessão Full Body dia sim, dia não e foco-me em superar o desempenho passado. O meu intervalo de reps favorito é 4–8 com 0–2 RIR, que uso para progressão dupla.
+
+Uso [Tracked](https://www.tracked.gg/) para registar o meu treino e nutrição. Tem imensas funcionalidades e a versão grátis é a mais generosa possível. Para além disso, o desenvolvedor tem paixão e é muito recetivo ao feedback. 
