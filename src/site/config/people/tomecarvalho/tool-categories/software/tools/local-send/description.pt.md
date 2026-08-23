@@ -1,0 +1,1 @@
+Uma aplicação multi-plataforma que permite a partilha seguro de ficheiros e da área de transferência entre dispositivos numa rede local. Elimina a necessidade de recorrer a soluções específicas a cada plataforma com compatibilidade limitada — basta instalar o LocalSend em todos os dispositivos e pronto.

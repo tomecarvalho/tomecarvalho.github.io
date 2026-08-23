@@ -1,11 +1,15 @@
-import type { Translatable, Translated } from "../../../i18n/types";
+import type {
+  LocalizedMarkdown,
+  Translatable,
+  Translated,
+} from "../../../i18n/types";
 import type { InterestCard } from "./InterestCard";
 import type { InterestLink } from "./InterestLink";
 
 export interface Interest {
   id: string;
   name: Translatable;
-  description: Translatable;
+  description: LocalizedMarkdown;
   icon: string;
   links?: InterestLink[];
   cards?: InterestCard[];

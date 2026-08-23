@@ -1,0 +1,1 @@
+A cross-platform app that enables secure file and clipboard sharing between devices on a local network. It eliminates the need to rely platform-specific solutions of limited compatibility – simply install LocalSend everywhere and you're good to go.

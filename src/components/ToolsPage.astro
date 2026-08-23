@@ -2,13 +2,15 @@
 import Layout from "../layouts/Layout.astro";
 import { appendSiteName } from "../site/utils";
 import type { TranslatedToolCategory } from "../types/data/tools/ToolCategory";
+import RichText from "./RichText.astro";
+import type { Props as RichTextProps } from "./RichText.astro";
 import Stack from "./Stack.astro";
 import ToolCategory from "./ToolCategory.astro";
 
 export interface Props {
   text: {
     title: string;
-    description: string;
+    description: RichTextProps["Content"];
   };
   toolCategories: TranslatedToolCategory[];
 }
@@ -18,13 +20,14 @@ const {
   toolCategories,
 } = Astro.props;
 
+const Description = description;
 const layoutTitle = appendSiteName(title);
 ---
 
 <Layout title={layoutTitle}>
   <Stack gap={4}>
     <h1>{title}</h1>
-    <p>{description}</p>
+    <RichText Content={Description} />
     <Stack gap={5}>
       {
         toolCategories?.map((toolCategory) => (

@@ -1,5 +1,7 @@
 import type { Project } from "../../../../../../../types/data/projects/Project";
 import terms from "../../../terms";
+import { Content as DescriptionEn } from "./fedora-workstation.description.en.md";
+import { Content as DescriptionPt } from "./fedora-workstation.description.pt.md";
 
 const fedoraWorkstation = {
   name: {
@@ -7,12 +9,8 @@ const fedoraWorkstation = {
     pt: "Fedora Workstation - Pós-Instalação",
   },
   description: {
-    en: `Configuration and post-install scripts for Fedora Workstation (GNOME Desktop Environment).
-    
-Includes scripts to install and set up software I use, as well as utilities for config versioning.`,
-    pt: `Scripts de configuração e pós-instalação para Fedora Workstation (Ambiente de Trabalho GNOME).
-    
-Inclui scripts para instalar e configurar software que uso, bem como scripts utilitários para versionamento de configurações.`,
+    en: DescriptionEn,
+    pt: DescriptionPt,
   },
   imageUrl:
     "https://fedoraproject.org/assets/images/fedora-workstation-logo.png",

@@ -1,6 +1,7 @@
 ---
 import type { TranslatedTool } from "../types/data/tools/Tool";
-import Paragraphs from "./Paragraphs.astro";
+import RichText from "./RichText.astro";
+import type { Props as RichTextProps } from "./RichText.astro";
 import Stack from "./Stack.astro";
 import ToolListLinks from "./ToolListLinks.astro";
 
@@ -15,6 +16,7 @@ const {
   },
 } = Astro;
 
+const Description: RichTextProps["Content"] = description;
 const hasChildren = !!children?.length;
 const hasLinks = !!links?.length;
 ---
@@ -24,7 +26,7 @@ const hasLinks = !!links?.length;
     <a href={href}>
       <h3>{`${name} - ${type}`}</h3>
     </a>
-    <Paragraphs paragraphs={description} />
+    <RichText Content={Description} />
   </Stack>
   {hasLinks && <ToolListLinks links={links} />}
   {
@@ -43,11 +45,20 @@ const hasLinks = !!links?.length;
     list-style: none;
   }
 
+  .item > :global(.tool-list-links),
+  .children {
+    margin-top: 1rem;
+  }
+
   .children {
     margin-left: 1rem;
   }
 
   .children > li {
     list-style: disc;
+  }
+
+  .children > li + li {
+    margin-top: 1rem;
   }
 </style>

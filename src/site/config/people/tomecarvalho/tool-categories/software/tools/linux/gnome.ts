@@ -1,26 +1,24 @@
 import type { Tool } from "../../../../../../../../types/data/tools/Tool";
-import centerMouseShortcuts from "../../../../project-categories/gnome-shell-extensions/projects/center-mouse-shortcuts";
+import centerMouseShortcuts, {
+  centerMouseShortcutsSummary,
+} from "../../../../project-categories/gnome-shell-extensions/projects/center-mouse-shortcuts";
+import { Content as DescriptionEn } from "./gnome.description.en.md";
+import { Content as DescriptionPt } from "./gnome.description.pt.md";
 
 const gnome = {
   name: { en: "GNOME", pt: "GNOME" },
   type: { en: "Desktop Environment", pt: "Ambiente de Trabalho" },
   href: "https://www.gnome.org/",
   description: {
-    en: `Truth be told, no desktop environment or window manager fulfils all of my desires – in an ideal world, I'd be using a tiling WM/DE. Nevertheless, at the moment, GNOME is the most reliable option for my hardware and needs, and its configuration is versionable enough.
-
-If you've used GNOME before, you may have noticed that my website looks familiar – I thought it'd be fun to style it after GNOME's Adwaita theme.
-    
-I do rely on a handful of extensions to provide some functionality GNOME doesn't offer out of the box, mainly:`,
-    pt: `Verdade seja dita, nenhum ambiente de trabalho ou gestor de janelas satisfaz todos os meus desejos — num mundo ideal, utilizaria um tiling WM/DE. De qualquer modo, de momento, o GNOME é a opção mais fiável para o meu hardware e necessidades, e a sua configuração é versionável que chegue.
-    
-Recorro a algumas extensões para fornecer algumas funcionalidades que o GNOME não oferece de imediato, principalmente:`,
+    en: DescriptionEn,
+    pt: DescriptionPt,
   },
   links: [
     {
       text: {
         primary: centerMouseShortcuts.name,
         secondary: { en: "By myself", pt: "Por mim" },
-        description: centerMouseShortcuts.description,
+        description: centerMouseShortcutsSummary,
       },
       href: centerMouseShortcuts.links[1].href,
     },

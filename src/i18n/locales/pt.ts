@@ -9,9 +9,6 @@ const pt: FullLocaleStrings = {
   "index.titles.explore": "Explorar",
 
   "projects.titles.universityCoursework": "Trabalhos Universitários",
-
-  "tools.description":
-    "Estas são algumas das ferramentas que uso e recomendo, e o motivo pelo qual as prefiro.",
 };
 
 export default pt;

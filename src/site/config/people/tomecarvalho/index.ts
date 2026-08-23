@@ -4,17 +4,19 @@ import coursework from "./coursework";
 import interests from "./interests";
 import intro from "./intro";
 import projectCategories from "./project-categories";
-import toolCategories from "./tool-categories";
+import site from "./site";
+import toolCategories, { toolsDescription } from "./tool-categories";
 
 const tomecarvalho = {
-  site: "https://tomecarvalho.github.io",
   handle: "tomecarvalho",
   name: "Tomé Carvalho",
-  intro,
   contacts,
   coursework,
   interests,
+  intro,
   projectCategories,
+  site,
+  toolsDescription,
   toolCategories,
 } as const satisfies SiteConfig;
 
