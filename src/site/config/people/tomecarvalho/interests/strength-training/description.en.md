@@ -6,4 +6,4 @@ I started strength training in 2023, and my only regret is that I didn't start s
 
 My main goal is to efficiently build muscle and, by extension, strength. I pick stable exercises that allow for long-term progressive overload for each trained muscle group, based on its main joint actions. I do the same Full Body session every other day and focus on beating the logbook. My favourite rep range is 4–8 at 0–2 reps in reserve, which I use for double progression.
 
-I use [Tracked](https://www.tracked.gg/) to track my training and nutrition. It's really feature rich and the free version is as generous as it gets. Also, the developer is passionate and very receptive to feedback. 
+I use [Tracked](https://www.tracked.gg/) to track my training and nutrition. It's really feature rich and the free version is as generous as it gets. Also, the developer is passionate and very receptive to feedback.
