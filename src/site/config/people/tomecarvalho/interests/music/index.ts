@@ -9,7 +9,7 @@ const music = {
   id: "music",
   name: { en: "Music", pt: "Música" },
   description: {
-    en: `Most of my listening time is Metal—Death Metal, in particular, is my favourite subgenre, and Death my favourite band. Other than that, I predictably like Rock and video game soundtracks.`,
+    en: `Most of my listening time is Metal – Death Metal, in particular, is my favourite subgenre, and Death my favourite band. Other than that, I predictably like Rock and video game soundtracks.`,
     pt: `A maioria do tempo, ouço Metal — Death Metal, em particular, é o meu subgénero favorito, e Death a minha banda favorita. Além disso, previsivelmente, gosto de Rock e trilhas sonoras de videojogos.`,
   },
   icon: "mdi:music",

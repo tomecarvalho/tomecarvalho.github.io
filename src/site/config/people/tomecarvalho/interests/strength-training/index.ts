@@ -4,7 +4,7 @@ const strengthTraining = {
   id: "strength-training",
   name: { en: "Strength Training", pt: "Musculação" },
   description: {
-    en: `I started strength training in 2023, and my only regret is that I didn't start sooner. I was never athletic, and I used to think lifting was very demanding and gyms were intimidating. I eventually signed up for the sake of my health, and then discovered it's based on routine (I'm a creature of habit) and there's a lot to learn about the science behind it—it shares a surprising similarity with grinding stats and optimising builds in video games.
+    en: `I started strength training in 2023, and my only regret is that I didn't start sooner. I was never athletic, and I used to think lifting was very demanding and gyms were intimidating. I eventually signed up for the sake of my health, and then discovered it's based on routine (I'm a creature of habit) and there's a lot to learn about the science behind it – it shares a surprising similarity with grinding stats and optimising builds in video games.
     
 My main goal is to efficiently build muscle and, by extension, strength. I pick stable exercises that allow for long-term progressive overload for each trained muscle group, based on its main joint actions. I currently run Upper/Lower/Rest-Repeat for practicality, although I am most fond of Full Body Every Other Day for its high frequency, because it minimises the consequences of diminishing returns per set performed within a session, and is more flexible when life gets in the way.
 
