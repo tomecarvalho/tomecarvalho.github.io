@@ -1,5 +1,5 @@
-Truth be told, no DE or WM fulfils all of my desires. I need something reliable, with decent support for hybrid graphics laptops with NVIDIA dGPUs, fractional scaling with different scaling factors per output, with good workspace management and efficient keyboard-driven window management. Bonus points for easily versionable configuration.
+Truth be told, no desktop environment or window manager fulfils all of my desires – in an ideal world, I'd be using a tiling WM/DE. Nevertheless, at the moment, GNOME is the most reliable option for my hardware and needs, and its configuration is versionable enough.
 
-Although I loved my brief time on i3 WM—back when both my displays were 1080p—I cannot use it now due to X11's limitations, nor can I use its Wayland counterpart, Sway, due to its lacklustre fractional scaling, at least on all-too-common XWayland apps. Only the "big two", GNOME and KDE Plasma, implement enough magic in their fractional scaling implementations for everything to look crisp on all my displays. There's also COSMIC, of course, but it's not mature enough yet.
+If you've used GNOME before, you may have noticed that my website looks familiar – I thought it'd be fun to style it after GNOME's Adwaita theme.
 
-I settled on GNOME because it's better at handling multi-monitor window management, it's generally less buggy, its design is cleaner, and it's more suitable for configuration versioning. However, I do rely on a handful of extensions to provide some functionality it doesn't offer out of the box, mainly:
+I do rely on a handful of extensions to provide some functionality GNOME doesn't offer out of the box, mainly:

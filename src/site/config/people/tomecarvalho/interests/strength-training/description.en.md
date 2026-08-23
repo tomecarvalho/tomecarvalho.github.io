@@ -1,6 +1,6 @@
-I started strength training in 2023, and my only regret is that I didn't start sooner. I signed up for health, and then discovered it's based on routine (I'm a creature of habit) and there's a lot to learn about the science behind it — it shares a surprising similarity with grinding stats and optimising builds in video games.
+I started strength training in 2023, and my only regret is that I didn't start sooner. I signed up for health, and then discovered it's based on routine (I'm a creature of habit) and there's a lot to learn about the science behind it – it shares a surprising similarity with grinding stats and optimising builds in video games.
 
-> My split's Full Body — I train Full Body every other day, so every 48 h. I do one set per exercise, but I do multiple exercises per muscle — and that is the key.
+> My split's Full Body – I train Full Body every other day, so every 48 h. I do one set per exercise, but I do multiple exercises per muscle – and that is the key.
 >
 > — <cite>[Keenan Malloy](https://vm.tiktok.com/ZGdxJRTtG/)</cite>
 
