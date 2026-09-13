@@ -1,0 +1,240 @@
+---
+/**
+ * Route navigation as a rofi-style launcher: a centred panel with a filter
+ * prompt and the routes as entries, driven by the keyboard.
+ */
+
+import { Icon } from "astro-icon/components";
+import type { TranslatedNavRoute } from "../routes/nav-routes";
+
+export type Props = {
+  routes: TranslatedNavRoute[];
+  text: {
+    /** The launcher's mode, shown as rofi shows the one it's running in. */
+    prompt: string;
+    filter: string;
+    hints: string;
+  };
+};
+
+const {
+  routes,
+  text: { prompt, filter, hints },
+} = Astro.props;
+
+const { pathname } = Astro.url;
+---
+
+<dialog class="launcher" aria-labelledby="launcher-mode">
+  <div class="launcher-prompt">
+    <span class="launcher-mode" id="launcher-mode">{prompt}:</span>
+    <input
+      class="launcher-filter"
+      type="text"
+      aria-label={filter}
+      autocomplete="off"
+      spellcheck="false"
+    />
+  </div>
+  <ul class="launcher-list">
+    {
+      routes.map(({ path, label, icon, originalPath }) => (
+        <li>
+          <a
+            class:list={[
+              "launcher-item",
+              { current: pathname === originalPath },
+            ]}
+            href={path}
+            data-label={label}
+          >
+            <span class="launcher-name">
+              {!!icon && <Icon name={icon} />}
+              {label}
+            </span>
+            <Icon name="mdi:check" class="launcher-check" />
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <p class="launcher-hints">{hints}</p>
+</dialog>
+
+<script>
+  const launcher = document.querySelector<HTMLDialogElement>(".launcher");
+  const filter = launcher?.querySelector<HTMLInputElement>(".launcher-filter");
+  const items = [
+    ...(launcher?.querySelectorAll<HTMLAnchorElement>(".launcher-item") ?? []),
+  ];
+
+  /** Diacritics are awkward to type, so they shouldn't stand between a match. */
+  const fold = (value: string) =>
+    value
+      .normalize("NFD")
+      .replace(/\p{Diacritic}/gu, "")
+      .toLowerCase();
+
+  const isVisible = (item: HTMLAnchorElement) =>
+    !item.parentElement?.hasAttribute("hidden");
+
+  const select = (item: HTMLAnchorElement) => {
+    for (const other of items)
+      other.classList.toggle("selected", other === item);
+    item.scrollIntoView({ block: "nearest" });
+  };
+
+  const applyFilter = () => {
+    const query = fold(filter?.value ?? "");
+
+    for (const item of items) {
+      const matches = fold(item.dataset.label ?? "").includes(query);
+      item.parentElement?.toggleAttribute("hidden", !matches);
+    }
+
+    const [first] = items.filter(isVisible);
+    if (first) select(first);
+  };
+
+  const open = () => {
+    if (!launcher) return;
+
+    if (filter) filter.value = "";
+    applyFilter();
+
+    const current = items.find((item) => item.classList.contains("current"));
+    if (current) select(current);
+
+    launcher.showModal();
+    filter?.focus();
+  };
+
+  for (const trigger of document.querySelectorAll("[data-launcher-trigger]")) {
+    trigger.addEventListener("click", () => {
+      trigger.setAttribute("aria-expanded", "true");
+      open();
+    });
+  }
+
+  launcher?.addEventListener("close", () => {
+    for (const trigger of document.querySelectorAll("[data-launcher-trigger]"))
+      trigger.setAttribute("aria-expanded", "false");
+  });
+
+  /* The panel covers the dialog's box, so a click on it landed on the backdrop. */
+  launcher?.addEventListener("click", ({ target }) => {
+    if (target === launcher) launcher.close();
+  });
+
+  filter?.addEventListener("input", applyFilter);
+
+  launcher?.addEventListener("keydown", (event) => {
+    const visible = items.filter(isVisible);
+    if (!visible.length) return;
+
+    const selected = visible.findIndex((item) =>
+      item.classList.contains("selected"),
+    );
+
+    switch (event.key) {
+      case "ArrowDown":
+        event.preventDefault();
+        select(visible[(selected + 1) % visible.length]!);
+        break;
+      case "ArrowUp":
+        event.preventDefault();
+        select(visible[(selected - 1 + visible.length) % visible.length]!);
+        break;
+      case "Enter":
+        event.preventDefault();
+        visible[Math.max(selected, 0)]!.click();
+        break;
+    }
+  });
+</script>
+
+<style>
+  .launcher {
+    /* `auto` margins centre the panel against the viewport. */
+    margin: auto;
+    padding: 0;
+    width: min(26rem, calc(100vw - 2rem));
+    border: 2px solid var(--color-border);
+    background-color: var(--color-bg-float);
+    color: var(--color-fg);
+    font-family: var(--font-mono);
+  }
+
+  .launcher::backdrop {
+    background-color: rgb(0 0 0 / 0.5);
+  }
+
+  .launcher-prompt {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    border-bottom: 1px solid var(--color-surface);
+  }
+
+  .launcher-mode {
+    color: var(--color-accent);
+  }
+
+  .launcher-filter {
+    flex: 1;
+    min-width: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    color: inherit;
+    font: inherit;
+  }
+
+  .launcher-filter:focus-visible {
+    outline: none;
+  }
+
+  .launcher-list {
+    padding: 0.25rem 0;
+    list-style: none;
+  }
+
+  .launcher-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0 0.5rem;
+    color: var(--color-fg-dim);
+    text-decoration: none;
+  }
+
+  /* The entry under the cursor, highlighted as the launcher's selection. */
+  .launcher-item.selected {
+    background-color: var(--color-selection);
+    color: var(--color-fg);
+  }
+
+  .launcher-name {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* Marks the page you're on, which the selection moves away from. */
+  .launcher-check {
+    opacity: 0;
+  }
+
+  .launcher-item.current .launcher-check {
+    opacity: 1;
+  }
+
+  .launcher-hints {
+    padding: 0.25rem 0.5rem;
+    border-top: 1px solid var(--color-surface);
+    color: var(--color-fg-muted);
+    font-size: 0.875rem;
+  }
+</style>

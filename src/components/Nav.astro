@@ -1,12 +1,8 @@
 ---
 /**
- * Route navigation component.
- * On wide windows:
- * - Routes arranged horizontally.
- * - Current route highlighted through its font weight.
- * On narrow windows:
- * - Routes collapsed into a dropdown menu.
- * - Current route highlighted through a check icon.
+ * Route navigation, laid out horizontally like a statusline's workspaces.
+ * Narrow windows have no room for it, and reach the routes through the
+ * launcher in the header instead.
  */
 
 import type { TranslatedNavRoute } from "../routes/nav-routes";
@@ -22,21 +18,12 @@ const { pathname } = Astro.url;
 
 <nav class="nav">
   {
-    routes.map(({ path, label, icon, originalPath }) => {
-      const current = pathname === originalPath;
-
-      const iconEl = !!icon && <Icon name={icon} />;
-
-      return (
-        <a href={path} class:list={[{ current }]}>
-          <span>
-            {iconEl}
-            {label}
-          </span>
-          <Icon name="mdi:check" class:list={["check", { current }]} />
-        </a>
-      );
-    })
+    routes.map(({ path, label, icon, originalPath }) => (
+      <a href={path} class:list={[{ current: pathname === originalPath }]}>
+        {!!icon && <Icon name={icon} />}
+        {label}
+      </a>
+    ))
   }
 </nav>
 
@@ -47,64 +34,31 @@ const { pathname } = Astro.url;
   }
 
   .nav > a {
-    color: var(--color-fg-dim);
-    text-decoration: none;
-    white-space: nowrap;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 0.5rem;
     /* No vertical padding: the highlight fills the bar, like a statusline. */
     padding: 0 0.5rem;
+    color: var(--color-fg-dim);
+    text-decoration: none;
+    white-space: nowrap;
   }
 
   .nav > a:hover {
-    color: var(--color-fg);
     background-color: var(--color-surface);
+    color: var(--color-fg);
   }
 
   /* The current route is highlighted like selected text in an editor. */
   .nav > a.current,
   .nav > a.current:hover {
-    color: var(--color-fg);
     background-color: var(--color-selection);
+    color: var(--color-fg);
   }
 
-  .nav > a > span {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .check {
-    display: none;
-  }
-
-  /* Narrow windows: Nav links are displayed in a dropdown menu. */
   @media (max-width: 715px) {
     .nav {
-      position: absolute;
-      top: 100%;
-      right: 0;
-      z-index: 10;
-      background-color: var(--color-bg-float);
-      padding: 0.5rem 0.75rem;
       display: none;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .nav.open {
-      display: flex;
-    }
-
-    .check {
-      /* Render invisible check icon for other routes, keeping width consistent. */
-      display: block;
-      opacity: 0;
-    }
-    .check.current {
-      opacity: 1;
     }
   }
 </style>

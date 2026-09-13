@@ -4,14 +4,25 @@ import type { Props as LanguageSelectProps } from "./LanguageSelect.astro";
 import LanguageSelect from "./LanguageSelect.astro";
 import type { Props as NavProps } from "./Nav.astro";
 import Nav from "./Nav.astro";
+import type { Props as RouteLauncherProps } from "./RouteLauncher.astro";
+import RouteLauncher from "./RouteLauncher.astro";
 
 export type Props = Pick<NavProps, "routes"> & {
   title: string;
   homeHref: string;
   languageOptions: LanguageSelectProps["options"];
+  launcherText: RouteLauncherProps["text"];
+  openLauncherLabel: string;
 };
 
-const { routes, title, homeHref, languageOptions } = Astro.props;
+const {
+  routes,
+  title,
+  homeHref,
+  languageOptions,
+  launcherText,
+  openLauncherLabel,
+} = Astro.props;
 ---
 
 <header class="header">
@@ -22,8 +33,9 @@ const { routes, title, homeHref, languageOptions } = Astro.props;
       <LanguageSelect options={languageOptions} />
       <button
         class="menu-button"
-        aria-label="Toggle menu"
+        aria-label={openLauncherLabel}
         aria-expanded="false"
+        data-launcher-trigger
       >
         <Icon name="mdi:menu" />
       </button>
@@ -31,38 +43,12 @@ const { routes, title, homeHref, languageOptions } = Astro.props;
   </div>
 </header>
 
-<script>
-  const menuButton = document.querySelector(".menu-button");
-  const nav = document.querySelector(".nav");
-  const navLinks = nav?.querySelectorAll("a") ?? [];
-
-  // Open the nav dropdown menu when the menu button is clicked.
-  menuButton?.addEventListener("click", () => {
-    const isOpen = menuButton.getAttribute("aria-expanded") === "true";
-    menuButton.setAttribute("aria-expanded", (!isOpen).toString());
-    nav?.classList.toggle("open");
-  });
-
-  // Close the nav dropdown menu when a nav link is clicked.
-  for (const link of navLinks)
-    link.addEventListener("click", () => {
-      menuButton?.setAttribute("aria-expanded", "false");
-      nav?.classList.remove("open");
-    });
-
-  // Close the nav dropdown menu when the user clicks outside of it.
-  document.addEventListener("click", ({ target }) => {
-    if (target instanceof Element && !target.closest("header")) {
-      menuButton?.setAttribute("aria-expanded", "false");
-      nav?.classList.remove("open");
-    }
-  });
-</script>
+<RouteLauncher routes={routes} text={launcherText} />
 
 <!--
 Layouts ([Left] [Right])
 - Wide: [Handle] [Nav, Language Select]
-- Narrow: [Handle] [Language Select, Nav Menu Button]
+- Narrow: [Handle] [Language Select, Launcher Button]
 -->
 <style>
   .header {
@@ -95,7 +81,6 @@ Layouts ([Left] [Right])
   }
 
   .header-end {
-    position: relative;
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -112,7 +97,7 @@ Layouts ([Left] [Right])
     cursor: pointer;
   }
 
-  /* Narrow: the nav routes collapse into the menu button's dropdown. */
+  /* Narrow: the nav routes move into the launcher this button opens. */
   @media (max-width: 715px) {
     .menu-button {
       display: inline-flex;

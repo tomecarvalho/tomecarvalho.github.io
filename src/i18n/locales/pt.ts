@@ -6,6 +6,11 @@ const pt: FullLocaleStrings = {
   "nav.projects": "Projetos",
   "nav.tools": "Ferramentas",
 
+  "launcher.prompt": "rotas",
+  "launcher.filter": "Filtrar rotas",
+  "launcher.hints": "↑↓ selecionar · ↵ abrir · esc fechar",
+  "launcher.open": "Abrir lançador de rotas",
+
   "index.titles.explore": "Explorar",
 
   "projects.titles.universityCoursework": "Trabalhos Universitários",

@@ -282,6 +282,12 @@ const headerTitle = `~/${siteConfig.handle}`;
       title={headerTitle}
       homeHref={toLocalePath(locale, navRoutes.aboutMe.path)}
       languageOptions={languageOptions}
+      launcherText={{
+        prompt: t("launcher.prompt"),
+        filter: t("launcher.filter"),
+        hints: t("launcher.hints"),
+      }}
+      openLauncherLabel={t("launcher.open")}
     />
     <main class="main">
       <slot />
