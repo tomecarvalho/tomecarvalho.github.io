@@ -2,6 +2,7 @@
 import type { AsProp } from "../types/component/AsProp";
 
 type Props = {
+  id?: string;
   class?: string;
   hoverable?: boolean;
   /** Drops the surface fill, for papers that already sit on one. */
@@ -9,6 +10,7 @@ type Props = {
 } & AsProp;
 
 const {
+  id,
   class: className,
   as: Tag = "div",
   hoverable = false,
@@ -16,7 +18,7 @@ const {
 } = Astro.props;
 ---
 
-<Tag class:list={["paper", { hoverable, flat }, className]}>
+<Tag id={id} class:list={["paper", { hoverable, flat }, className]}>
   <slot />
 </Tag>
 

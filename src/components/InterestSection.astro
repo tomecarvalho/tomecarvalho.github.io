@@ -1,5 +1,6 @@
 ---
 import type { TranslatedInterest } from "../types/data/interests/Interest";
+import { interestCardTargetId } from "../search";
 import AutoGrid from "./AutoGrid.astro";
 import CollapsibleSection from "./CollapsibleSection.astro";
 import InterestCard from "./InterestCard.astro";
@@ -28,8 +29,11 @@ const hasCards = !!cards?.length;
     {
       hasCards && (
         <AutoGrid minWidth="9.5rem" columns="fit" stretch>
-          {cards.map((card) => (
-            <InterestCard {...card} />
+          {cards.map((card, cardIndex) => (
+            <InterestCard
+              {...card}
+              targetId={interestCardTargetId(id, cardIndex)}
+            />
           ))}
         </AutoGrid>
       )

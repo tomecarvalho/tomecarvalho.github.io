@@ -7,9 +7,12 @@ const pt: FullLocaleStrings = {
   "nav.tools": "Ferramentas",
 
   "launcher.prompt": "Rotas",
-  "launcher.filter": "Filtrar rotas",
-  "launcher.hints": "↑↓ selecionar · ↵ abrir · esc fechar",
+  "launcher.searchPrompt": "Pesquisar",
+  "launcher.languagePrompt": "Idioma",
+  "launcher.filter": "Filtrar entradas do lançador",
+  "launcher.hints": "tab modo · ↑↓ selecionar · ↵ abrir · esc fechar",
   "launcher.open": "Abrir lançador de rotas",
+  "launcher.openLanguage": "Mudar idioma",
 
   "index.titles.explore": "Explorar",
 

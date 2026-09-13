@@ -1,5 +1,6 @@
 ---
 import type { TranslatedTool } from "../types/data/tools/Tool";
+import { toolTargetId } from "../search";
 import RichText from "./RichText.astro";
 import type { Props as RichTextProps } from "./RichText.astro";
 import Stack from "./Stack.astro";
@@ -7,12 +8,18 @@ import ToolListLinks from "./ToolListLinks.astro";
 
 interface Props {
   tool: TranslatedTool;
+  categoryId: string;
+  path: number[];
+  targetId: string;
 }
 
 const {
   self: Self,
   props: {
     tool: { name, type, description, href, children, links },
+    categoryId,
+    path,
+    targetId,
   },
 } = Astro;
 
@@ -21,7 +28,7 @@ const hasChildren = !!children?.length;
 const hasLinks = !!links?.length;
 ---
 
-<li class="item">
+<li class="item" id={targetId}>
   <Stack gap={1}>
     <a href={href}>
       <h3>{`${name} - ${type}`}</h3>
@@ -32,8 +39,13 @@ const hasLinks = !!links?.length;
   {
     hasChildren && (
       <ul class="children">
-        {children.map((child) => (
-          <Self tool={child} />
+        {children.map((child, childIndex) => (
+          <Self
+            tool={child}
+            categoryId={categoryId}
+            path={[...path, childIndex]}
+            targetId={toolTargetId(categoryId, [...path, childIndex])}
+          />
         ))}
       </ul>
     )

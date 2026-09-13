@@ -5,9 +5,12 @@ const en = {
   "nav.tools": "Tools",
 
   "launcher.prompt": "Routes",
-  "launcher.filter": "Filter routes",
-  "launcher.hints": "↑↓ select · ↵ open · esc close",
+  "launcher.searchPrompt": "Search",
+  "launcher.languagePrompt": "Language",
+  "launcher.filter": "Filter launcher entries",
+  "launcher.hints": "tab mode · ↑↓ select · ↵ open · esc close",
   "launcher.open": "Open route launcher",
+  "launcher.openLanguage": "Change language",
 
   "index.titles.explore": "Explore",
 

@@ -9,7 +9,7 @@ import type { TranslatedNavRoute } from "../routes/nav-routes";
 import { Icon } from "astro-icon/components";
 
 export interface Props {
-  routes: TranslatedNavRoute[];
+  routes: (TranslatedNavRoute & { originalPath: string })[];
 }
 
 const { routes } = Astro.props;

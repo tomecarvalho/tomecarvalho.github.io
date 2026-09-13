@@ -1,5 +1,6 @@
 ---
 import type { TranslatedToolCategory } from "../types/data/tools/ToolCategory";
+import { toolTargetId } from "../search";
 import Stack from "./Stack.astro";
 import ToolListItem from "./ToolListItem.astro";
 import Window from "./Window.astro";
@@ -13,6 +14,15 @@ const { toolCategory } = Astro.props;
 
 <Window id={toolCategory.id} title={toolCategory.name} titleAs="h2">
   <Stack gap={4}>
-    {toolCategory.tools.map((tool) => <ToolListItem tool={tool} />)}
+    {
+      toolCategory.tools.map((tool, toolIndex) => (
+        <ToolListItem
+          tool={tool}
+          categoryId={toolCategory.id}
+          path={[toolIndex]}
+          targetId={toolTargetId(toolCategory.id, [toolIndex])}
+        />
+      ))
+    }
   </Stack>
 </Window>

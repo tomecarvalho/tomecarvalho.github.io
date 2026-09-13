@@ -19,6 +19,7 @@ type AlignProps =
     };
 
 type Props = {
+  id?: string;
   gap?: Spacing;
   class?: string;
   direction?: "row" | "column";
@@ -29,6 +30,7 @@ type Props = {
   AsProp;
 
 const {
+  id,
   gap,
   center,
   class: className,
@@ -49,6 +51,7 @@ const style = toStyle({ gap, alignItems, justifyContent, height });
 ---
 
 <Tag
+  id={id}
   class:list={["stack", className, { horizontal, wrap, fullWidth }]}
   style={style}
 >

@@ -8,6 +8,7 @@ import {
   useTranslations,
 } from "../i18n/utils";
 import { navRoutes, navRoutesArray } from "../routes/nav-routes";
+import { getSearchEntries } from "../search";
 import siteConfig from "../site/config";
 import "@fontsource/ibm-plex-sans/latin-400.css";
 import "@fontsource/ibm-plex-sans/latin-700.css";
@@ -31,6 +32,7 @@ const locale = getLocale(currentLocale);
 const t = useTranslations(currentLocale);
 
 const languageOptions = getLanguageOptions(pathname, currentLocale);
+const searchEntries = getSearchEntries(currentLocale);
 
 const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
   (route) => ({
@@ -59,6 +61,7 @@ const headerTitle = `~/${siteConfig.handle}`;
         /* Wide enough that the window chrome doesn't eat into the content. */
         --content-max-width: 940px;
         --content-padding-x: 2rem;
+        --header-height: 1.5rem;
         --font-sans: "IBM Plex Sans", system-ui, sans-serif;
         --font-mono: "IBM Plex Mono", ui-monospace, monospace;
       }
@@ -67,6 +70,11 @@ const headerTitle = `~/${siteConfig.handle}`;
       *::before,
       *::after {
         box-sizing: border-box;
+      }
+
+      /* The header sticks to the top, so anchors have to land clear of it. */
+      html {
+        scroll-padding-top: calc(var(--header-height) + 0.5rem);
       }
 
       body {
@@ -282,12 +290,16 @@ const headerTitle = `~/${siteConfig.handle}`;
       title={headerTitle}
       homeHref={toLocalePath(locale, navRoutes.aboutMe.path)}
       languageOptions={languageOptions}
+      searchEntries={searchEntries}
       launcherText={{
         prompt: t("launcher.prompt"),
+        searchPrompt: t("launcher.searchPrompt"),
+        languagePrompt: t("launcher.languagePrompt"),
         filter: t("launcher.filter"),
         hints: t("launcher.hints"),
       }}
       openLauncherLabel={t("launcher.open")}
+      openLanguageLabel={t("launcher.openLanguage")}
     />
     <main class="main">
       <slot />

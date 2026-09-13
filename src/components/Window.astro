@@ -67,12 +67,25 @@ const sectionId = `window-${id}`;
 
   let open = defaultOpen;
 
-  const toggle = () => {
-    open = !open;
+  const setOpen = (nextOpen) => {
+    open = nextOpen;
     content.style.display = open ? "" : "none";
     icon.style.transform = open ? "" : "rotate(-90deg)";
     trigger.setAttribute("aria-expanded", open);
   };
 
-  trigger.addEventListener("click", toggle);
+  trigger.addEventListener("click", () => setOpen(!open));
+
+  /* Search results can point inside a shaded window. Reveal the destination
+     before scrolling to it, both after a page load and for same-page results. */
+  const revealHashTarget = () => {
+    const target = document.getElementById(location.hash.slice(1));
+    if (!target || !content.contains(target)) return;
+
+    setOpen(true);
+    requestAnimationFrame(() => target.scrollIntoView({ block: "center" }));
+  };
+
+  window.addEventListener("hashchange", revealHashTarget);
+  revealHashTarget();
 </script>

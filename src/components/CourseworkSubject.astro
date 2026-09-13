@@ -1,5 +1,6 @@
 ---
 import Stack from "./Stack.astro";
+import { courseworkTargetId } from "../search";
 
 export interface Props {
   subject: {
@@ -11,23 +12,28 @@ export interface Props {
       topics: string[];
     }[];
   };
+  path: [number, number, number];
 }
 
-const { subject } = Astro.props;
+const { subject, path } = Astro.props;
 ---
 
-<Stack class="subject" gap={1.5}>
+<Stack class="subject" gap={1.5} id={courseworkTargetId(...path)}>
   <h5 class="subject-title">
     <a href={subject.href}>{subject.name}</a>
   </h5>
   <Stack as="ul" class="projects" gap={2}>
     {
-      subject.projects.map(({ name, href, topics }) => {
+      subject.projects.map(({ name, href, topics }, projectIndex) => {
         const topicsString = topics.join(", ");
 
         return (
           <Fragment>
-            <Stack as="li" gap={0.5}>
+            <Stack
+              as="li"
+              gap={0.5}
+              id={courseworkTargetId(...path, projectIndex)}
+            >
               <a href={href}>{name}</a>
               <span class="text-secondary">{topicsString}</span>
             </Stack>
