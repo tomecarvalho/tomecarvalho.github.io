@@ -43,25 +43,31 @@ const { pathname } = Astro.url;
 <style>
   .nav {
     display: flex;
-    gap: 1.5rem;
+    gap: 0.5rem;
   }
 
   .nav > a {
-    color: inherit;
+    color: var(--color-fg-dim);
     text-decoration: none;
     white-space: nowrap;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 0.5rem;
+    /* No vertical padding: the highlight fills the bar, like a statusline. */
+    padding: 0 0.5rem;
   }
 
   .nav > a:hover {
-    text-decoration: underline;
+    color: var(--color-fg);
+    background-color: var(--color-surface);
   }
 
-  .nav > a.current {
-    font-weight: bold;
+  /* The current route is highlighted like selected text in an editor. */
+  .nav > a.current,
+  .nav > a.current:hover {
+    color: var(--color-fg);
+    background-color: var(--color-selection);
   }
 
   .nav > a > span {
@@ -81,9 +87,8 @@ const { pathname } = Astro.url;
       top: 100%;
       right: 0;
       z-index: 10;
-      background-color: Canvas;
-      border: 1px solid;
-      padding: 0.5rem;
+      background-color: var(--color-bg-float);
+      padding: 0.5rem 0.75rem;
       display: none;
       flex-direction: column;
       gap: 0.5rem;

@@ -1,0 +1,51 @@
+/*
+ * https://github.com/rebelot/kanagawa.nvim.
+ */
+:root {
+  /* Palette */
+  --sumi-ink-0: #16161d;
+  --sumi-ink-3: #1f1f28;
+  --sumi-ink-4: #2a2a37;
+  --sumi-ink-5: #363646;
+  --sumi-ink-6: #54546d;
+  --wave-blue-1: #223249;
+  --fuji-white: #dcd7ba;
+  --old-white: #c8c093;
+  --fuji-gray: #727169;
+  --oni-violet: #957fb8;
+  --spring-violet-1: #938aa9;
+  --crystal-blue: #7e9cd8;
+  --spring-blue: #7fb4ca;
+  --wave-aqua-2: #7aa89f;
+  --carp-yellow: #e6c384;
+
+  /* Surfaces: the editor background, its lighter shades, and floats. */
+  --color-bg: var(--sumi-ink-3);
+  --color-bg-float: var(--sumi-ink-0);
+  --color-surface: var(--sumi-ink-4);
+  --color-surface-hover: var(--sumi-ink-5);
+
+  /* Text: default foreground, statusline foreground, comments. */
+  --color-fg: var(--fuji-white);
+  --color-fg-dim: var(--old-white);
+  --color-fg-muted: var(--fuji-gray);
+
+  --color-border: var(--sumi-ink-6);
+
+  /* The editor's visual selection: highlights text and the current route. */
+  --color-selection: var(--wave-blue-1);
+
+  /* Links take the colour of functions and titles. */
+  --color-link: var(--crystal-blue);
+  --color-link-hover: var(--spring-blue);
+
+  /* Accent: the violet of keywords and statements. */
+  --color-accent: var(--oni-violet);
+  --color-accent-dim: var(--spring-violet-1);
+
+  /* Headings take the syntax colours of the roles they play in a page. */
+  --color-heading-1: var(--carp-yellow); /* identifiers */
+  --color-heading-2: var(--oni-violet); /* keywords and statements */
+  --color-heading-3: var(--crystal-blue); /* functions and titles */
+  --color-heading-4: var(--wave-aqua-2); /* types */
+}

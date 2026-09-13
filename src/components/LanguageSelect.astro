@@ -13,9 +13,14 @@ const { options } = Astro.props;
   <Icon name="mdi:language" />
   <select data-language-select aria-label="Language">
     {
-      options.map(({ label, href, current }) => (
-        <option value={href} selected={current}>
-          {label}
+      options.map(({ label, flag, href, current }) => (
+        <option
+          value={href}
+          selected={current}
+          aria-label={label}
+          title={label}
+        >
+          {flag}
         </option>
       ))
     }

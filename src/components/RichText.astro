@@ -64,12 +64,25 @@ const { Content } = Astro.props;
   }
 
   .rich-text :global(blockquote) {
-    border-left: 3px solid;
+    border-left: 3px solid var(--color-border);
     padding-left: 1rem;
+    color: var(--color-fg-dim);
+  }
+
+  .rich-text :global(:not(pre) > code) {
+    padding: 0.1em 0.35em;
+    background-color: var(--color-surface);
   }
 
   .rich-text :global(pre) {
     overflow-x: auto;
+    padding: 0.85rem 1rem;
+    background-color: var(--color-surface);
+  }
+
+  .rich-text :global(pre code) {
+    padding: 0;
+    background: none;
   }
 
   .rich-text :global(table) {
@@ -79,13 +92,19 @@ const { Content } = Astro.props;
 
   .rich-text :global(th),
   .rich-text :global(td) {
-    border: 1px solid;
+    border: 1px solid var(--color-border);
     padding: 0.5rem 0.75rem;
     text-align: left;
   }
 
+  .rich-text :global(th) {
+    background-color: var(--color-surface);
+  }
+
   .rich-text :global(hr) {
     margin: 1.5rem 0;
+    border: none;
+    border-top: 1px solid var(--color-border);
   }
 
   .rich-text :global(img) {

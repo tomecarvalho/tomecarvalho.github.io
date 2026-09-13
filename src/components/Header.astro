@@ -66,9 +66,13 @@ Layouts ([Left] [Right])
 -->
 <style>
   .header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
     display: flex;
     justify-content: center;
-    padding: 1rem 0;
+    background-color: var(--color-bg-float);
+    font-family: var(--font-mono);
   }
 
   .header-content {
@@ -81,27 +85,30 @@ Layouts ([Left] [Right])
   }
 
   .header-title {
-    font-size: 1.125rem;
     font-weight: bold;
     text-decoration: none;
-    color: inherit;
+    color: var(--color-accent);
+  }
+
+  .header-title:hover {
+    color: var(--color-accent-dim);
   }
 
   .header-end {
     position: relative;
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1rem;
   }
 
   .menu-button {
     display: none;
     align-items: center;
-    padding: 0.25rem;
+    padding: 0;
     border: none;
     background: none;
     color: inherit;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     cursor: pointer;
   }
 

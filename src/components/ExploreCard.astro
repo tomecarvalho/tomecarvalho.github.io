@@ -34,6 +34,11 @@ const { path, label, description, icon } = Astro.props;
       display: flex;
       flex-direction: column;
       min-height: 100%;
+      color: var(--color-fg);
+    }
+
+    .explore-card:hover h3 {
+      color: var(--color-link-hover);
     }
 
     .explore-card :global(.paper) {

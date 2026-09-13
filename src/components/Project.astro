@@ -63,7 +63,9 @@ const paperClickable = !hasLinks && !!href;
     flex-shrink: 0;
   }
 
+  :global(.anchor),
   :global(.anchor:hover) {
+    color: var(--color-fg);
     text-decoration: none;
   }
 
