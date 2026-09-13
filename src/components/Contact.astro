@@ -50,7 +50,7 @@ const {
 
 <style>
   .contact {
-    display: inline-flex;
+    display: flex;
     text-wrap: nowrap;
     gap: 0.5rem;
     font-size: 1rem;
@@ -70,7 +70,13 @@ const {
     background-color: var(--color-border);
   }
 
+  /* An action alongside the contact links, so it takes their colour too. */
   .clipboard-button {
     display: flex;
+    color: var(--color-link);
+  }
+
+  .clipboard-button:hover {
+    color: var(--color-link-hover);
   }
 </style>

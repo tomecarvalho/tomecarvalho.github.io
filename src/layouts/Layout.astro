@@ -56,7 +56,8 @@ const headerTitle = `~/${siteConfig.handle}`;
     <title>{title}</title>
     <style is:global>
       :root {
-        --content-max-width: 900px;
+        /* Wide enough that the window chrome doesn't eat into the content. */
+        --content-max-width: 940px;
         --content-padding-x: 2rem;
         --font-sans: "IBM Plex Sans", system-ui, sans-serif;
         --font-mono: "IBM Plex Mono", ui-monospace, monospace;
