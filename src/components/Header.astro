@@ -17,18 +17,16 @@ const { routes, title, homeHref, languageOptions } = Astro.props;
 <header class="header">
   <div class="header-content">
     <a class="header-title" href={homeHref}>{title}</a>
-    <div class="menu">
+    <div class="header-end">
+      <Nav routes={routes} />
+      <LanguageSelect options={languageOptions} />
       <button
-        class="menu-button text"
+        class="menu-button"
         aria-label="Toggle menu"
         aria-expanded="false"
       >
         <Icon name="mdi:menu" />
       </button>
-      <Nav routes={routes} />
-    </div>
-    <div class="header-end">
-      <LanguageSelect options={languageOptions} />
     </div>
   </div>
 </header>
@@ -37,15 +35,12 @@ const { routes, title, homeHref, languageOptions } = Astro.props;
   const menuButton = document.querySelector(".menu-button");
   const nav = document.querySelector(".nav");
   const navLinks = nav?.querySelectorAll("a") ?? [];
-  const header = document.querySelector(".header");
-  const scrollContainer = document.querySelector("main");
 
   // Open the nav dropdown menu when the menu button is clicked.
   menuButton?.addEventListener("click", () => {
     const isOpen = menuButton.getAttribute("aria-expanded") === "true";
     menuButton.setAttribute("aria-expanded", (!isOpen).toString());
     nav?.classList.toggle("open");
-    menuButton.classList.toggle("open");
   });
 
   // Close the nav dropdown menu when a nav link is clicked.
@@ -62,107 +57,58 @@ const { routes, title, homeHref, languageOptions } = Astro.props;
       nav?.classList.remove("open");
     }
   });
-
-  // Add box-shadow to the header when it partially covers main content.
-  scrollContainer?.addEventListener(
-    "scroll",
-    () => {
-      header?.classList.toggle(
-        "scrolled",
-        (scrollContainer?.scrollTop ?? 0) > 0,
-      );
-    },
-    { passive: true },
-  );
 </script>
 
 <!--
-Layouts ([Left] [Centre] [Right])
-- Small: [Handle] [Empty] [Language Select, Nav Menu Button]
-- Medium: [Nav] [Empty] [Language Select]
-- Large: [Handle] [Nav] [Language Select]
+Layouts ([Left] [Right])
+- Wide: [Handle] [Nav, Language Select]
+- Narrow: [Handle] [Language Select, Nav Menu Button]
 -->
 <style>
+  .header {
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
+  }
+
   .header-content {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    position: relative;
+    justify-content: space-between;
+    gap: 1.5rem;
     padding: 0 var(--content-padding-x);
     width: min(100%, var(--content-max-width));
   }
 
-  .header {
-    padding: 0.5rem 0;
+  .header-title {
+    font-size: 1.125rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .header-end {
     position: relative;
     display: flex;
-    justify-content: center;
-    transition: box-shadow 0.2s ease;
-    font-weight: bold;
-  }
-
-  .header.scrolled {
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
-  }
-
-  /* Base styles target the medium range (716px–899px). */
-  .menu {
-    position: relative;
-    left: auto;
-    transform: none;
-  }
-
-  .header-title {
-    display: none;
+    align-items: center;
+    gap: 1.5rem;
   }
 
   .menu-button {
-    padding: 0.25rem !important;
     display: none;
+    align-items: center;
+    padding: 0.25rem;
+    border: none;
+    background: none;
+    color: inherit;
     font-size: 1.5rem;
-    border-radius: var(--button-border-radius);
-    padding: var(--button-padding);
+    cursor: pointer;
   }
 
-  .menu-button:hover {
-    background-color: var(--button-bg-color-hover-dark);
-  }
-  .menu-button:active,
-  .menu-button.open {
-    background-color: var(--button-bg-color-active-dark);
-  }
-
-  /* Large: handle, centered nav routes, language select. */
-  @media (min-width: 900px) {
-    .menu {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .header-title {
-      display: block;
-    }
-  }
-
-  /* Small: handle, language select, and collapsed nav menu. */
+  /* Narrow: the nav routes collapse into the menu button's dropdown. */
   @media (max-width: 715px) {
-    .header-title {
-      display: block;
-    }
-
-    .header-end {
-      order: 2;
-      margin-left: auto;
-    }
-
-    .menu {
-      order: 3;
-      margin-left: 2rem;
-    }
-
     .menu-button {
-      display: flex;
+      display: inline-flex;
     }
   }
 </style>

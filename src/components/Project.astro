@@ -19,7 +19,7 @@ const hasLinks = !!links?.length;
 const paperClickable = !hasLinks && !!href;
 ---
 
-<Paper class="paper" hoverable={paperClickable}>
+<Paper hoverable={paperClickable}>
   <ConditionalLink href={href} condition={paperClickable} class="anchor">
     <div class="layout">
       <Stack gap={2}>
@@ -29,7 +29,7 @@ const paperClickable = !hasLinks && !!href;
           hasLinks && (
             <Stack direction="row" gap={1} justifyContent="flex-end">
               {links?.map(({ icon, href, label }) => (
-                <a href={href} class="button text bright">
+                <a href={href} class="button">
                   <Icon name={icon} size="1.5rem" title={label} />
                 </a>
               ))}

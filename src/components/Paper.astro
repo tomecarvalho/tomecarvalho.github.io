@@ -9,20 +9,7 @@ type Props = {
 const { class: className, as: Tag = "div", hoverable = false } = Astro.props;
 ---
 
-<Tag class:list={["paper", , { hoverable }, className]}>
+<!-- Surface hook for themes. Unstyled while the site is plain. -->
+<Tag class:list={["paper", { hoverable }, className]}>
   <slot />
 </Tag>
-
-<style>
-  .paper {
-    background-color: var(--paper-bg-color-dark);
-    box-shadow: var(--paper-box-shadow);
-    padding: var(--paper-padding);
-    border-radius: var(--paper-border-radius);
-    transition: background-color var(--transition-duration);
-  }
-
-  .paper.hoverable:hover {
-    background-color: var(--paper-hoverable-bg-color-hover-dark);
-  }
-</style>

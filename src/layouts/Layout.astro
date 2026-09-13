@@ -47,206 +47,51 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
       :root {
         --content-max-width: 900px;
         --content-padding-x: 2rem;
-
-        /* Adwaita base */
-
-        --button-align-items: center;
-        --button-border-radius: 8px;
-        --button-border: none;
-        --button-box-shadow: var(--paper-box-shadow);
-        --button-cursor: pointer;
-        --button-display: inline-flex;
-        --button-gap: 0.5rem;
-        --button-font-color: inherit;
-        --button-font-size: 1rem;
-        --button-padding: 0.375rem 0.5rem;
-        --button-transition: background-color var(--transition-duration);
-        --button-width: fit-content;
-
-        --dropdown-border-radius: var(--button-border-radius);
-        --dropdown-box-shadow: var(--paper-box-shadow);
-
-        --tooltip-border-radius: var(--button-border-radius);
-        --tooltip-box-shadow: var(--dropdown-box-shadow);
-        --tooltip-font-size: 0.8125rem;
-        --tooltip-max-width: min(20rem, 90vw);
-        --tooltip-offset: 8px;
-        --tooltip-padding: 0.375rem 0.625rem;
-        --tooltip-transition: opacity var(--transition-duration) ease;
-        --tooltip-z-index: 10;
-
-        --nav-border-radius: 8px;
-
-        --paper-border-radius: 12px;
-        --paper-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        --paper-padding: 1rem 1.25rem;
-
-        --transition-duration: 0.2s;
-
-        --text-secondary-font-size: 0.875rem;
-        --text-tertiary-font-size: 0.8125rem;
-
-        /* Adwaita dark */
-
-        --bg-color-dark: #1d1d20;
-
-        --paper-bg-color-dark: #333337;
-        --paper-hoverable-bg-color-hover-dark: #39393d;
-
-        --button-font-color-hover-dark: white;
-        --button-bg-color-dark: #333337;
-        --button-bg-color-hover-dark: var(
-          --paper-hoverable-bg-color-hover-dark
-        );
-        --button-bg-color-active-dark: #434347;
-        /* Strong versions: for use in lighter backgrounds, like Paper's. */
-        --button-bg-color-hover-dark-strong: #424246;
-        --button-bg-color-active-dark-strong: #555559;
-
-        --divider-color-dark: #515155;
-
-        --dropdown-bg-color-dark: #36363a;
-
-        --dropdown-item-selected-bg-color-dark: #4a4a4d;
-        --dropdown-item-selected-bg-color-active-dark: #5c5c5f;
-        --dropdown-item-bg-color-hover-dark: #4a4a4d;
-        --dropdown-item-bg-color-active-dark: #5c5c5f;
-        --dropdown-item-bg-color-dark: var(--dropdown-bg-color-dark);
-
-        --nav-bg-color-hover-dark: #323235;
-        --nav-bg-color-active-dark: #464649;
-        --nav-bg-color-current-dark: #38383b;
-        --nav-bg-color-current-hover-dark: #3f3f42;
-        --nav-bg-color-current-active-dark: #4c4c4f;
-
-        --select-bg-color-hover-dark: var(--nav-bg-color-hover-dark);
-        --select-bg-color-active-dark: var(--nav-bg-color-active-dark);
-
-        --font-color-dark: #f0f0f0;
-        --font-color-secondary-dark: #9f9fa1;
-
-        --font-color-tertiary-dark: var(--font-color-secondary-dark);
-
-        --tooltip-bg-color-dark: var(--dropdown-bg-color-dark);
-        --tooltip-font-color-dark: var(--font-color-dark);
       }
 
-      * {
-        margin: 0;
+      *,
+      *::before,
+      *::after {
         box-sizing: border-box;
-        color: var(--font-color-dark);
+      }
+
+      body {
+        margin: 0;
         font-family: system-ui, sans-serif;
-
-        scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+        line-height: 1.5;
       }
 
-      *::-webkit-scrollbar {
-        width: 8px;
-      }
-
-      *::-webkit-scrollbar-track {
-        background: transparent;
-      }
-
-      *::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 4px;
-      }
-
-      *::-webkit-scrollbar-thumb:hover {
-        background: rgba(255, 255, 255, 0.35);
-      }
-
-      p {
-        margin-bottom: 1rem;
+      /* Vertical rhythm comes from layout gaps, not from default margins. */
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      ul,
+      ol {
+        margin: 0;
       }
 
       ul {
         padding: 0;
       }
 
-      a {
-        text-decoration: none;
-        transition: text-decoration var(--transition-duration);
-      }
-
-      a:hover {
-        text-decoration: underline;
-      }
-
-      button,
+      /* Layout-only hook for links that pair an icon with a label. */
       .button {
-        background-color: var(--button-bg-color-dark);
-        border-radius: var(--button-border-radius);
-        color: var(--button-font-color);
-        border: var(--button-border);
-        box-shadow: var(--button-box-shadow);
-        padding: var(--button-padding);
-        font-size: var(--button-font-size);
-        cursor: var(--button-cursor);
-        width: var(--button-width);
-        display: var(--button-display);
-        align-items: var(--button-align-items);
-        gap: var(--button-gap);
-      }
-
-      button:hover,
-      .button:hover {
-        background-color: var(--button-bg-color-hover-dark);
-        transition: var(--button-transition);
-      }
-
-      button:active,
-      .button:active {
-        background-color: var(--button-bg-color-active-dark);
-        transition: var(--button-transition);
-      }
-
-      /* Text buttons have no background, border or box-shadow unless hovered/active. */
-      button.text,
-      .button.text {
-        background: none;
-        border: none;
-        box-shadow: none;
-        text-decoration: none;
-      }
-
-      .button.text:hover,
-      .button.text:active {
-        background-color: var(--button-bg-color-hover-dark);
-        color: var(--button-font-color-hover-dark);
-      }
-
-      .button.text.bright:hover {
-        background-color: var(--button-bg-color-hover-dark-strong);
-      }
-      .button.text.bright:active {
-        background-color: var(--button-bg-color-active-dark-strong);
-      }
-
-      select {
-        background-color: transparent;
-        border: none;
-        padding: 0.25rem;
-        border-radius: 8px;
-        font-size: 1rem;
-        transition: background-color var(--transition-duration);
-      }
-      select:hover {
-        background-color: var(--select-bg-color-hover-dark);
-      }
-      select:active {
-        background-color: var(--select-bg-color-active-dark);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        width: fit-content;
       }
 
       .text-secondary {
-        font-size: var(--text-secondary-font-size);
-        color: var(--font-color-secondary-dark);
+        font-size: 0.875rem;
       }
 
       .text-tertiary {
-        font-size: var(--text-tertiary-font-size);
-        color: var(--font-color-tertiary-dark);
+        font-size: 0.8125rem;
       }
 
       .tooltip-wrapper {
@@ -256,20 +101,18 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
 
       .tooltip {
         position: fixed;
-        background-color: var(--tooltip-bg-color-dark);
-        color: var(--tooltip-font-color-dark);
-        padding: var(--tooltip-padding);
-        border-radius: var(--tooltip-border-radius);
-        box-shadow: var(--tooltip-box-shadow);
-        font-size: var(--tooltip-font-size);
-        white-space: normal;
+        z-index: 10;
         width: max-content;
-        max-width: var(--tooltip-max-width);
+        max-width: min(20rem, 90vw);
+        padding: 0.25rem 0.5rem;
+        background-color: Canvas;
+        color: CanvasText;
+        border: 1px solid;
+        font-size: 0.8125rem;
+        white-space: normal;
         pointer-events: none;
         opacity: 0;
         visibility: hidden;
-        transition: var(--tooltip-transition);
-        z-index: var(--tooltip-z-index);
       }
 
       .tooltip-wrapper:hover .tooltip,
@@ -285,7 +128,7 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
       }
     </style>
   </head>
-  <body class="body">
+  <body>
     <Header
       routes={translatedNavRoutes}
       title={siteConfig.handle}
@@ -299,22 +142,9 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
 </html>
 
 <style>
-  .body {
-    height: 100vh;
-    margin: 0;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--bg-color-dark);
-  }
-
   .main {
-    flex: 1;
-    min-height: 0;
     margin: 0 auto;
-    padding: 4rem var(--content-padding-x);
+    padding: 2rem var(--content-padding-x);
     width: min(100%, var(--content-max-width));
-    overflow-y: auto;
-    background-color: var(--bg-color-dark);
   }
 </style>

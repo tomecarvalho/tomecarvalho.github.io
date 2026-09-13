@@ -38,12 +38,6 @@ const sectionId = `collapsible-${id}`;
   </div>
 </Stack>
 
-<style>
-  [id$="-icon"] {
-    transition: transform var(--transition-duration);
-  }
-</style>
-
 <script is:inline define:vars={{ sectionId, defaultOpen }}>
   const content = document.getElementById(sectionId);
   const trigger = document.getElementById(`${sectionId}-trigger`);

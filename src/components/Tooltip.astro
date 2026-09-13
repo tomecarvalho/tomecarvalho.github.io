@@ -12,13 +12,8 @@ const { text } = Astro.props;
 </span>
 
 <script>
-  const tooltipOffset =
-    parseInt(
-      getComputedStyle(document.documentElement).getPropertyValue(
-        "--tooltip-offset",
-      ),
-      10,
-    ) || 8;
+  /** Gap, in pixels, between the tooltip and the element it describes. */
+  const tooltipOffset = 8;
 
   const wrappers = document.querySelectorAll(".tooltip-wrapper");
 
