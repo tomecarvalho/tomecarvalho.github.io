@@ -18,7 +18,7 @@ const { coursework } = Astro.props;
 <JointPapers>
   {
     coursework.map((year) => (
-      <Paper>
+      <Paper flat>
         <Stack as="article" gap={2}>
           <h3 class="year-title">{year.title}</h3>
           <div class="semesters">

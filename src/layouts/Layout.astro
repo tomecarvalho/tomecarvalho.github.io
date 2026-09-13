@@ -150,6 +150,80 @@ const headerTitle = `~/${siteConfig.handle}`;
         color: var(--color-heading-4);
       }
 
+      /*
+       * Window chrome, after a tiling window manager's titlebar and border.
+       * Global so that any component can dress its content as a window.
+       */
+      .window {
+        border: 2px solid var(--color-surface);
+        background-color: var(--color-bg);
+      }
+
+      .window-title {
+        display: flex;
+        align-items: center;
+        height: 1.5em;
+        padding: 0 0.5rem;
+        background-color: var(--color-surface);
+        color: var(--color-fg-muted);
+        font-family: var(--font-mono);
+        font-size: 1rem;
+        font-weight: normal;
+        line-height: 1.5;
+      }
+
+      /* The titlebar doubles as the control that shades the window. */
+      .window-trigger {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        width: 100%;
+        padding: 0;
+        border: none;
+        background: none;
+        color: inherit;
+        font: inherit;
+        cursor: pointer;
+      }
+
+      .window-name {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      /*
+       * A line box reserves room for descenders that most titles never use, so
+       * centring it leaves the text looking low. Trim to the x-height instead.
+       */
+      .window-label {
+        text-box: trim-both ex alphabetic;
+      }
+
+      /* The trim leaves the icon centred on the x-height, where it reads low;
+         raise it onto the cap band so it sits level with the letters. */
+      .window-name svg {
+        position: relative;
+        top: -0.125em;
+      }
+
+      .window-content {
+        padding: 1rem;
+      }
+
+      /* Focused window, as a window manager marks the one holding the cursor. */
+      .window:hover,
+      .window:focus-within {
+        border-color: var(--color-selection);
+      }
+
+      .window:hover > .window-title,
+      .window:focus-within > .window-title {
+        background-color: var(--color-selection);
+        color: var(--color-fg);
+      }
+
       /* Layout-only hook for links that pair an icon with a label. */
       .button {
         display: inline-flex;

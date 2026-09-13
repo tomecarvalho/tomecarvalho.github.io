@@ -19,7 +19,7 @@ const hasLinks = !!links?.length;
 const paperClickable = !hasLinks && !!href;
 ---
 
-<Paper hoverable={paperClickable}>
+<Paper flat hoverable={paperClickable}>
   <ConditionalLink href={href} condition={paperClickable} class="anchor">
     <div class="layout">
       <Stack gap={2}>

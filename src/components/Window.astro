@@ -1,0 +1,78 @@
+---
+/**
+ * Wraps content in a tiling window manager's chrome: a titlebar above a
+ * bordered content area. The titlebar shades the window, like i3.
+ * The chrome itself is styled globally by the layout.
+ */
+
+import { Icon } from "astro-icon/components";
+import type { As, AsProp } from "../types/component/AsProp";
+
+export type Props = {
+  id: string;
+  title: string;
+  icon?: string;
+  /** Element for the titlebar text. Use a heading when it labels a section. */
+  titleAs?: As;
+  defaultOpen?: boolean;
+  class?: string;
+} & AsProp;
+
+const {
+  id,
+  title,
+  icon,
+  titleAs: TitleTag = "div",
+  defaultOpen = true,
+  as: Tag = "section",
+  class: className,
+} = Astro.props;
+
+const sectionId = `window-${id}`;
+---
+
+<Tag class:list={["window", className]}>
+  <TitleTag class="window-title">
+    <button
+      class="window-trigger"
+      type="button"
+      id={`${sectionId}-trigger`}
+      aria-expanded={defaultOpen}
+      aria-controls={sectionId}
+    >
+      <span class="window-name">
+        {icon && <Icon name={icon} />}
+        <span class="window-label">{title}</span>
+      </span>
+      <Icon
+        name="mdi:chevron-down"
+        id={`${sectionId}-icon`}
+        style={defaultOpen ? "" : "transform: rotate(-90deg)"}
+      />
+    </button>
+  </TitleTag>
+  <div
+    class="window-content"
+    id={sectionId}
+    style={defaultOpen ? "" : "display: none"}
+  >
+    <slot />
+  </div>
+</Tag>
+
+<script is:inline define:vars={{ sectionId, defaultOpen }}>
+  const content = document.getElementById(sectionId);
+  const trigger = document.getElementById(`${sectionId}-trigger`);
+  const icon = document.getElementById(`${sectionId}-icon`);
+
+  let open = defaultOpen;
+
+  const toggle = () => {
+    open = !open;
+    content.style.display = open ? "" : "none";
+    icon.style.transform = open ? "" : "rotate(-90deg)";
+    trigger.setAttribute("aria-expanded", open);
+  };
+
+  trigger.addEventListener("click", toggle);
+</script>
