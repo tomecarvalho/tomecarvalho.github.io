@@ -6,7 +6,7 @@ const pt: FullLocaleStrings = {
   "nav.projects": "Projetos",
   "nav.tools": "Ferramentas",
 
-  "launcher.prompt": "rotas",
+  "launcher.prompt": "Rotas",
   "launcher.filter": "Filtrar rotas",
   "launcher.hints": "↑↓ selecionar · ↵ abrir · esc fechar",
   "launcher.open": "Abrir lançador de rotas",

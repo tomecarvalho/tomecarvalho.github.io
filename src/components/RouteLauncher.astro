@@ -109,12 +109,32 @@ const { pathname } = Astro.url;
     filter?.focus();
   };
 
-  for (const trigger of document.querySelectorAll("[data-launcher-trigger]")) {
+  const triggers = document.querySelectorAll("[data-launcher-trigger]");
+
+  for (const trigger of triggers) {
     trigger.addEventListener("click", () => {
       trigger.setAttribute("aria-expanded", "true");
       open();
     });
   }
+
+  const isTyping = (target: EventTarget | null) =>
+    target instanceof HTMLElement &&
+    (target.isContentEditable ||
+      ["INPUT", "SELECT", "TEXTAREA"].includes(target.tagName));
+
+  /* Wide windows hide the trigger, so the launcher answers to a keybinding. */
+  document.addEventListener("keydown", (event) => {
+    const plain = !event.altKey && !event.ctrlKey && !event.metaKey;
+    if (event.key !== "?" || !plain || isTyping(event.target)) return;
+
+    event.preventDefault();
+
+    for (const trigger of triggers)
+      trigger.setAttribute("aria-expanded", "true");
+
+    open();
+  });
 
   launcher?.addEventListener("close", () => {
     for (const trigger of document.querySelectorAll("[data-launcher-trigger]"))

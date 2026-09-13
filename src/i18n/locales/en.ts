@@ -4,7 +4,7 @@ const en = {
   "nav.projects": "Projects",
   "nav.tools": "Tools",
 
-  "launcher.prompt": "routes",
+  "launcher.prompt": "Routes",
   "launcher.filter": "Filter routes",
   "launcher.hints": "↑↓ select · ↵ open · esc close",
   "launcher.open": "Open route launcher",
