@@ -51,6 +51,14 @@ const currentLanguage = languageOptions.find(({ current }) => current);
       >
         <Icon name="mdi:menu" />
       </button>
+      <button
+        class="search-button"
+        aria-label={launcherText.searchPrompt}
+        aria-expanded="false"
+        data-launcher-trigger="search"
+      >
+        <Icon name="mdi:magnify" />
+      </button>
     </div>
   </div>
 </header>
@@ -64,8 +72,8 @@ const currentLanguage = languageOptions.find(({ current }) => current);
 
 <!--
 Layouts ([Left] [Right])
-- Wide: [Handle] [Nav, Language Button]
-- Narrow: [Handle] [Language Button, Launcher Button]
+- Wide: [Handle] [Nav, Language Button, Search Button]
+- Narrow: [Handle] [Language Button, Launcher Button, Search Button]
 -->
 <style>
   .header {
@@ -106,7 +114,8 @@ Layouts ([Left] [Right])
   }
 
   .language-button,
-  .menu-button {
+  .menu-button,
+  .search-button {
     display: flex;
     align-items: center;
     gap: 0.5rem;

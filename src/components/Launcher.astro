@@ -6,8 +6,8 @@
 
 import { Icon } from "astro-icon/components";
 import type { LanguageOption } from "../i18n/types";
-import type { Props as NavProps } from "./Nav.astro";
 import type { SearchEntry } from "../search/types";
+import type { Props as NavProps } from "./Nav.astro";
 
 export type Props = {
   routes: NavProps["routes"];
@@ -116,11 +116,11 @@ const { pathname } = Astro.url;
   </ul>
   <footer class="launcher-footer">
     <div class="launcher-modes">
-      <button class="launcher-mode-button active" data-mode-button="routes">
-        {prompt}
-      </button>
       <button class="launcher-mode-button" data-mode-button="search">
         {searchPrompt}
+      </button>
+      <button class="launcher-mode-button active" data-mode-button="routes">
+        {prompt}
       </button>
       <button class="launcher-mode-button" data-mode-button="language">
         {languagePrompt}
@@ -144,9 +144,14 @@ const { pathname } = Astro.url;
   const items = [
     ...(launcher?.querySelectorAll<HTMLAnchorElement>(".launcher-item") ?? []),
   ];
-  const modes = ["routes", "search", "language"] as const;
+  const modes = ["search", "routes", "language"] as const;
   type Mode = (typeof modes)[number];
   let mode: Mode = "routes";
+  const shortcutModes: Record<string, Mode> = {
+    l: "language",
+    r: "routes",
+    "?": "search",
+  };
 
   /** Diacritics are awkward to type, so they shouldn't stand between a match. */
   const fold = (value: string) =>
@@ -226,18 +231,18 @@ const { pathname } = Astro.url;
     (target.isContentEditable ||
       ["INPUT", "SELECT", "TEXTAREA"].includes(target.tagName));
 
-  /* Wide windows hide the trigger, so the launcher answers to a keybinding.
-     Searching covers the routes too, so that's the mode worth reaching for. */
+  /* Wide windows hide the trigger, so the launcher answers to keybindings. */
   document.addEventListener("keydown", (event) => {
     const plain = !event.altKey && !event.ctrlKey && !event.metaKey;
-    if (event.key !== "?" || !plain || isTyping(event.target)) return;
+    const shortcut = shortcutModes[event.key.toLowerCase()];
+    if (!shortcut || !plain || isTyping(event.target)) return;
 
     event.preventDefault();
 
     for (const trigger of triggers)
       trigger.setAttribute("aria-expanded", "true");
 
-    open("search");
+    open(shortcut);
   });
 
   launcher?.addEventListener("close", () => {

@@ -8,6 +8,7 @@ import "@fontsource/ibm-plex-sans/latin-700.css";
 import "@fontsource/ibm-plex-sans/latin-ext-400.css";
 import "@fontsource/ibm-plex-sans/latin-ext-700.css";
 import type { Props as HeaderProps } from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import {
   getLanguageOptions,
@@ -78,6 +79,9 @@ const headerTitle = `~/${siteConfig.handle}`;
       }
 
       body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
         margin: 0;
         font-family: var(--font-sans);
         line-height: 1.5;
@@ -304,11 +308,18 @@ const headerTitle = `~/${siteConfig.handle}`;
     <main class="main">
       <slot />
     </main>
+    <Footer
+      search={t("launcher.searchPrompt")}
+      routes={t("launcher.prompt")}
+      language={t("launcher.languagePrompt")}
+      hintsLabel={t("launcher.hints")}
+    />
   </body>
 </html>
 
 <style>
   .main {
+    flex: 1;
     margin: 0 auto;
     padding: 2rem var(--content-padding-x);
     width: min(100%, var(--content-max-width));

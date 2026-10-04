@@ -1,0 +1,65 @@
+---
+export type Props = {
+  search: string;
+  routes: string;
+  language: string;
+  hintsLabel: string;
+};
+
+const { search, routes, language, hintsLabel } = Astro.props;
+---
+
+<footer class="footer" aria-label={hintsLabel}>
+  <div class="footer-content">
+    <span class="footer-shortcut">
+      <kbd>?</kbd>
+      {search}
+    </span>
+    <span class="footer-shortcut">
+      <kbd>R</kbd>
+      {routes}
+    </span>
+    <span class="footer-shortcut">
+      <kbd>L</kbd>
+      {language}
+    </span>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    display: flex;
+    justify-content: center;
+    background-color: var(--color-bg-float);
+    font-family: var(--font-mono);
+  }
+
+  .footer-content {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+    padding: 0 var(--content-padding-x);
+    width: min(100%, var(--content-max-width));
+  }
+
+  .footer-shortcut {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--color-fg-muted);
+    font-size: 0.875rem;
+  }
+
+  .footer-shortcut kbd {
+    padding: 0 0.25rem;
+    background-color: var(--color-selection);
+    color: var(--color-fg);
+    font: inherit;
+  }
+
+  @media (max-width: 715px) {
+    .footer {
+      display: none;
+    }
+  }
+</style>
