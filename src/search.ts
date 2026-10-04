@@ -35,170 +35,165 @@ export const getSearchEntries = (
   currentLocale: CurrentLocale,
 ): SearchEntry[] => {
   const t = useTranslations(currentLocale);
+
   const locale = getLocale(currentLocale);
   const projectsPath = toLocalePath(locale, navRoutes.projects.path);
   const toolsPath = toLocalePath(locale, navRoutes.tools.path);
   const interestsPath = toLocalePath(locale, navRoutes.interests.path);
-  const aboutPath = toLocalePath(locale, navRoutes.aboutMe.path);
 
   const projectsLabel = t("nav.projects", { capitalize: true });
   const toolsLabel = t("nav.tools", { capitalize: true });
   const interestsLabel = t("nav.interests", { capitalize: true });
-  const aboutLabel = t("nav.aboutMe", { capitalize: true });
-  /* The pages lead the results, so one prompt can reach anything on the site. */
-  const entries: SearchEntry[] = navRoutesArray.map((route) => ({
-    label: t(route.label, { capitalize: true }),
-    context: t("launcher.prompt"),
-    href: toLocalePath(locale, route.path),
-    icon: route.icon,
-    keywords: "description" in route ? t(route.description) : undefined,
-  }));
-
-  entries.push({
-    label: siteConfig.name,
-    context: aboutLabel,
-    href: `${aboutPath}#${windowTarget("about-me")}`,
-    icon: navRoutes.aboutMe.icon,
-  });
 
   const projectCategories = translate(
     siteConfig.projectCategories,
     currentLocale,
   );
-  for (const category of projectCategories) {
-    entries.push({
-      label: category.name,
-      context: projectsLabel,
-      href: `${projectsPath}#${windowTarget(category.id)}`,
-      icon: category.icon,
-    });
-
-    category.projects.forEach((project, projectIndex) => {
-      entries.push({
-        label: project.name,
-        context: `${projectsLabel} › ${category.name}`,
-        href: `${projectsPath}#${projectTargetId(category.id, projectIndex)}`,
-        icon: category.icon,
-        keywords: project.links?.map(({ label }) => label).join(" "),
-      });
-    });
-  }
 
   const coursework = translate(siteConfig.coursework, currentLocale);
   const courseworkLabel = t("projects.titles.universityCoursework");
-  entries.push({
-    label: courseworkLabel,
-    context: projectsLabel,
-    href: `${projectsPath}#${windowTarget("coursework")}`,
-    icon: "mdi:university",
-  });
-
-  coursework.forEach((year, yearIndex) => {
-    entries.push({
-      label: year.title,
-      context: `${projectsLabel} › ${courseworkLabel}`,
-      href: `${projectsPath}#${courseworkTargetId(yearIndex)}`,
-      icon: "mdi:university",
-    });
-
-    year.semesters.forEach((semester, semesterIndex) => {
-      const semesterContext = `${projectsLabel} › ${courseworkLabel} › ${year.title}`;
-      entries.push({
-        label: semester.title,
-        context: semesterContext,
-        href: `${projectsPath}#${courseworkTargetId(yearIndex, semesterIndex)}`,
-        icon: "mdi:university",
-      });
-
-      semester.subjects.forEach((subject, subjectIndex) => {
-        const subjectPath = [yearIndex, semesterIndex, subjectIndex];
-        entries.push({
-          label: subject.name,
-          context: `${semesterContext} › ${semester.title}`,
-          href: `${projectsPath}#${courseworkTargetId(...subjectPath)}`,
-          icon: "mdi:book-education",
-        });
-
-        subject.projects.forEach((project, projectIndex) => {
-          entries.push({
-            label: project.name,
-            context: `${projectsLabel} › ${subject.name}`,
-            href: `${projectsPath}#${courseworkTargetId(...subjectPath, projectIndex)}`,
-            icon: "mdi:school",
-            keywords: project.topics.join(" "),
-          });
-        });
-      });
-    });
-  });
 
   const toolCategories = translate(siteConfig.toolCategories, currentLocale);
-  const addTools = (
+  const toolEntries = (
     tools: TranslatedTool[],
     categoryId: string,
-    icon: string,
     parents: string[],
     path: number[] = [],
-  ) => {
-    tools.forEach((tool, index) => {
+  ): SearchEntry[] =>
+    tools.flatMap((tool, index) => {
       const toolPath = [...path, index];
-      entries.push({
-        label: tool.name,
-        context: [toolsLabel, ...parents].join(" › "),
-        href: `${toolsPath}#${toolTargetId(categoryId, toolPath)}`,
-        icon,
-        keywords: tool.type,
-      });
-
-      if (tool.children)
-        addTools(
-          tool.children,
-          categoryId,
-          icon,
-          [...parents, tool.name],
-          toolPath,
-        );
-    });
-  };
-
-  for (const category of toolCategories) {
-    entries.push({
-      label: category.name,
-      context: toolsLabel,
-      href: `${toolsPath}#${windowTarget(category.id)}`,
-      icon: navRoutes.tools.icon,
-    });
-    addTools(category.tools, category.id, navRoutes.tools.icon, [
-      category.name,
-    ]);
-  }
-
-  const interests = translate(siteConfig.interests, currentLocale);
-  for (const interest of interests) {
-    entries.push({
-      label: interest.name,
-      context: interestsLabel,
-      href: `${interestsPath}#${windowTarget(interest.id)}`,
-      icon: interest.icon,
+      return [
+        {
+          label: tool.name,
+          context: [toolsLabel, ...parents].join(" > "),
+          href: `${toolsPath}#${toolTargetId(categoryId, toolPath)}`,
+          icon: navRoutes.tools.icon,
+          keywords: tool.type,
+        },
+        ...(tool.children
+          ? toolEntries(
+              tool.children,
+              categoryId,
+              [...parents, tool.name],
+              toolPath,
+            )
+          : []),
+      ];
     });
 
-    interest.cards?.forEach((card, cardIndex) => {
-      if (!card.text.primary) return;
+  const entries: SearchEntry[] = [
+    // Routes
+    ...navRoutesArray.map((route) => ({
+      label: t(route.label, { capitalize: true }),
+      context: t("launcher.prompt"),
+      href: toLocalePath(locale, route.path),
+      icon: route.icon,
+      keywords: "description" in route ? t(route.description) : undefined,
+    })),
 
-      entries.push({
-        label: card.text.primary,
-        context: `${interestsLabel} › ${interest.name}`,
-        href: `${interestsPath}#${interestCardTargetId(interest.id, cardIndex)}`,
+    // Projects
+    ...projectCategories.flatMap((category) => [
+      // Category
+      {
+        label: category.name,
+        context: projectsLabel,
+        href: `${projectsPath}#${windowTarget(category.id)}`,
+        icon: category.icon,
+      },
+      // Category projects
+      ...category.projects.map((project, projectIndex) => ({
+        label: project.name,
+        context: `${projectsLabel} > ${category.name}`,
+        href: `${projectsPath}#${projectTargetId(category.id, projectIndex)}`,
+        icon: category.icon,
+        keywords: project.links?.map(({ label }) => label).join(" "),
+      })),
+    ]),
+
+    // Coursework
+    {
+      label: courseworkLabel,
+      context: projectsLabel,
+      href: `${projectsPath}#${windowTarget("coursework")}`,
+      icon: "mdi:university",
+    },
+    ...coursework.flatMap((year, yearIndex) => [
+      {
+        label: year.title,
+        context: `${projectsLabel} > ${courseworkLabel}`,
+        href: `${projectsPath}#${courseworkTargetId(yearIndex)}`,
+        icon: "mdi:university",
+      },
+      ...year.semesters.flatMap((semester, semesterIndex) => [
+        {
+          label: semester.title,
+          context: `${projectsLabel} > ${courseworkLabel} > ${year.title}`,
+          href: `${projectsPath}#${courseworkTargetId(yearIndex, semesterIndex)}`,
+          icon: "mdi:university",
+        },
+        ...semester.subjects.flatMap((subject, subjectIndex) => {
+          const subjectPath = [yearIndex, semesterIndex, subjectIndex];
+          return [
+            {
+              label: subject.name,
+              context: `${projectsLabel} > ${courseworkLabel} > ${year.title} > ${semester.title}`,
+              href: `${projectsPath}#${courseworkTargetId(...subjectPath)}`,
+              icon: "mdi:book-education",
+            },
+            ...subject.projects.map((project, projectIndex) => ({
+              label: project.name,
+              context: `${projectsLabel} > ${courseworkLabel} > ${year.title} > ${semester.title} > ${subject.name}`,
+              href: `${projectsPath}#${courseworkTargetId(
+                ...subjectPath,
+                projectIndex,
+              )}`,
+              icon: "mdi:school",
+              keywords: project.topics.join(" "),
+            })),
+          ];
+        }),
+      ]),
+    ]),
+
+    // Tools
+    ...toolCategories.flatMap((category) => [
+      {
+        label: category.name,
+        context: toolsLabel,
+        href: `${toolsPath}#${windowTarget(category.id)}`,
+        icon: navRoutes.tools.icon,
+      },
+      ...toolEntries(category.tools, category.id, [category.name]),
+    ]),
+
+    // Interests
+    ...translate(siteConfig.interests, currentLocale).flatMap((interest) => [
+      {
+        label: interest.name,
+        context: interestsLabel,
+        href: `${interestsPath}#${windowTarget(interest.id)}`,
         icon: interest.icon,
-        keywords: [
-          card.text.secondary,
-          "tertiary" in card.text ? card.text.tertiary : undefined,
-        ]
-          .filter(Boolean)
-          .join(" "),
-      });
-    });
-  }
+      },
+      ...(interest.cards?.flatMap((card, cardIndex) => {
+        if (!card.text.primary) return [];
+
+        return [
+          {
+            label: card.text.primary,
+            context: `${interestsLabel} > ${interest.name}`,
+            href: `${interestsPath}#${interestCardTargetId(interest.id, cardIndex)}`,
+            icon: interest.icon,
+            keywords: [
+              card.text.secondary,
+              "tertiary" in card.text ? card.text.tertiary : undefined,
+            ]
+              .filter(Boolean)
+              .join(" "),
+          },
+        ];
+      }) ?? []),
+    ]),
+  ];
 
   return entries;
 };
