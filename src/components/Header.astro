@@ -1,16 +1,16 @@
 ---
 import { Icon } from "astro-icon/components";
+import type { Props as LauncherProps } from "./Launcher.astro";
+import Launcher from "./Launcher.astro";
 import type { Props as NavProps } from "./Nav.astro";
 import Nav from "./Nav.astro";
-import type { Props as RouteLauncherProps } from "./RouteLauncher.astro";
-import RouteLauncher from "./RouteLauncher.astro";
 
 export type Props = Pick<NavProps, "routes"> & {
   title: string;
   homeHref: string;
-  languageOptions: RouteLauncherProps["languageOptions"];
-  searchEntries: RouteLauncherProps["searchEntries"];
-  launcherText: RouteLauncherProps["text"];
+  languageOptions: LauncherProps["languageOptions"];
+  searchEntries: LauncherProps["searchEntries"];
+  launcherText: LauncherProps["text"];
   openLauncherLabel: string;
   openLanguageLabel: string;
 };
@@ -55,7 +55,7 @@ const currentLanguage = languageOptions.find(({ current }) => current);
   </div>
 </header>
 
-<RouteLauncher
+<Launcher
   routes={routes}
   searchEntries={searchEntries}
   languageOptions={languageOptions}

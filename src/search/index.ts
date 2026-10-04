@@ -1,21 +1,14 @@
-import type { CurrentLocale } from "./i18n/types";
+import type { CurrentLocale } from "../i18n/types";
 import {
   getLocale,
   toLocalePath,
   translate,
   useTranslations,
-} from "./i18n/utils";
-import { navRoutes, navRoutesArray } from "./routes/nav-routes";
-import siteConfig from "./site/config";
-import type { TranslatedTool } from "./types/data/tools/Tool";
-
-export type SearchEntry = {
-  label: string;
-  context: string;
-  href: string;
-  icon: string;
-  keywords?: string;
-};
+} from "../i18n/utils";
+import { navRoutes, navRoutesArray } from "../routes/nav-routes";
+import siteConfig from "../site/config";
+import type { TranslatedTool } from "../types/data/tools/Tool";
+import type { SearchEntry } from "./types";
 
 export const projectTargetId = (categoryId: string, projectIndex: number) =>
   `project-${categoryId}-${projectIndex}`;
@@ -54,6 +47,8 @@ export const getSearchEntries = (
   const courseworkLabel = t("projects.titles.universityCoursework");
 
   const toolCategories = translate(siteConfig.toolCategories, currentLocale);
+  const interests = translate(siteConfig.interests, currentLocale);
+
   const toolEntries = (
     tools: TranslatedTool[],
     categoryId: string,
@@ -62,6 +57,7 @@ export const getSearchEntries = (
   ): SearchEntry[] =>
     tools.flatMap((tool, index) => {
       const toolPath = [...path, index];
+
       return [
         {
           label: tool.name,
@@ -81,26 +77,23 @@ export const getSearchEntries = (
       ];
     });
 
-  const entries: SearchEntry[] = [
-    // Routes
-    ...navRoutesArray.map((route) => ({
+  const getRouteEntries = (): SearchEntry[] =>
+    navRoutesArray.map((route) => ({
       label: t(route.label, { capitalize: true }),
       context: t("launcher.prompt"),
       href: toLocalePath(locale, route.path),
       icon: route.icon,
       keywords: "description" in route ? t(route.description) : undefined,
-    })),
+    }));
 
-    // Projects
-    ...projectCategories.flatMap((category) => [
-      // Category
+  const getProjectEntries = (): SearchEntry[] =>
+    projectCategories.flatMap((category) => [
       {
         label: category.name,
         context: projectsLabel,
         href: `${projectsPath}#${windowTarget(category.id)}`,
         icon: category.icon,
       },
-      // Category projects
       ...category.projects.map((project, projectIndex) => ({
         label: project.name,
         context: `${projectsLabel} > ${category.name}`,
@@ -108,9 +101,9 @@ export const getSearchEntries = (
         icon: category.icon,
         keywords: project.links?.map(({ label }) => label).join(" "),
       })),
-    ]),
+    ]);
 
-    // Coursework
+  const getCourseworkEntries = (): SearchEntry[] => [
     {
       label: courseworkLabel,
       context: projectsLabel,
@@ -133,6 +126,7 @@ export const getSearchEntries = (
         },
         ...semester.subjects.flatMap((subject, subjectIndex) => {
           const subjectPath = [yearIndex, semesterIndex, subjectIndex];
+
           return [
             {
               label: subject.name,
@@ -154,9 +148,10 @@ export const getSearchEntries = (
         }),
       ]),
     ]),
+  ];
 
-    // Tools
-    ...toolCategories.flatMap((category) => [
+  const getToolCategoryEntries = (): SearchEntry[] =>
+    toolCategories.flatMap((category) => [
       {
         label: category.name,
         context: toolsLabel,
@@ -164,10 +159,10 @@ export const getSearchEntries = (
         icon: navRoutes.tools.icon,
       },
       ...toolEntries(category.tools, category.id, [category.name]),
-    ]),
+    ]);
 
-    // Interests
-    ...translate(siteConfig.interests, currentLocale).flatMap((interest) => [
+  const getInterestEntries = (): SearchEntry[] =>
+    interests.flatMap((interest) => [
       {
         label: interest.name,
         context: interestsLabel,
@@ -192,7 +187,14 @@ export const getSearchEntries = (
           },
         ];
       }) ?? []),
-    ]),
+    ]);
+
+  const entries: SearchEntry[] = [
+    ...getRouteEntries(),
+    ...getProjectEntries(),
+    ...getCourseworkEntries(),
+    ...getToolCategoryEntries(),
+    ...getInterestEntries(),
   ];
 
   return entries;
