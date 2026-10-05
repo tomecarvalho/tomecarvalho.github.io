@@ -515,9 +515,17 @@ const { pathname } = Astro.url;
       gap: 0.25rem;
     }
 
+    .launcher-modes {
+      width: 100%;
+    }
+
+    .launcher-mode-button {
+      flex: 1;
+      min-height: 1.75rem;
+    }
+
     .launcher-hints {
-      overflow: hidden;
-      text-overflow: ellipsis;
+      display: none;
     }
   }
 </style>
