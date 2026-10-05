@@ -4,11 +4,11 @@ const en = {
   "nav.projects": "Projects",
   "nav.tools": "Tools",
 
-  "launcher.prompt": "Routes",
-  "launcher.searchPrompt": "Search",
-  "launcher.languagePrompt": "Language",
   "launcher.filter": "Filter launcher entries",
   "launcher.hints": "tab mode · ↑↓ select · ↵ open · esc close",
+  "launcher.modes.language": "Language",
+  "launcher.modes.routes": "Routes",
+  "launcher.modes.search": "Search",
   "launcher.open": "Open route launcher",
   "launcher.openLanguage": "Change language",
 

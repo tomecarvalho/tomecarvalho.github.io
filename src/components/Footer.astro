@@ -1,42 +1,51 @@
 ---
-export type Props = {
-  search: string;
-  routes: string;
-  language: string;
+import { Icon } from "astro-icon/components";
+import type { SearchModeConfig } from "../search/types";
+import Stack from "./Stack.astro";
+import type { Translated } from "../i18n/types";
+
+type Props = {
+  searchModes: Translated<SearchModeConfig>[];
   hintsLabel: string;
 };
 
-const { search, routes, language, hintsLabel } = Astro.props;
+const { searchModes, hintsLabel } = Astro.props;
 ---
 
 <footer class="footer" aria-label={hintsLabel}>
   <div class="footer-content">
-    <span class="footer-shortcut">
-      <kbd>?</kbd>
-      {search}
-    </span>
-    <span class="footer-shortcut">
-      <kbd>R</kbd>
-      {routes}
-    </span>
-    <span class="footer-shortcut">
-      <kbd>L</kbd>
-      {language}
-    </span>
+    <Stack direction="row" center gap={1}>
+      <Icon name="mdi:keyboard" class="footer-icon" />
+      <span>Shortcuts:</span>
+    </Stack>
+    {
+      searchModes.map(({ shortcut, label }) => (
+        <span class="footer-shortcut">
+          <kbd>{shortcut}</kbd>
+          {label}
+        </span>
+      ))
+    }
   </div>
 </footer>
 
 <style>
   .footer {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 20;
     display: flex;
     justify-content: center;
+    flex-shrink: 0;
     background-color: var(--color-bg-float);
     font-family: var(--font-mono);
   }
 
   .footer-content {
     display: flex;
-    justify-content: flex-start;
+    align-items: center;
     gap: 1rem;
     padding: 0 var(--content-padding-x);
     width: min(100%, var(--content-max-width));
@@ -47,7 +56,6 @@ const { search, routes, language, hintsLabel } = Astro.props;
     align-items: center;
     gap: 0.25rem;
     color: var(--color-fg-muted);
-    font-size: 0.875rem;
   }
 
   .footer-shortcut kbd {
@@ -55,6 +63,7 @@ const { search, routes, language, hintsLabel } = Astro.props;
     background-color: var(--color-selection);
     color: var(--color-fg);
     font: inherit;
+    text-transform: uppercase;
   }
 
   @media (max-width: 715px) {

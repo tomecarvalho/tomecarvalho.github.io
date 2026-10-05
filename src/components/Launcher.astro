@@ -15,7 +15,7 @@ export type Props = {
   languageOptions: LanguageOption[];
   text: {
     /** The launcher's mode, shown as rofi shows the one it's running in. */
-    prompt: string;
+    routesPrompt: string;
     searchPrompt: string;
     languagePrompt: string;
     filter: string;
@@ -27,7 +27,7 @@ const {
   routes,
   searchEntries,
   languageOptions,
-  text: { prompt, searchPrompt, languagePrompt, filter, hints },
+  text: { routesPrompt, searchPrompt, languagePrompt, filter, hints },
 } = Astro.props;
 
 const { pathname } = Astro.url;
@@ -38,11 +38,11 @@ const { pathname } = Astro.url;
     <span
       class="launcher-mode"
       id="launcher-mode"
-      data-routes-prompt={prompt}
+      data-routes-prompt={routesPrompt}
       data-search-prompt={searchPrompt}
       data-language-prompt={languagePrompt}
     >
-      {prompt}:
+      {routesPrompt}:
     </span>
     <input
       class="launcher-filter"
@@ -120,7 +120,7 @@ const { pathname } = Astro.url;
         {searchPrompt}
       </button>
       <button class="launcher-mode-button active" data-mode-button="routes">
-        {prompt}
+        {routesPrompt}
       </button>
       <button class="launcher-mode-button" data-mode-button="language">
         {languagePrompt}
@@ -144,14 +144,18 @@ const { pathname } = Astro.url;
   const items = [
     ...(launcher?.querySelectorAll<HTMLAnchorElement>(".launcher-item") ?? []),
   ];
+
   const modes = ["search", "routes", "language"] as const;
+
   type Mode = (typeof modes)[number];
+
   let mode: Mode = "routes";
+
   const shortcutModes: Record<string, Mode> = {
-    l: "language",
+    s: "search",
     r: "routes",
-    "?": "search",
-  };
+    l: "language",
+  } as const;
 
   /** Diacritics are awkward to type, so they shouldn't stand between a match. */
   const fold = (value: string) =>

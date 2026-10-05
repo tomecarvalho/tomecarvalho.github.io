@@ -80,7 +80,7 @@ export const getSearchEntries = (
   const getRouteEntries = (): SearchEntry[] =>
     navRoutesArray.map((route) => ({
       label: t(route.label, { capitalize: true }),
-      context: t("launcher.prompt"),
+      context: t("launcher.modes.routes"),
       href: toLocalePath(locale, route.path),
       icon: route.icon,
       keywords: "description" in route ? t(route.description) : undefined,

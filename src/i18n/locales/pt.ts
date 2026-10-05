@@ -6,11 +6,11 @@ const pt: FullLocaleStrings = {
   "nav.projects": "Projetos",
   "nav.tools": "Ferramentas",
 
-  "launcher.prompt": "Rotas",
-  "launcher.searchPrompt": "Pesquisar",
-  "launcher.languagePrompt": "Idioma",
   "launcher.filter": "Filtrar entradas do lançador",
   "launcher.hints": "tab modo · ↑↓ selecionar · ↵ abrir · esc fechar",
+  "launcher.modes.language": "Idioma",
+  "launcher.modes.routes": "Rotas",
+  "launcher.modes.search": "Pesquisar",
   "launcher.open": "Abrir lançador de rotas",
   "launcher.openLanguage": "Mudar idioma",
 

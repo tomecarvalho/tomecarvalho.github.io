@@ -7,17 +7,19 @@ import "@fontsource/ibm-plex-sans/latin-400.css";
 import "@fontsource/ibm-plex-sans/latin-700.css";
 import "@fontsource/ibm-plex-sans/latin-ext-400.css";
 import "@fontsource/ibm-plex-sans/latin-ext-700.css";
-import type { Props as HeaderProps } from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import type { Props as HeaderProps } from "../components/Header.astro";
 import Header from "../components/Header.astro";
 import {
   getLanguageOptions,
   getLocale,
   toLocalePath,
+  translate,
   useTranslations,
 } from "../i18n/utils";
 import { navRoutes, navRoutesArray } from "../routes/nav-routes";
 import { getSearchEntries } from "../search";
+import { SEARCH_MODES } from "../search/constants";
 import siteConfig from "../site/config";
 import "../style/kanagawa.css";
 
@@ -44,6 +46,8 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
     description: "description" in route ? t(route.description) : undefined,
   }),
 );
+
+const translatedSearchModes = translate(SEARCH_MODES, currentLocale);
 
 const headerTitle = `~/${siteConfig.handle}`;
 ---
@@ -296,9 +300,9 @@ const headerTitle = `~/${siteConfig.handle}`;
       languageOptions={languageOptions}
       searchEntries={searchEntries}
       launcherText={{
-        prompt: t("launcher.prompt"),
-        searchPrompt: t("launcher.searchPrompt"),
-        languagePrompt: t("launcher.languagePrompt"),
+        routesPrompt: t("launcher.modes.routes"),
+        searchPrompt: t("launcher.modes.search"),
+        languagePrompt: t("launcher.modes.language"),
         filter: t("launcher.filter"),
         hints: t("launcher.hints"),
       }}
@@ -309,9 +313,7 @@ const headerTitle = `~/${siteConfig.handle}`;
       <slot />
     </main>
     <Footer
-      search={t("launcher.searchPrompt")}
-      routes={t("launcher.prompt")}
-      language={t("launcher.languagePrompt")}
+      searchModes={translatedSearchModes}
       hintsLabel={t("launcher.hints")}
     />
   </body>
@@ -321,7 +323,7 @@ const headerTitle = `~/${siteConfig.handle}`;
   .main {
     flex: 1;
     margin: 0 auto;
-    padding: 2rem var(--content-padding-x);
+    padding: 2rem var(--content-padding-x) calc(2rem + 1.5rem);
     width: min(100%, var(--content-max-width));
   }
 </style>
