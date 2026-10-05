@@ -1,0 +1,37 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getLocale, toLocalePath, useTranslations } from "../i18n/utils";
+import { navRoutes } from "../routes/nav-routes";
+import { appendSiteName } from "../site/utils";
+import Window from "./Window.astro";
+
+const { currentLocale } = Astro;
+const locale = getLocale(currentLocale);
+const t = useTranslations(currentLocale);
+const title = t("notFound.title");
+---
+
+<Layout title={appendSiteName(title)}>
+  <Window id="not-found" title={title}>
+    <div class="not-found">
+      <h1>404</h1>
+      <p>{t("notFound.message")}</p>
+      <a href={toLocalePath(locale, navRoutes.aboutMe.path)}>
+        {t("notFound.home")}
+      </a>
+    </div>
+  </Window>
+</Layout>
+
+<style>
+  .not-found {
+    display: grid;
+    gap: 1rem;
+    justify-items: start;
+  }
+
+  h1 {
+    color: var(--color-heading-1);
+    font-family: var(--font-mono);
+  }
+</style>

@@ -17,6 +17,10 @@ const pt: FullLocaleStrings = {
 
   "index.titles.explore": "Explorar",
 
+  "notFound.title": "Página Não Encontrada",
+  "notFound.message": "A página que procura não existe.",
+  "notFound.home": "Voltar ao início",
+
   "projects.titles.universityCoursework": "Trabalhos Universitários",
 };
 
