@@ -15,6 +15,10 @@ const en = {
 
   "index.titles.explore": "Explore",
 
+  "notFound.title": "Page Not Found",
+  "notFound.message": "The page you are looking for does not exist.",
+  "notFound.home": "Go back home",
+
   "projects.titles.universityCoursework": "University Coursework",
 };
 
