@@ -1,7 +1,11 @@
 {
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "eslint.validate": ["javascript", "typescript", "astro"],
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+    "astro"
+  ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
@@ -31,7 +35,9 @@
     "Lusophones",
     "martinhjartmyr",
     "Murtry",
+    "Niri",
     "Projekt",
+    "subótimos",
     "tomecarvalho",
     "versionable",
     "versionamento",
