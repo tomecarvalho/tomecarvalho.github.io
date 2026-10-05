@@ -5,6 +5,7 @@ export type SearchEntry = {
   context: string;
   href: string;
   icon: string;
+  value?: string;
   keywords?: string;
 };
 

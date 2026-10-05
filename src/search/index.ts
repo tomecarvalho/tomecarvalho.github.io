@@ -24,6 +24,22 @@ export const courseworkTargetId = (...path: number[]) =>
 
 const windowTarget = (id: string) => `window-${id}-trigger`;
 
+export const getContactEntries = (
+  currentLocale: CurrentLocale,
+): SearchEntry[] => {
+  const t = useTranslations(currentLocale);
+  const contactsLabel = t("launcher.modes.contacts");
+
+  return siteConfig.contacts.map(({ label, value, href, icon }) => ({
+    label,
+    context: contactsLabel,
+    href,
+    icon,
+    value: value || href,
+    keywords: [value, href].filter(Boolean).join(" ") || undefined,
+  }));
+};
+
 export const getSearchEntries = (
   currentLocale: CurrentLocale,
 ): SearchEntry[] => {
@@ -191,6 +207,7 @@ export const getSearchEntries = (
 
   const entries: SearchEntry[] = [
     ...getRouteEntries(),
+    ...getContactEntries(currentLocale),
     ...getProjectEntries(),
     ...getCourseworkEntries(),
     ...getToolCategoryEntries(),

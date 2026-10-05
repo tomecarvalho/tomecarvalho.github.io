@@ -18,7 +18,7 @@ import {
   useTranslations,
 } from "../i18n/utils";
 import { navRoutes, navRoutesArray } from "../routes/nav-routes";
-import { getSearchEntries } from "../search";
+import { getContactEntries, getSearchEntries } from "../search";
 import { SEARCH_MODES } from "../search/constants";
 import siteConfig from "../site/config";
 import "../style/kanagawa.css";
@@ -295,12 +295,14 @@ const headerTitle = `~/${siteConfig.handle}`;
   <body>
     <Header
       routes={translatedNavRoutes}
+      contacts={getContactEntries(currentLocale)}
       title={headerTitle}
       homeHref={toLocalePath(locale, navRoutes.aboutMe.path)}
       languageOptions={languageOptions}
       searchEntries={searchEntries}
       launcherText={{
         routesPrompt: t("launcher.modes.routes"),
+        contactsPrompt: t("launcher.modes.contacts"),
         searchPrompt: t("launcher.modes.search"),
         languagePrompt: t("launcher.modes.language"),
         filter: t("launcher.filter"),

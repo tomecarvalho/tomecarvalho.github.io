@@ -8,6 +8,7 @@ const pt: FullLocaleStrings = {
 
   "launcher.filter": "Filtrar entradas do lançador",
   "launcher.hints": "tab modo · ↑↓ selecionar · ↵ abrir · esc fechar",
+  "launcher.modes.contacts": "Contactos",
   "launcher.modes.language": "Idioma",
   "launcher.modes.routes": "Rotas",
   "launcher.modes.search": "Pesquisar",

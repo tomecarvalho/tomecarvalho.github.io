@@ -11,11 +11,13 @@ import type { Props as NavProps } from "./Nav.astro";
 
 export type Props = {
   routes: NavProps["routes"];
+  contacts: SearchEntry[];
   searchEntries: SearchEntry[];
   languageOptions: LanguageOption[];
   text: {
     /** The launcher's mode, shown as rofi shows the one it's running in. */
     routesPrompt: string;
+    contactsPrompt: string;
     searchPrompt: string;
     languagePrompt: string;
     filter: string;
@@ -25,9 +27,17 @@ export type Props = {
 
 const {
   routes,
+  contacts,
   searchEntries,
   languageOptions,
-  text: { routesPrompt, searchPrompt, languagePrompt, filter, hints },
+  text: {
+    routesPrompt,
+    contactsPrompt,
+    searchPrompt,
+    languagePrompt,
+    filter,
+    hints,
+  },
 } = Astro.props;
 
 const { pathname } = Astro.url;
@@ -39,6 +49,7 @@ const { pathname } = Astro.url;
       class="launcher-mode"
       id="launcher-mode"
       data-routes-prompt={routesPrompt}
+      data-contacts-prompt={contactsPrompt}
       data-search-prompt={searchPrompt}
       data-language-prompt={languagePrompt}
     >
@@ -76,7 +87,7 @@ const { pathname } = Astro.url;
   </ul>
   <ul class="launcher-list" data-mode="search" hidden>
     {
-      searchEntries.map(({ label, context, href, icon, keywords }) => (
+      searchEntries.map(({ label, context, href, icon, value, keywords }) => (
         <li>
           <a
             class="launcher-item"
@@ -87,7 +98,33 @@ const { pathname } = Astro.url;
               <Icon name={icon} />
               <span class="launcher-result">
                 <span>{label}</span>
-                <span class="launcher-context">{context}</span>
+                <span class="launcher-context">
+                  {context}
+                  {value && <span class="launcher-value">{value}</span>}
+                </span>
+              </span>
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <ul class="launcher-list" data-mode="contacts" hidden>
+    {
+      contacts.map(({ label, context, href, icon, value, keywords }) => (
+        <li>
+          <a
+            class="launcher-item"
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-label={[label, context, keywords].filter(Boolean).join(" ")}
+          >
+            <span class="launcher-name">
+              <Icon name={icon} />
+              <span class="launcher-result">
+                <span>{label}</span>
+                <span class="launcher-context">{value || context}</span>
               </span>
             </span>
           </a>
@@ -122,6 +159,9 @@ const { pathname } = Astro.url;
       <button class="launcher-mode-button active" data-mode-button="routes">
         {routesPrompt}
       </button>
+      <button class="launcher-mode-button" data-mode-button="contacts">
+        {contactsPrompt}
+      </button>
       <button class="launcher-mode-button" data-mode-button="language">
         {languagePrompt}
       </button>
@@ -145,7 +185,7 @@ const { pathname } = Astro.url;
     ...(launcher?.querySelectorAll<HTMLAnchorElement>(".launcher-item") ?? []),
   ];
 
-  const modes = ["search", "routes", "language"] as const;
+  const modes = ["search", "routes", "contacts", "language"] as const;
 
   type Mode = (typeof modes)[number];
 
@@ -154,6 +194,7 @@ const { pathname } = Astro.url;
   const shortcutModes: Record<string, Mode> = {
     s: "search",
     r: "routes",
+    c: "contacts",
     l: "language",
   } as const;
 
@@ -373,6 +414,7 @@ const { pathname } = Astro.url;
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    flex: 1;
     min-width: 0;
   }
 
@@ -386,6 +428,7 @@ const { pathname } = Astro.url;
   .launcher-result {
     display: flex;
     flex-direction: column;
+    flex: 1;
     min-width: 0;
     line-height: 1.25;
   }
@@ -397,8 +440,18 @@ const { pathname } = Astro.url;
   }
 
   .launcher-context {
+    display: flex;
+    justify-content: space-between;
     color: var(--color-fg-muted);
     font-size: 0.75rem;
+  }
+
+  .launcher-value {
+    margin-left: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: right;
+    white-space: nowrap;
   }
 
   .launcher-item.selected .launcher-context {

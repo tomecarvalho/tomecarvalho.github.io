@@ -9,6 +9,7 @@ export type Props = Pick<NavProps, "routes"> & {
   title: string;
   homeHref: string;
   languageOptions: LauncherProps["languageOptions"];
+  contacts: LauncherProps["contacts"];
   searchEntries: LauncherProps["searchEntries"];
   launcherText: LauncherProps["text"];
   openLauncherLabel: string;
@@ -20,6 +21,7 @@ const {
   title,
   homeHref,
   languageOptions,
+  contacts,
   searchEntries,
   launcherText,
   openLauncherLabel,
@@ -65,6 +67,7 @@ const currentLanguage = languageOptions.find(({ current }) => current);
 
 <Launcher
   routes={routes}
+  contacts={contacts}
   searchEntries={searchEntries}
   languageOptions={languageOptions}
   text={launcherText}

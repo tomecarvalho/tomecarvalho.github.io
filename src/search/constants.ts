@@ -9,6 +9,10 @@ const SEARCH_MODES_OBJ = {
     label: "launcher.modes.routes",
     shortcut: "r",
   },
+  contacts: {
+    label: "launcher.modes.contacts",
+    shortcut: "c",
+  },
   language: {
     label: "launcher.modes.language",
     shortcut: "l",

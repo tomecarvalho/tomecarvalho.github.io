@@ -6,6 +6,7 @@ const en = {
 
   "launcher.filter": "Filter launcher entries",
   "launcher.hints": "tab mode · ↑↓ select · ↵ open · esc close",
+  "launcher.modes.contacts": "Contacts",
   "launcher.modes.language": "Language",
   "launcher.modes.routes": "Routes",
   "launcher.modes.search": "Search",
