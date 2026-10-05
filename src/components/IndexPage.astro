@@ -9,6 +9,7 @@ import ExploreCard from "./ExploreCard.astro";
 import type { Props as ParagraphsProps } from "./Paragraphs.astro";
 import Paragraphs from "./Paragraphs.astro";
 import Stack from "./Stack.astro";
+import Window from "./Window.astro";
 export interface Props {
   text: {
     title: string;
@@ -31,22 +32,35 @@ const roleAndLocation = `${role} - ${location}`;
 ---
 
 <Layout title={layoutTitle}>
-  <Stack gap={5}>
-    <Stack gap={4} as="section">
-      <Stack gap={0.5}>
-        <h1 class="name">{name}</h1>
-        <h3 class="role-and-location">{roleAndLocation}</h3>
+  <Stack gap={2}>
+    <Window id="about-me" title={title}>
+      <Stack gap={4}>
+        <Stack gap={0.5}>
+          <h1 class="name">{name}</h1>
+          <h3 class="role-and-location">{roleAndLocation}</h3>
+        </Stack>
+        <Stack gap={2}>
+          <Paragraphs paragraphs={description} />
+          <Contacts contacts={contacts} />
+        </Stack>
       </Stack>
-      <Stack gap={2}>
-        <Paragraphs paragraphs={description} />
-        <Contacts contacts={contacts} />
-      </Stack>
-    </Stack>
-    <Stack gap={3} as="section">
-      <h2>{explore}</h2>
+    </Window>
+    <Window id="explore" title={explore} titleAs="h2">
       <AutoGrid minWidth="300px" gap={3} stretch>
         {exploreRoutes.map((route) => <ExploreCard {...route} />)}
       </AutoGrid>
-    </Stack>
+    </Window>
   </Stack>
 </Layout>
+
+<style>
+  /* The name reads as the title here, with the role as its type annotation. */
+  .name {
+    color: var(--color-heading-3);
+  }
+
+  /* A subtitle to the name above it, rather than a heading in its own right. */
+  .role-and-location {
+    color: var(--color-heading-4);
+  }
+</style>

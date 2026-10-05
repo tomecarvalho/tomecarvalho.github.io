@@ -1,6 +1,6 @@
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { capitalize } from "../utils/string";
-import { i18nConfig, localeLabels } from "./config";
+import { i18nConfig, localeFlags, localeLabels } from "./config";
 import {
   type CurrentLocale,
   type LanguageOption,
@@ -59,6 +59,7 @@ export const getLanguageOptions = (
   return locales.map((locale) => ({
     locale,
     label: localeLabels[locale],
+    flag: localeFlags[locale],
     href: getRelativeLocaleUrl(locale, path),
     current: locale === finalCurrentLocale,
   }));

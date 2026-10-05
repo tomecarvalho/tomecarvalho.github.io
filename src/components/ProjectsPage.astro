@@ -1,6 +1,7 @@
 ---
 import type { Translated } from "../i18n/types";
 import Layout from "../layouts/Layout.astro";
+import { projectTargetId } from "../search";
 import { appendSiteName } from "../site/utils";
 import type { ProjectCategory } from "../types/data/projects/ProjectCategory";
 import type { Props as CourseworkProps } from "./Coursework.astro";
@@ -30,12 +31,15 @@ const layoutTitle = appendSiteName(title);
 <Layout title={layoutTitle}>
   <Stack gap={4}>
     <h1>{title}</h1>
-    <Stack gap={6}>
+    <Stack gap={2}>
       {
         projectCategories?.map(({ id, name, icon, projects }) => (
           <ProjectsSection id={id} name={name} icon={icon}>
-            {projects.map((project) => (
-              <Project {...project} />
+            {projects.map((project, projectIndex) => (
+              <Project
+                {...project}
+                targetId={projectTargetId(id, projectIndex)}
+              />
             ))}
           </ProjectsSection>
         ))

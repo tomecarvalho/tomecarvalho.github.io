@@ -2,27 +2,38 @@
 import type { AsProp } from "../types/component/AsProp";
 
 type Props = {
+  id?: string;
   class?: string;
   hoverable?: boolean;
+  /** Drops the surface fill, for papers that already sit on one. */
+  flat?: boolean;
 } & AsProp;
 
-const { class: className, as: Tag = "div", hoverable = false } = Astro.props;
+const {
+  id,
+  class: className,
+  as: Tag = "div",
+  hoverable = false,
+  flat = false,
+} = Astro.props;
 ---
 
-<Tag class:list={["paper", , { hoverable }, className]}>
+<Tag id={id} class:list={["paper", { hoverable, flat }, className]}>
   <slot />
 </Tag>
 
 <style>
   .paper {
-    background-color: var(--paper-bg-color-dark);
-    box-shadow: var(--paper-box-shadow);
-    padding: var(--paper-padding);
-    border-radius: var(--paper-border-radius);
-    transition: background-color var(--transition-duration);
+    padding: 1rem 1.25rem;
+    background-color: var(--color-surface);
+  }
+
+  .paper.flat {
+    padding-inline: 0;
+    background-color: transparent;
   }
 
   .paper.hoverable:hover {
-    background-color: var(--paper-hoverable-bg-color-hover-dark);
+    background-color: var(--color-surface-hover);
   }
 </style>

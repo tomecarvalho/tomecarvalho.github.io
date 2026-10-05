@@ -1,168 +1,144 @@
 ---
 import { Icon } from "astro-icon/components";
-import type { Props as LanguageSelectProps } from "./LanguageSelect.astro";
-import LanguageSelect from "./LanguageSelect.astro";
+import type { Props as LauncherProps } from "./Launcher.astro";
+import Launcher from "./Launcher.astro";
 import type { Props as NavProps } from "./Nav.astro";
 import Nav from "./Nav.astro";
 
 export type Props = Pick<NavProps, "routes"> & {
   title: string;
   homeHref: string;
-  languageOptions: LanguageSelectProps["options"];
+  languageOptions: LauncherProps["languageOptions"];
+  contacts: LauncherProps["contacts"];
+  searchEntries: LauncherProps["searchEntries"];
+  launcherText: LauncherProps["text"];
+  openLauncherLabel: string;
+  openLanguageLabel: string;
 };
 
-const { routes, title, homeHref, languageOptions } = Astro.props;
+const {
+  routes,
+  title,
+  homeHref,
+  languageOptions,
+  contacts,
+  searchEntries,
+  launcherText,
+  openLauncherLabel,
+  openLanguageLabel,
+} = Astro.props;
+
+const currentLanguage = languageOptions.find(({ current }) => current);
 ---
 
 <header class="header">
   <div class="header-content">
     <a class="header-title" href={homeHref}>{title}</a>
-    <div class="menu">
+    <div class="header-end">
+      <Nav routes={routes} />
       <button
-        class="menu-button text"
-        aria-label="Toggle menu"
+        class="language-button"
+        aria-label={openLanguageLabel}
         aria-expanded="false"
+        data-launcher-trigger="language"
+      >
+        <Icon name="mdi:language" />
+        {currentLanguage?.flag}
+      </button>
+      <button
+        class="menu-button"
+        aria-label={openLauncherLabel}
+        aria-expanded="false"
+        data-launcher-trigger="routes"
       >
         <Icon name="mdi:menu" />
       </button>
-      <Nav routes={routes} />
-    </div>
-    <div class="header-end">
-      <LanguageSelect options={languageOptions} />
+      <button
+        class="search-button"
+        aria-label={launcherText.searchPrompt}
+        aria-expanded="false"
+        data-launcher-trigger="search"
+      >
+        <Icon name="mdi:magnify" />
+      </button>
     </div>
   </div>
 </header>
 
-<script>
-  const menuButton = document.querySelector(".menu-button");
-  const nav = document.querySelector(".nav");
-  const navLinks = nav?.querySelectorAll("a") ?? [];
-  const header = document.querySelector(".header");
-  const scrollContainer = document.querySelector("main");
-
-  // Open the nav dropdown menu when the menu button is clicked.
-  menuButton?.addEventListener("click", () => {
-    const isOpen = menuButton.getAttribute("aria-expanded") === "true";
-    menuButton.setAttribute("aria-expanded", (!isOpen).toString());
-    nav?.classList.toggle("open");
-    menuButton.classList.toggle("open");
-  });
-
-  // Close the nav dropdown menu when a nav link is clicked.
-  for (const link of navLinks)
-    link.addEventListener("click", () => {
-      menuButton?.setAttribute("aria-expanded", "false");
-      nav?.classList.remove("open");
-    });
-
-  // Close the nav dropdown menu when the user clicks outside of it.
-  document.addEventListener("click", ({ target }) => {
-    if (target instanceof Element && !target.closest("header")) {
-      menuButton?.setAttribute("aria-expanded", "false");
-      nav?.classList.remove("open");
-    }
-  });
-
-  // Add box-shadow to the header when it partially covers main content.
-  scrollContainer?.addEventListener(
-    "scroll",
-    () => {
-      header?.classList.toggle(
-        "scrolled",
-        (scrollContainer?.scrollTop ?? 0) > 0,
-      );
-    },
-    { passive: true },
-  );
-</script>
+<Launcher
+  routes={routes}
+  contacts={contacts}
+  searchEntries={searchEntries}
+  languageOptions={languageOptions}
+  text={launcherText}
+/>
 
 <!--
-Layouts ([Left] [Centre] [Right])
-- Small: [Handle] [Empty] [Language Select, Nav Menu Button]
-- Medium: [Nav] [Empty] [Language Select]
-- Large: [Handle] [Nav] [Language Select]
+Layouts ([Left] [Right])
+- Wide: [Handle] [Nav, Language Button, Search Button]
+- Narrow: [Handle] [Language Button, Launcher Button, Search Button]
 -->
 <style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    /* Fixed so that anchored targets know how far to clear it. */
+    height: var(--header-height);
+    background-color: var(--color-bg-float);
+    font-family: var(--font-mono);
+  }
+
   .header-content {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    position: relative;
+    justify-content: space-between;
+    gap: 1.5rem;
     padding: 0 var(--content-padding-x);
     width: min(100%, var(--content-max-width));
   }
 
-  .header {
-    padding: 0.5rem 0;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    transition: box-shadow 0.2s ease;
-    font-weight: bold;
-  }
-
-  .header.scrolled {
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
-  }
-
-  /* Base styles target the medium range (716px–899px). */
-  .menu {
-    position: relative;
-    left: auto;
-    transform: none;
-  }
-
   .header-title {
-    display: none;
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--color-accent);
+  }
+
+  .header-title:hover {
+    color: var(--color-accent-dim);
+  }
+
+  .header-end {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .language-button,
+  .menu-button,
+  .search-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0;
+    border: none;
+    background: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
   }
 
   .menu-button {
-    padding: 0.25rem !important;
     display: none;
-    font-size: 1.5rem;
-    border-radius: var(--button-border-radius);
-    padding: var(--button-padding);
+    font-size: 1.25rem;
   }
 
-  .menu-button:hover {
-    background-color: var(--button-bg-color-hover-dark);
-  }
-  .menu-button:active,
-  .menu-button.open {
-    background-color: var(--button-bg-color-active-dark);
-  }
-
-  /* Large: handle, centered nav routes, language select. */
-  @media (min-width: 900px) {
-    .menu {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .header-title {
-      display: block;
-    }
-  }
-
-  /* Small: handle, language select, and collapsed nav menu. */
+  /* Narrow: the nav routes move into the launcher this button opens. */
   @media (max-width: 715px) {
-    .header-title {
-      display: block;
-    }
-
-    .header-end {
-      order: 2;
-      margin-left: auto;
-    }
-
-    .menu {
-      order: 3;
-      margin-left: 2rem;
-    }
-
     .menu-button {
-      display: flex;
+      display: inline-flex;
     }
   }
 </style>

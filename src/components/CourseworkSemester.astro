@@ -1,4 +1,5 @@
 ---
+import { courseworkTargetId } from "../search";
 import type { Props as CourseworkSubjectProps } from "./CourseworkSubject.astro";
 import CourseworkSubject from "./CourseworkSubject.astro";
 import Stack from "./Stack.astro";
@@ -8,17 +9,18 @@ export interface Props {
     title: string;
     subjects: CourseworkSubjectProps["subject"][];
   };
+  path: [number, number];
 }
 
-const { semester } = Astro.props;
+const { semester, path } = Astro.props;
 ---
 
-<section class="semester">
+<section class="semester" id={courseworkTargetId(...path)}>
   <h4 class="semester-title">{semester.title}</h4>
   <Stack gap={4}>
     {
-      semester.subjects.map((subject) => (
-        <CourseworkSubject subject={subject} />
+      semester.subjects.map((subject, subjectIndex) => (
+        <CourseworkSubject subject={subject} path={[...path, subjectIndex]} />
       ))
     }
   </Stack>

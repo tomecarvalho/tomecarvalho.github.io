@@ -1,11 +1,12 @@
 ---
+import { interestCardTargetId } from "../search";
 import type { TranslatedInterest } from "../types/data/interests/Interest";
 import AutoGrid from "./AutoGrid.astro";
 import CollapsibleSection from "./CollapsibleSection.astro";
 import InterestCard from "./InterestCard.astro";
 import InterestLinks from "./InterestLinks.astro";
-import RichText from "./RichText.astro";
 import type { Props as RichTextProps } from "./RichText.astro";
+import RichText from "./RichText.astro";
 import Stack from "./Stack.astro";
 
 interface Props {
@@ -28,8 +29,11 @@ const hasCards = !!cards?.length;
     {
       hasCards && (
         <AutoGrid minWidth="9.5rem" columns="fit" stretch>
-          {cards.map((card) => (
-            <InterestCard {...card} />
+          {cards.map((card, cardIndex) => (
+            <InterestCard
+              {...card}
+              targetId={interestCardTargetId(id, cardIndex)}
+            />
           ))}
         </AutoGrid>
       )

@@ -6,6 +6,12 @@ export const localeLabels = {
   pt: "Português",
 } as const;
 
+/** Compact labels for the language select. */
+export const localeFlags = {
+  en: "🇬🇧",
+  pt: "🇵🇹",
+} as const;
+
 const localesArray = Object.keys(localeLabels) as LocaleKey[];
 
 export const i18nConfig = {

@@ -1,14 +1,27 @@
 ---
+import "@fontsource/ibm-plex-mono/latin-400.css";
+import "@fontsource/ibm-plex-mono/latin-700.css";
+import "@fontsource/ibm-plex-mono/latin-ext-400.css";
+import "@fontsource/ibm-plex-mono/latin-ext-700.css";
+import "@fontsource/ibm-plex-sans/latin-400.css";
+import "@fontsource/ibm-plex-sans/latin-700.css";
+import "@fontsource/ibm-plex-sans/latin-ext-400.css";
+import "@fontsource/ibm-plex-sans/latin-ext-700.css";
+import Footer from "../components/Footer.astro";
 import type { Props as HeaderProps } from "../components/Header.astro";
 import Header from "../components/Header.astro";
 import {
   getLanguageOptions,
   getLocale,
   toLocalePath,
+  translate,
   useTranslations,
 } from "../i18n/utils";
 import { navRoutes, navRoutesArray } from "../routes/nav-routes";
+import { getContactEntries, getSearchEntries } from "../search";
+import { SEARCH_MODES } from "../search/constants";
 import siteConfig from "../site/config";
+import "../style/kanagawa.css";
 
 type Props = Pick<HeaderProps, "title">;
 
@@ -22,6 +35,7 @@ const locale = getLocale(currentLocale);
 const t = useTranslations(currentLocale);
 
 const languageOptions = getLanguageOptions(pathname, currentLocale);
+const searchEntries = getSearchEntries(currentLocale);
 
 const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
   (route) => ({
@@ -32,6 +46,10 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
     description: "description" in route ? t(route.description) : undefined,
   }),
 );
+
+const translatedSearchModes = translate(SEARCH_MODES, currentLocale);
+
+const headerTitle = `~/${siteConfig.handle}`;
 ---
 
 <!doctype html>
@@ -45,208 +63,200 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
     <title>{title}</title>
     <style is:global>
       :root {
-        --content-max-width: 900px;
+        /* Wide enough that the window chrome doesn't eat into the content. */
+        --content-max-width: 940px;
         --content-padding-x: 2rem;
-
-        /* Adwaita base */
-
-        --button-align-items: center;
-        --button-border-radius: 8px;
-        --button-border: none;
-        --button-box-shadow: var(--paper-box-shadow);
-        --button-cursor: pointer;
-        --button-display: inline-flex;
-        --button-gap: 0.5rem;
-        --button-font-color: inherit;
-        --button-font-size: 1rem;
-        --button-padding: 0.375rem 0.5rem;
-        --button-transition: background-color var(--transition-duration);
-        --button-width: fit-content;
-
-        --dropdown-border-radius: var(--button-border-radius);
-        --dropdown-box-shadow: var(--paper-box-shadow);
-
-        --tooltip-border-radius: var(--button-border-radius);
-        --tooltip-box-shadow: var(--dropdown-box-shadow);
-        --tooltip-font-size: 0.8125rem;
-        --tooltip-max-width: min(20rem, 90vw);
-        --tooltip-offset: 8px;
-        --tooltip-padding: 0.375rem 0.625rem;
-        --tooltip-transition: opacity var(--transition-duration) ease;
-        --tooltip-z-index: 10;
-
-        --nav-border-radius: 8px;
-
-        --paper-border-radius: 12px;
-        --paper-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        --paper-padding: 1rem 1.25rem;
-
-        --transition-duration: 0.2s;
-
-        --text-secondary-font-size: 0.875rem;
-        --text-tertiary-font-size: 0.8125rem;
-
-        /* Adwaita dark */
-
-        --bg-color-dark: #1d1d20;
-
-        --paper-bg-color-dark: #333337;
-        --paper-hoverable-bg-color-hover-dark: #39393d;
-
-        --button-font-color-hover-dark: white;
-        --button-bg-color-dark: #333337;
-        --button-bg-color-hover-dark: var(
-          --paper-hoverable-bg-color-hover-dark
-        );
-        --button-bg-color-active-dark: #434347;
-        /* Strong versions: for use in lighter backgrounds, like Paper's. */
-        --button-bg-color-hover-dark-strong: #424246;
-        --button-bg-color-active-dark-strong: #555559;
-
-        --divider-color-dark: #515155;
-
-        --dropdown-bg-color-dark: #36363a;
-
-        --dropdown-item-selected-bg-color-dark: #4a4a4d;
-        --dropdown-item-selected-bg-color-active-dark: #5c5c5f;
-        --dropdown-item-bg-color-hover-dark: #4a4a4d;
-        --dropdown-item-bg-color-active-dark: #5c5c5f;
-        --dropdown-item-bg-color-dark: var(--dropdown-bg-color-dark);
-
-        --nav-bg-color-hover-dark: #323235;
-        --nav-bg-color-active-dark: #464649;
-        --nav-bg-color-current-dark: #38383b;
-        --nav-bg-color-current-hover-dark: #3f3f42;
-        --nav-bg-color-current-active-dark: #4c4c4f;
-
-        --select-bg-color-hover-dark: var(--nav-bg-color-hover-dark);
-        --select-bg-color-active-dark: var(--nav-bg-color-active-dark);
-
-        --font-color-dark: #f0f0f0;
-        --font-color-secondary-dark: #9f9fa1;
-
-        --font-color-tertiary-dark: var(--font-color-secondary-dark);
-
-        --tooltip-bg-color-dark: var(--dropdown-bg-color-dark);
-        --tooltip-font-color-dark: var(--font-color-dark);
+        --header-height: 1.5rem;
+        --font-sans: "IBM Plex Sans", system-ui, sans-serif;
+        --font-mono: "IBM Plex Mono", ui-monospace, monospace;
       }
 
-      * {
-        margin: 0;
+      *,
+      *::before,
+      *::after {
         box-sizing: border-box;
-        color: var(--font-color-dark);
-        font-family: system-ui, sans-serif;
-
-        scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
       }
 
-      *::-webkit-scrollbar {
-        width: 8px;
+      /* The header sticks to the top, so anchors have to land clear of it. */
+      html {
+        scroll-padding-top: calc(var(--header-height) + 0.5rem);
       }
 
-      *::-webkit-scrollbar-track {
-        background: transparent;
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        margin: 0;
+        font-family: var(--font-sans);
+        line-height: 1.5;
+        background-color: var(--color-bg);
+        color: var(--color-fg);
+        scrollbar-color: var(--color-surface-hover) var(--color-bg);
       }
 
-      *::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 4px;
+      ::selection {
+        background-color: var(--color-selection);
       }
 
-      *::-webkit-scrollbar-thumb:hover {
-        background: rgba(255, 255, 255, 0.35);
+      :focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 2px;
       }
 
-      p {
-        margin-bottom: 1rem;
+      a {
+        color: var(--color-link);
+      }
+
+      a:hover {
+        color: var(--color-link-hover);
+      }
+
+      select {
+        padding: 0 0.25rem;
+        border: none;
+        background-color: var(--color-bg-float);
+        color: var(--color-fg);
+        font-family: inherit;
+        font-size: inherit;
+      }
+
+      /* Vertical rhythm comes from layout gaps, not from default margins. */
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      ul,
+      ol {
+        margin: 0;
       }
 
       ul {
         padding: 0;
       }
 
-      a {
-        text-decoration: none;
-        transition: text-decoration var(--transition-duration);
-      }
-
-      a:hover {
-        text-decoration: underline;
-      }
-
-      button,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      code,
+      kbd,
+      samp,
+      pre,
       .button {
-        background-color: var(--button-bg-color-dark);
-        border-radius: var(--button-border-radius);
-        color: var(--button-font-color);
-        border: var(--button-border);
-        box-shadow: var(--button-box-shadow);
-        padding: var(--button-padding);
-        font-size: var(--button-font-size);
-        cursor: var(--button-cursor);
-        width: var(--button-width);
-        display: var(--button-display);
-        align-items: var(--button-align-items);
-        gap: var(--button-gap);
+        font-family: var(--font-mono);
       }
 
-      button:hover,
-      .button:hover {
-        background-color: var(--button-bg-color-hover-dark);
-        transition: var(--button-transition);
+      h1 {
+        color: var(--color-heading-1);
       }
 
-      button:active,
-      .button:active {
-        background-color: var(--button-bg-color-active-dark);
-        transition: var(--button-transition);
+      h2 {
+        color: var(--color-heading-2);
       }
 
-      /* Text buttons have no background, border or box-shadow unless hovered/active. */
-      button.text,
-      .button.text {
-        background: none;
-        border: none;
-        box-shadow: none;
-        text-decoration: none;
+      h3 {
+        color: var(--color-heading-3);
       }
 
-      .button.text:hover,
-      .button.text:active {
-        background-color: var(--button-bg-color-hover-dark);
-        color: var(--button-font-color-hover-dark);
+      h4 {
+        color: var(--color-heading-4);
       }
 
-      .button.text.bright:hover {
-        background-color: var(--button-bg-color-hover-dark-strong);
-      }
-      .button.text.bright:active {
-        background-color: var(--button-bg-color-active-dark-strong);
+      /*
+       * Window chrome, after a tiling window manager's titlebar and border.
+       * Global so that any component can dress its content as a window.
+       */
+      .window {
+        border: 2px solid var(--color-surface);
+        background-color: var(--color-bg);
       }
 
-      select {
-        background-color: transparent;
-        border: none;
-        padding: 0.25rem;
-        border-radius: 8px;
+      .window-title {
+        display: flex;
+        align-items: center;
+        height: 1.5em;
+        padding: 0 0.5rem;
+        background-color: var(--color-surface);
+        color: var(--color-fg-muted);
+        font-family: var(--font-mono);
         font-size: 1rem;
-        transition: background-color var(--transition-duration);
+        font-weight: normal;
+        line-height: 1.5;
       }
-      select:hover {
-        background-color: var(--select-bg-color-hover-dark);
+
+      /* The titlebar doubles as the control that shades the window. */
+      .window-trigger {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        width: 100%;
+        padding: 0;
+        border: none;
+        background: none;
+        color: inherit;
+        font: inherit;
+        cursor: pointer;
       }
-      select:active {
-        background-color: var(--select-bg-color-active-dark);
+
+      .window-name {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      /*
+       * A line box reserves room for descenders that most titles never use, so
+       * centring it leaves the text looking low. Trim to the x-height instead.
+       */
+      .window-label {
+        text-box: trim-both ex alphabetic;
+      }
+
+      /* The trim leaves the icon centred on the x-height, where it reads low;
+         raise it onto the cap band so it sits level with the letters. */
+      .window-name svg {
+        position: relative;
+        top: -0.125em;
+      }
+
+      .window-content {
+        padding: 1rem;
+      }
+
+      /* Focused window, as a window manager marks the one holding the cursor. */
+      .window:hover,
+      .window:focus-within {
+        border-color: var(--color-selection);
+      }
+
+      .window:hover > .window-title,
+      .window:focus-within > .window-title {
+        background-color: var(--color-selection);
+        color: var(--color-fg);
+      }
+
+      /* Layout-only hook for links that pair an icon with a label. */
+      .button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        width: fit-content;
       }
 
       .text-secondary {
-        font-size: var(--text-secondary-font-size);
-        color: var(--font-color-secondary-dark);
+        font-size: 0.875rem;
+        color: var(--color-fg-dim);
       }
 
       .text-tertiary {
-        font-size: var(--text-tertiary-font-size);
-        color: var(--font-color-tertiary-dark);
+        font-size: 0.8125rem;
+        color: var(--color-fg-muted);
       }
 
       .tooltip-wrapper {
@@ -256,20 +266,17 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
 
       .tooltip {
         position: fixed;
-        background-color: var(--tooltip-bg-color-dark);
-        color: var(--tooltip-font-color-dark);
-        padding: var(--tooltip-padding);
-        border-radius: var(--tooltip-border-radius);
-        box-shadow: var(--tooltip-box-shadow);
-        font-size: var(--tooltip-font-size);
-        white-space: normal;
+        z-index: 10;
         width: max-content;
-        max-width: var(--tooltip-max-width);
+        max-width: min(20rem, 90vw);
+        padding: 0.25rem 0.5rem;
+        background-color: var(--color-bg-float);
+        color: var(--color-fg-dim);
+        font-size: 0.8125rem;
+        white-space: normal;
         pointer-events: none;
         opacity: 0;
         visibility: hidden;
-        transition: var(--tooltip-transition);
-        z-index: var(--tooltip-z-index);
       }
 
       .tooltip-wrapper:hover .tooltip,
@@ -285,36 +292,40 @@ const translatedNavRoutes: HeaderProps["routes"] = navRoutesArray.map(
       }
     </style>
   </head>
-  <body class="body">
+  <body>
     <Header
       routes={translatedNavRoutes}
-      title={siteConfig.handle}
+      contacts={getContactEntries(currentLocale)}
+      title={headerTitle}
       homeHref={toLocalePath(locale, navRoutes.aboutMe.path)}
       languageOptions={languageOptions}
+      searchEntries={searchEntries}
+      launcherText={{
+        routesPrompt: t("launcher.modes.routes"),
+        contactsPrompt: t("launcher.modes.contacts"),
+        searchPrompt: t("launcher.modes.search"),
+        languagePrompt: t("launcher.modes.language"),
+        filter: t("launcher.filter"),
+        hints: t("launcher.hints"),
+      }}
+      openLauncherLabel={t("launcher.open")}
+      openLanguageLabel={t("launcher.openLanguage")}
     />
     <main class="main">
       <slot />
     </main>
+    <Footer
+      searchModes={translatedSearchModes}
+      hintsLabel={t("launcher.hints")}
+    />
   </body>
 </html>
 
 <style>
-  .body {
-    height: 100vh;
-    margin: 0;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--bg-color-dark);
-  }
-
   .main {
     flex: 1;
-    min-height: 0;
     margin: 0 auto;
-    padding: 4rem var(--content-padding-x);
+    padding: 2rem var(--content-padding-x) calc(2rem + 1.5rem);
     width: min(100%, var(--content-max-width));
-    overflow-y: auto;
-    background-color: var(--bg-color-dark);
   }
 </style>

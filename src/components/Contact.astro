@@ -14,7 +14,7 @@ const {
 
 {
   value ? (
-    <div class="contact button">
+    <div class="contact">
       <a class="contactAnchor" href={href} title={label}>
         <Icon name={icon} size="1.5rem" />
       </a>
@@ -31,7 +31,7 @@ const {
       </UnstyledButton>
     </div>
   ) : (
-    <a class="contact contactAnchor button" href={href} title={label}>
+    <a class="contact contactAnchor" href={href} title={label}>
       <Icon name={icon} size="1.5rem" />
     </a>
   )
@@ -50,8 +50,7 @@ const {
 
 <style>
   .contact {
-    display: inline-flex;
-    padding: 0.5rem 0.75rem;
+    display: flex;
     text-wrap: nowrap;
     gap: 0.5rem;
     font-size: 1rem;
@@ -66,11 +65,18 @@ const {
 
   .divider {
     height: 1.5rem;
-    color: var(--divider-color-dark);
     width: 1px;
+    border: none;
+    background-color: var(--color-border);
   }
 
+  /* An action alongside the contact links, so it takes their colour too. */
   .clipboard-button {
     display: flex;
+    color: var(--color-link);
+  }
+
+  .clipboard-button:hover {
+    color: var(--color-link-hover);
   }
 </style>

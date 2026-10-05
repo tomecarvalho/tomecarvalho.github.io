@@ -1,5 +1,5 @@
 import type { MarkdownInstance } from "astro";
-import type { localeLabels } from "./config";
+import type { localeFlags, localeLabels } from "./config";
 import type en from "./locales/en";
 
 export type FullLocaleStrings = typeof en;
@@ -71,7 +71,9 @@ export type LocaleKey = keyof typeof localeLabels;
 
 export type LanguageOption = {
   locale: LocaleKey;
+  /** Language name, kept as the option's accessible name. */
   label: (typeof localeLabels)[LocaleKey];
+  flag: (typeof localeFlags)[LocaleKey];
   href: string;
   current: boolean;
 };

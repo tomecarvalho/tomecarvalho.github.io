@@ -8,9 +8,11 @@ import RichText from "./RichText.astro";
 import type { Props as RichTextProps } from "./RichText.astro";
 import Stack from "./Stack.astro";
 
-type Props = Translated<Project>;
+type Props = Translated<Project> & {
+  targetId?: string;
+};
 
-const { name, description, href, imageUrl, links } = Astro.props;
+const { name, description, href, imageUrl, links, targetId } = Astro.props;
 
 const Description: RichTextProps["Content"] = description;
 const hasLinks = !!links?.length;
@@ -19,7 +21,7 @@ const hasLinks = !!links?.length;
 const paperClickable = !hasLinks && !!href;
 ---
 
-<Paper class="paper" hoverable={paperClickable}>
+<Paper id={targetId} flat hoverable={paperClickable}>
   <ConditionalLink href={href} condition={paperClickable} class="anchor">
     <div class="layout">
       <Stack gap={2}>
@@ -29,7 +31,7 @@ const paperClickable = !hasLinks && !!href;
           hasLinks && (
             <Stack direction="row" gap={1} justifyContent="flex-end">
               {links?.map(({ icon, href, label }) => (
-                <a href={href} class="button text bright">
+                <a href={href} class="button">
                   <Icon name={icon} size="1.5rem" title={label} />
                 </a>
               ))}
@@ -63,7 +65,9 @@ const paperClickable = !hasLinks && !!href;
     flex-shrink: 0;
   }
 
+  :global(.anchor),
   :global(.anchor:hover) {
+    color: var(--color-fg);
     text-decoration: none;
   }
 

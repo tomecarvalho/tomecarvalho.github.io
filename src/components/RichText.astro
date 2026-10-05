@@ -63,39 +63,26 @@ const { Content } = Astro.props;
     margin-top: 0.35rem;
   }
 
-  .rich-text :global(a) {
-    text-decoration: underline;
-  }
-
   .rich-text :global(blockquote) {
-    border-left: 3px solid rgba(255, 255, 255, 0.25);
+    border-left: 3px solid var(--color-border);
     padding-left: 1rem;
-    color: var(--font-color-secondary-dark);
-  }
-
-  .rich-text :global(code) {
-    font-family:
-      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-      "Courier New", monospace;
-    font-size: 0.9em;
+    color: var(--color-fg-dim);
   }
 
   .rich-text :global(:not(pre) > code) {
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 0.25rem;
     padding: 0.1em 0.35em;
+    background-color: var(--color-surface);
   }
 
   .rich-text :global(pre) {
     overflow-x: auto;
-    background: rgba(255, 255, 255, 0.06);
-    border-radius: 0.5rem;
     padding: 0.85rem 1rem;
+    background-color: var(--color-surface);
   }
 
   .rich-text :global(pre code) {
-    background: none;
     padding: 0;
+    background: none;
   }
 
   .rich-text :global(table) {
@@ -105,19 +92,19 @@ const { Content } = Astro.props;
 
   .rich-text :global(th),
   .rich-text :global(td) {
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid var(--color-border);
     padding: 0.5rem 0.75rem;
     text-align: left;
   }
 
   .rich-text :global(th) {
-    background: rgba(255, 255, 255, 0.06);
+    background-color: var(--color-surface);
   }
 
   .rich-text :global(hr) {
-    border: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
     margin: 1.5rem 0;
+    border: none;
+    border-top: 1px solid var(--color-border);
   }
 
   .rich-text :global(img) {
