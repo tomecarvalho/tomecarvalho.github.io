@@ -44,7 +44,7 @@ const { pathname } = Astro.url;
 ---
 
 <dialog class="launcher" aria-labelledby="launcher-mode">
-  <div class="launcher-prompt">
+  <div class="launcher-prompt" hidden>
     <span
       class="launcher-mode"
       id="launcher-mode"
@@ -53,7 +53,8 @@ const { pathname } = Astro.url;
       data-search-prompt={searchPrompt}
       data-language-prompt={languagePrompt}
     >
-      {routesPrompt}:
+      <Icon name="mdi:magnify" aria-hidden="true" />
+      <span class="launcher-mode-label">{routesPrompt}:</span>
     </span>
     <input
       class="launcher-filter"
@@ -79,7 +80,6 @@ const { pathname } = Astro.url;
               {!!icon && <Icon name={icon} />}
               {label}
             </span>
-            <Icon name="mdi:check" class="launcher-check" />
           </a>
         </li>
       ))
@@ -145,7 +145,6 @@ const { pathname } = Astro.url;
               <span class="launcher-flag">{flag}</span>
               {label}
             </span>
-            <Icon name="mdi:check" class="launcher-check" />
           </a>
         </li>
       ))
@@ -172,8 +171,9 @@ const { pathname } = Astro.url;
 
 <script>
   const launcher = document.querySelector<HTMLDialogElement>(".launcher");
+  const promptBar = launcher?.querySelector<HTMLElement>(".launcher-prompt");
   const filter = launcher?.querySelector<HTMLInputElement>(".launcher-filter");
-  const prompt = launcher?.querySelector<HTMLElement>(".launcher-mode");
+  const prompt = launcher?.querySelector<HTMLElement>(".launcher-mode-label");
   const lists = [
     ...(launcher?.querySelectorAll<HTMLElement>(".launcher-list") ?? []),
   ];
@@ -234,6 +234,7 @@ const { pathname } = Astro.url;
     for (const button of modeButtons)
       button.classList.toggle("active", button.dataset.modeButton === mode);
 
+    if (promptBar) promptBar.hidden = mode !== "search";
     if (prompt) prompt.textContent = `${prompt.dataset[`${mode}Prompt`]}:`;
 
     if (filter) filter.value = "";
@@ -245,7 +246,13 @@ const { pathname } = Astro.url;
     );
     if (current) select(current);
 
-    filter?.focus();
+    if (mode === "search") {
+      filter?.focus();
+    } else {
+      items
+        .find((item) => isVisible(item) && item.classList.contains("selected"))
+        ?.focus();
+    }
   };
 
   const open = (initialMode: Mode) => {
@@ -346,18 +353,45 @@ const { pathname } = Astro.url;
 
 <style>
   .launcher {
-    /* `auto` margins centre the panel against the viewport. */
     margin: auto;
-    padding: 0;
-    /* Wide enough for the footer's modes and hints in the wordiest locale. */
-    width: min(42rem, calc(100vw - 2rem));
+    padding: 0.75rem;
+    width: min(48rem, calc(100vw - 2rem));
     border: 2px solid var(--color-border);
+    border-radius: var(--radius);
     background-color: var(--color-bg-float);
     color: var(--color-fg);
-    font-family: var(--font-mono);
+    box-shadow: var(--shadow-window);
+    overflow: hidden;
+    transition:
+      opacity 160ms ease,
+      transform 160ms ease,
+      display 160ms allow-discrete,
+      overlay 160ms allow-discrete,
+      background-color 160ms ease,
+      color 160ms ease,
+      border-color 160ms ease;
+    opacity: 0;
+    transform: scale(0.97) translateY(-0.5rem);
+  }
+
+  .launcher[open] {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+  @starting-style {
+    .launcher[open] {
+      opacity: 0;
+      transform: scale(0.97) translateY(-0.5rem);
+    }
   }
 
   .launcher::backdrop {
+    background-color: transparent;
+    transition: background-color 160ms ease;
+  }
+
+  .launcher[open]::backdrop {
     background-color: rgb(0 0 0 / 0.5);
   }
 
@@ -365,12 +399,34 @@ const { pathname } = Astro.url;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.25rem 0.5rem;
-    border-bottom: 1px solid var(--color-surface);
+    min-height: 2.75rem;
+    padding: 0.375rem 0.625rem;
+    border: 2px solid var(--color-focus);
+    border-radius: 0.75rem;
+    background-color: var(--color-bg);
+  }
+
+  .launcher-prompt[hidden] {
+    display: none;
   }
 
   .launcher-mode {
+    display: flex;
+    align-items: center;
     color: var(--color-accent);
+    font-weight: 700;
+  }
+
+  .launcher-mode-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
   .launcher-filter {
@@ -389,9 +445,16 @@ const { pathname } = Astro.url;
 
   .launcher-list {
     max-height: min(24rem, 60vh);
-    padding: 0.25rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.75rem 0.25rem 0.25rem;
     list-style: none;
     overflow-y: auto;
+  }
+
+  .launcher-list[hidden] {
+    display: none;
   }
 
   .launcher-item {
@@ -400,14 +463,27 @@ const { pathname } = Astro.url;
     justify-content: space-between;
     gap: 0.5rem;
     padding: 0.2rem 0.5rem;
+    border-radius: 0.75rem;
     color: var(--color-fg-dim);
     text-decoration: none;
+    transition:
+      background-color 160ms ease,
+      color 160ms ease;
+  }
+
+  .launcher-item:hover {
+    background-color: var(--color-launcher-hover);
+    color: var(--color-fg);
   }
 
   /* The entry under the cursor, highlighted as the launcher's selection. */
   .launcher-item.selected {
-    background-color: var(--color-selection);
+    background-color: var(--color-launcher-selected);
     color: var(--color-fg);
+  }
+
+  .launcher-item.selected:hover {
+    background-color: var(--color-launcher-selected);
   }
 
   .launcher-name {
@@ -474,7 +550,8 @@ const { pathname } = Astro.url;
     align-items: center;
     justify-content: space-between;
     gap: 0.25rem 1rem;
-    padding: 0.25rem 0.5rem;
+    margin-top: 0.5rem;
+    padding: 0.375rem 0.25rem 0;
     border-top: 1px solid var(--color-surface);
   }
 
@@ -484,16 +561,20 @@ const { pathname } = Astro.url;
   }
 
   .launcher-mode-button {
-    padding: 0 0.25rem;
+    padding: 0.25rem 0.625rem;
     border: none;
-    background: none;
+    border-radius: 999px;
+    background-color: transparent;
     color: var(--color-fg-muted);
     font: inherit;
     cursor: pointer;
+    transition:
+      background-color 160ms ease,
+      color 160ms ease;
   }
 
   .launcher-mode-button.active {
-    background-color: var(--color-selection);
+    background-color: var(--color-focus);
     color: var(--color-fg);
   }
 

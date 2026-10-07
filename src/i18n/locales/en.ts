@@ -5,7 +5,7 @@ const en = {
   "nav.tools": "Tools",
 
   "launcher.filter": "Filter launcher entries",
-  "launcher.hints": "tab mode · ↑↓ select · ↵ open · esc close",
+  "launcher.hints": "Tab Mode · ↑↓ Select · ↵ Open · Esc Close",
   "launcher.modes.contacts": "Contacts",
   "launcher.modes.language": "Language",
   "launcher.modes.routes": "Routes",
@@ -20,6 +20,8 @@ const en = {
   "notFound.home": "Go back home",
 
   "projects.titles.universityCoursework": "University Coursework",
+
+  "footer.shortcuts": "Shortcuts",
 };
 
 export default en;

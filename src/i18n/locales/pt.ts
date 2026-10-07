@@ -7,7 +7,7 @@ const pt: FullLocaleStrings = {
   "nav.tools": "Ferramentas",
 
   "launcher.filter": "Filtrar entradas do lançador",
-  "launcher.hints": "tab modo · ↑↓ selecionar · ↵ abrir · esc fechar",
+  "launcher.hints": "Tab Modo · ↑↓ Selecionar · ↵ Abrir · Esc Fechar",
   "launcher.modes.contacts": "Contactos",
   "launcher.modes.language": "Idioma",
   "launcher.modes.routes": "Rotas",
@@ -22,6 +22,8 @@ const pt: FullLocaleStrings = {
   "notFound.home": "Voltar ao início",
 
   "projects.titles.universityCoursework": "Trabalhos Universitários",
+
+  "footer.shortcuts": "Atalhos",
 };
 
 export default pt;

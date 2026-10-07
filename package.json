@@ -18,8 +18,7 @@
     "check": "pnpm lint && pnpm format:check && pnpm typecheck && pnpm knip"
   },
   "dependencies": {
-    "@fontsource/ibm-plex-mono": "^5.3.0",
-    "@fontsource/ibm-plex-sans": "^5.3.0",
+    "@fontsource/inter": "^5.3.0",
     "@iconify-json/mdi": "^1.2.3",
     "astro": "^7.2.4",
     "astro-icon": "^1.1.5"

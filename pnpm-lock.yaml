@@ -7,10 +7,7 @@ settings:
 importers:
   .:
     dependencies:
-      "@fontsource/ibm-plex-mono":
-        specifier: ^5.3.0
-        version: 5.3.0
-      "@fontsource/ibm-plex-sans":
+      "@fontsource/inter":
         specifier: ^5.3.0
         version: 5.3.0
       "@iconify-json/mdi":
@@ -650,16 +647,10 @@ packages:
       }
     engines: { node: ^20.19.0 || ^22.13.0 || >=24 }
 
-  "@fontsource/ibm-plex-mono@5.3.0":
+  "@fontsource/inter@5.3.0":
     resolution:
       {
-        integrity: sha512-eTgnZjZEGk1QtD3ZstF+Vclo2HLAni8YMy34/DxllwZvyz1lR/1RF/xTiAquOBO7MvqBx8D2Ig2WCPMVfdZu7Q==,
-      }
-
-  "@fontsource/ibm-plex-sans@5.3.0":
-    resolution:
-      {
-        integrity: sha512-CbE4CbbEEZJX860XyUiRpsksXIQR8Rp2XDva2VO53NJox9tVNtusrysd2x5YkUEY3ErQ66W1IiiQL8/wihhw5w==,
+        integrity: sha512-RofMylZmjlJEfELXeNHFWBRcSs75rGU/6bV2S2jfnvv/3rPXPGe0LgUJTklcHZ9lM4OZmAVFhcJPnACfb91A3g==,
       }
 
   "@humanfs/core@0.19.2":
@@ -4339,9 +4330,7 @@ snapshots:
       "@eslint/core": 1.2.1
       levn: 0.4.1
 
-  "@fontsource/ibm-plex-mono@5.3.0": {}
-
-  "@fontsource/ibm-plex-sans@5.3.0": {}
+  "@fontsource/inter@5.3.0": {}
 
   "@humanfs/core@0.19.2":
     dependencies:

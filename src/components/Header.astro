@@ -83,12 +83,17 @@ Layouts ([Left] [Right])
     position: sticky;
     top: 0;
     z-index: 20;
+    isolation: isolate;
     display: flex;
     justify-content: center;
     /* Fixed so that anchored targets know how far to clear it. */
-    height: var(--header-height);
-    background-color: var(--color-bg-float);
-    font-family: var(--font-mono);
+    min-height: var(--header-height);
+    width: 100%;
+    background-color: var(--color-bg);
+    box-shadow: 0 0.25rem 0.75rem rgb(0 0 0 / 0.2);
+    transition:
+      background-color 160ms ease,
+      box-shadow 160ms ease;
   }
 
   .header-content {
@@ -96,14 +101,24 @@ Layouts ([Left] [Right])
     align-items: center;
     justify-content: space-between;
     gap: 1.5rem;
-    padding: 0 var(--content-padding-x);
-    width: min(100%, var(--content-max-width));
+    padding: 0.375rem var(--content-padding-x);
+    width: 100%;
   }
 
   .header-title {
+    min-width: 0;
+    overflow: hidden;
+    padding: 0 0.625rem;
+    border-radius: 999px;
+    background-color: var(--color-surface);
     font-weight: bold;
     text-decoration: none;
     color: var(--color-accent);
+    transition:
+      background-color 160ms ease,
+      color 160ms ease;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .header-title:hover {
@@ -114,6 +129,7 @@ Layouts ([Left] [Right])
     display: flex;
     align-items: center;
     gap: 1rem;
+    flex-shrink: 0;
   }
 
   .language-button,
@@ -124,10 +140,21 @@ Layouts ([Left] [Right])
     gap: 0.5rem;
     padding: 0;
     border: none;
-    background: none;
+    border-radius: 999px;
+    background-color: var(--color-surface);
     color: inherit;
     font: inherit;
+    line-height: 1;
+    min-height: 1.5rem;
     cursor: pointer;
+    transition:
+      background-color 160ms ease,
+      color 160ms ease;
+  }
+
+  .language-button,
+  .search-button {
+    padding: 0 0.625rem;
   }
 
   .menu-button {
@@ -138,7 +165,7 @@ Layouts ([Left] [Right])
   /* Narrow: the nav routes move into the launcher this button opens. */
   @media (max-width: 715px) {
     .header {
-      height: 2.5rem;
+      min-height: 2.5rem;
     }
 
     .header-end {
@@ -156,6 +183,7 @@ Layouts ([Left] [Right])
 
     .menu-button {
       display: inline-flex;
+      padding: 0 0.625rem;
     }
   }
 </style>

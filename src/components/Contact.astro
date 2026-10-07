@@ -61,6 +61,16 @@ const {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    padding: 0.25rem;
+    border-radius: 0.5rem;
+    transition:
+      background-color 160ms ease,
+      color 160ms ease;
+  }
+
+  .contactAnchor:hover,
+  .clipboard-button:hover {
+    background-color: var(--color-surface);
   }
 
   .divider {
@@ -73,7 +83,12 @@ const {
   /* An action alongside the contact links, so it takes their colour too. */
   .clipboard-button {
     display: flex;
+    padding: 0.25rem;
+    border-radius: 0.5rem;
     color: var(--color-link);
+    transition:
+      background-color 160ms ease,
+      color 160ms ease;
   }
 
   .clipboard-button:hover {

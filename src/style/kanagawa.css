@@ -31,6 +31,12 @@
   --color-fg-muted: var(--fuji-gray);
 
   --color-border: var(--sumi-ink-6);
+  --color-focus: var(--crystal-blue);
+  --color-focus-container: #6176a3;
+  --color-launcher-selected: #30364a;
+  --color-launcher-hover: #2a2d3b;
+  --radius: 12px;
+  --shadow-window: 0 0.75rem 1.875rem rgb(0 0 0 / 0.28);
 
   /* The editor's visual selection: highlights text and the current route. */
   --color-selection: var(--wave-blue-1);

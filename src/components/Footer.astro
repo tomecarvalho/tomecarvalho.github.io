@@ -7,16 +7,19 @@ import type { Translated } from "../i18n/types";
 type Props = {
   searchModes: Translated<SearchModeConfig>[];
   hintsLabel: string;
+  text: {
+    shortcuts: string;
+  };
 };
 
-const { searchModes, hintsLabel } = Astro.props;
+const { searchModes, hintsLabel, text } = Astro.props;
 ---
 
 <footer class="footer" aria-label={hintsLabel}>
   <div class="footer-content">
     <Stack direction="row" center gap={1}>
       <Icon name="mdi:keyboard" class="footer-icon" />
-      <span>Shortcuts:</span>
+      <span>{text.shortcuts}:</span>
     </Stack>
     {
       searchModes.map(({ shortcut, label }) => (
@@ -32,23 +35,30 @@ const { searchModes, hintsLabel } = Astro.props;
 <style>
   .footer {
     position: fixed;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    left: 50%;
+    bottom: 0.5rem;
     z-index: 20;
     display: flex;
     justify-content: center;
     flex-shrink: 0;
+    width: fit-content;
+    transform: translateX(-50%);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
     background-color: var(--color-bg-float);
-    font-family: var(--font-mono);
+    box-shadow: var(--shadow-window);
+    transition:
+      background-color 160ms ease,
+      color 160ms ease,
+      box-shadow 160ms ease;
   }
 
   .footer-content {
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 0 var(--content-padding-x);
-    width: min(100%, var(--content-max-width));
+    padding: 0 1rem;
+    width: fit-content;
   }
 
   .footer-shortcut {
