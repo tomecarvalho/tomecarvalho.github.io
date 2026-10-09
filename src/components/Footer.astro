@@ -19,7 +19,7 @@ const { searchModes, hintsLabel, text } = Astro.props;
   <div class="footer-content">
     <Stack direction="row" center gap={1}>
       <Icon name="mdi:keyboard" class="footer-icon" />
-      <span>{text.shortcuts}s</span>
+      <span>{text.shortcuts}</span>
     </Stack>
     {
       searchModes.map(({ shortcut, label }) => (
