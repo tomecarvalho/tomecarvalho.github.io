@@ -6,8 +6,8 @@ import type { Props as ContactsProps } from "./Contacts.astro";
 import Contacts from "./Contacts.astro";
 import AutoGrid from "./AutoGrid.astro";
 import ExploreCard from "./ExploreCard.astro";
-import type { Props as ParagraphsProps } from "./Paragraphs.astro";
-import Paragraphs from "./Paragraphs.astro";
+import RichText from "./RichText.astro";
+import type { Props as RichTextProps } from "./RichText.astro";
 import Stack from "./Stack.astro";
 import Window from "./Window.astro";
 export interface Props {
@@ -17,7 +17,7 @@ export interface Props {
     role: string;
     location: string;
     explore: string;
-    description: ParagraphsProps["paragraphs"];
+    description: RichTextProps["Content"];
   };
   contacts: ContactsProps["contacts"];
   exploreRoutes: TranslatedNavRoute[];
@@ -40,7 +40,7 @@ const roleAndLocation = `${role} - ${location}`;
           <h3 class="role-and-location">{roleAndLocation}</h3>
         </Stack>
         <Stack gap={2}>
-          <Paragraphs paragraphs={description} />
+          <RichText Content={description} />
           <Contacts contacts={contacts} />
         </Stack>
       </Stack>
