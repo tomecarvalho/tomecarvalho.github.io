@@ -372,6 +372,10 @@ const { pathname } = Astro.url;
 </script>
 
 <style>
+  :global(html:has(dialog.launcher[open])) {
+    overflow: hidden;
+  }
+
   .launcher {
     margin: auto;
     padding: 0.75rem;
