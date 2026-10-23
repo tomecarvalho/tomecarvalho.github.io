@@ -1,6 +1,12 @@
 ---
-import "@fontsource/inter/400.css";
-import "@fontsource/inter/700.css";
+import "@fontsource/ibm-plex-mono/latin-400.css";
+import "@fontsource/ibm-plex-mono/latin-700.css";
+import "@fontsource/ibm-plex-mono/latin-ext-400.css";
+import "@fontsource/ibm-plex-mono/latin-ext-700.css";
+import "@fontsource/ibm-plex-sans/latin-400.css";
+import "@fontsource/ibm-plex-sans/latin-700.css";
+import "@fontsource/ibm-plex-sans/latin-ext-400.css";
+import "@fontsource/ibm-plex-sans/latin-ext-700.css";
 import Footer from "../components/Footer.astro";
 import type { Props as HeaderProps } from "../components/Header.astro";
 import Header from "../components/Header.astro";
@@ -61,7 +67,8 @@ const headerTitle = `~/${siteConfig.handle}`;
         --content-max-width: 940px;
         --content-padding-x: 2rem;
         --header-height: 2.25rem;
-        --font-sans: "Adwaita Sans", "Inter", system-ui, sans-serif;
+        --font-sans: "IBM Plex Sans", system-ui, sans-serif;
+        --font-mono: "IBM Plex Mono", ui-monospace, monospace;
       }
 
       @media (max-width: 715px) {
@@ -148,8 +155,13 @@ const headerTitle = `~/${siteConfig.handle}`;
       h3,
       h4,
       h5,
-      h6 {
-        font-family: var(--font-sans);
+      h6,
+      code,
+      kbd,
+      samp,
+      pre,
+      .button {
+        font-family: var(--font-mono);
       }
 
       h1 {
@@ -190,6 +202,7 @@ const headerTitle = `~/${siteConfig.handle}`;
         padding: 0 0.5rem;
         background-color: var(--color-surface);
         color: var(--color-fg-muted);
+        font-family: var(--font-mono);
         font-size: 1rem;
         font-weight: normal;
         line-height: 1.5;
