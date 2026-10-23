@@ -1,0 +1,1 @@
+A superfamília tipográfica desenhada para a IBM – deve estar a vê-lo agora mesmo nesta página! É elegante e, na minha opinião, tem mais caráter que os montes de tipos de letra redondos que há. [BlexMono Nerd Font](https://www.nerdfonts.com/font-downloads#:~:text=BlexMono) é a variante monospace correspondente com ícones Nerd Font.

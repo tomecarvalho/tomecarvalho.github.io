@@ -1,4 +1,5 @@
 import type { SiteConfig } from "../../..";
+import aesthetics from "./aesthetics";
 import { Content as DescriptionEn } from "./description.en.md";
 import { Content as DescriptionPt } from "./description.pt.md";
 import software from "./software";
@@ -10,6 +11,7 @@ export const toolsDescription = {
 
 const toolCategories = [
   software,
+  aesthetics,
 ] as const satisfies SiteConfig["toolCategories"];
 
 export default toolCategories;

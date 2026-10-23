@@ -1,0 +1,1 @@
+The open-source font superfamily designed for IBM – you should be seeing it right now on this very page! It's sleek and, in my view, has more character than the myriads of soft, round fonts out there. [BlexMono Nerd Font](https://www.nerdfonts.com/font-downloads#:~:text=BlexMono) is the corresponding monospace variant with Nerd Font icons.

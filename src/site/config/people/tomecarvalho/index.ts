@@ -8,7 +8,7 @@ import site from "./site";
 import toolCategories, { toolsDescription } from "./tool-categories";
 
 const tomecarvalho = {
-  handle: "tomecarvalho",
+  handle: "tomec",
   name: "Tomé Carvalho",
   contacts,
   coursework,
