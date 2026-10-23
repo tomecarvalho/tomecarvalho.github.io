@@ -1,1 +1,3 @@
-Utilizo Linux para praticamente tudo, exceto jogos (relutantemente, e espero que não por muito tempo…). É FOSS, dá-me a liberdade de configurar um ambiente de trabalho produtivo, e proporciona uma experiência de desenvolvimento muito melhor do que o Windows. O Linux não tenta forçar Copilot em tudo nem acelera as ventoinhas do portátil ao tentar futilmente indexar ficheiros, nem está preso a um único ecossistema de fornecedores.
+Uso Linux para tudo menos gaming (apesar de melhorar todos os anos).
+
+É FOSS, dá-me a liberdade de configurar um ambiente produtivo, e fornece uma melhor experiência de desenvolvimento que o Windows.
