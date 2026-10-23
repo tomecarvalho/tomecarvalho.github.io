@@ -4,4 +4,4 @@ Se nunca ouviu falar de _scrolling WMs_, o conceito é: as janelas são organiza
 
 O Niri, em particular, é o _scrolling WM_ mais conceituado por bom motivo – é estável e potente, mas nada difícil de aprender.
 
-Utilizo [DankMaterialShell](https://danklinux.com/) para proporcionar funcionalidades de ambiente de trabalho – elementos como a barra superior, launcher, centro de controlo, painel, etc. Resulta numa experiência coesa, pronta a usar e não longe da de um ambiente de trabalho, mas sendo na mesma personalizável e até extensível.
+Utilizo [Dux Shell (DMS)](https://duxlabs.dev/) para proporcionar funcionalidades de ambiente de trabalho – elementos como a barra superior, launcher, centro de controlo, painel, etc. Resulta numa experiência coesa, pronta a usar e não longe da de um ambiente de trabalho, mas sendo na mesma personalizável e até extensível.
