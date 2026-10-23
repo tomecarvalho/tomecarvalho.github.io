@@ -1,9 +1,13 @@
-Olá, sou o Tomé.
+### Olá, sou o Tomé
 
-Adoro gaming, treino de resistência, ler e ouvir metal, mas provavelmente está aqui por outro motivo!
+#### Sobre mim
 
-Profissionalmente, sou um desenvolvedor full stack que gosta do código limpo, soluções robustas e fluxos automatizados: o tipo de pessoa proativa e fiável que sabe bem que não há nada mais permanente que uma solução temporária.
+Gosto de gaming, musculação, leitura e metal; embora provavelmente estejas aqui por outro motivo.
 
-No meu tempo livre, também gosto de dedicar-me a projetos pessoais e contribuições para ferramentas de código aberto que melhoram o meu fluxo de trabalho — e, espero eu, o de outros também — e que me proporcionam novas oportunidades de aprendizagem ao longo do processo.
+#### Profissão
 
-Fique à vontade para dar uma vista de olhos! Veja os meus projetos ou passatempos, e não hesite em entrar em contacto.
+Desenvolvedor full-stack, atento a detalhes e defensor de código limpo. Pouco fã de soluções "temporárias". Incomodado por ineficiências.
+
+Também gosto de explorar projetos pessoais e contribuir para ferramentas de código aberto que melhorem o meu fluxo de trabalho e sirvam como oportunidades de aprendizagem.
+
+Fica à vontade para explorar os meus projetos e passatempos, e entra em contacto através de qualquer uma das opções abaixo.

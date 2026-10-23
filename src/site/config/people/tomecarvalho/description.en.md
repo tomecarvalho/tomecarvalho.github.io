@@ -1,9 +1,13 @@
-### Hi, I'm Tomé!
+### Hi, I'm Tomé
 
-I love gaming, resistance training, reading, and listening to metal, but you're probably here for something else!
+#### About me
 
-Professionally, I'm a full-stack developer who likes his code clean, solutions robust, and pipelines automated: the proactive, reliable kind of guy who knows there's nothing more permanent than a temporary solution.
+I enjoy gaming, lifting, reading, and metal; you're probably here for something else, though.
 
-In my spare time, I also like to dabble in personal projects and contribute to open-source tools that improve my workflow — and hopefully other users' too — and provide new learning opportunities through the process.
+#### Profession
 
-Feel free to poke around! Check out my projects or hobbies, and don't hesitate to get in touch.
+Full-stack developer, detail enthusiast, believer in clean code. Not fond of not-so-temporary kludges. Irked by inefficiencies.
+
+I also like to tinker with personal projects and contribute to open-source tools that improve my workflow and provide new learning opportunities.
+
+Feel free to have a look at my projects and hobbies, and get in touch through any of the options below.

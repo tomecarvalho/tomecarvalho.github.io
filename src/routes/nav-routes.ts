@@ -34,8 +34,8 @@ export const navRoutes = {
     path: "/interests/",
     icon: "mdi:heart",
     description: {
-      en: "The fun stuff! The page where I nerd out about my hobbies.",
-      pt: 'O divertido! A página onde eu dou "nerd" sobre os meus hobbies.',
+      en: "Where I nerd out about my hobbies.",
+      pt: "Onde falo sobre os meus passatempos.",
     },
   },
 } as const satisfies Record<string, NavRoute>;
