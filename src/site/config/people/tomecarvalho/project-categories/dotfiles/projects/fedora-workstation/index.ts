@@ -1,7 +1,7 @@
-import type { Project } from "../../../../../../../types/data/projects/Project";
-import terms from "../../../terms";
-import { Content as DescriptionEn } from "./fedora-workstation.description.en.md";
-import { Content as DescriptionPt } from "./fedora-workstation.description.pt.md";
+import type { Project } from "../../../../../../../../types/data/projects/Project";
+import terms from "../../../../terms";
+import { Content as DescriptionEn } from "./description.en.md";
+import { Content as DescriptionPt } from "./description.pt.md";
 
 const fedoraWorkstation = {
   name: {

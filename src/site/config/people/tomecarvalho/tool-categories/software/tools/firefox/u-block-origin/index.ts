@@ -1,6 +1,6 @@
-import type { Tool } from "../../../../../../../../types/data/tools/Tool";
-import { Content as DescriptionEn } from "./u-block-origin.description.en.md";
-import { Content as DescriptionPt } from "./u-block-origin.description.pt.md";
+import type { Tool } from "../../../../../../../../../types/data/tools/Tool";
+import { Content as DescriptionEn } from "./description.en.md";
+import { Content as DescriptionPt } from "./description.pt.md";
 
 const uBlockOrigin = {
   name: { en: "uBlock Origin", pt: "uBlock Origin" },

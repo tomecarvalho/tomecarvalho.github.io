@@ -1,6 +1,6 @@
 import type { Tool } from "../../../../../../../types/data/tools/Tool";
-import { Content as DescriptionEn } from "./ibm-plex.description.en.md";
-import { Content as DescriptionPt } from "./ibm-plex.description.pt.md";
+import { Content as DescriptionEn } from "./description.en.md";
+import { Content as DescriptionPt } from "./description.pt.md";
 
 const ibmPlex = {
   name: { en: "IBM Plex", pt: "IBM Plex" },

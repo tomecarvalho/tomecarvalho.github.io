@@ -1,6 +1,6 @@
 import type { Tool } from "../../../../../../../types/data/tools/Tool";
-import { Content as DescriptionEn } from "./kanagawa.description.en.md";
-import { Content as DescriptionPt } from "./kanagawa.description.pt.md";
+import { Content as DescriptionEn } from "./description.en.md";
+import { Content as DescriptionPt } from "./description.pt.md";
 
 const kanagawa = {
   name: { en: "Kanagawa", pt: "Kanagawa" },

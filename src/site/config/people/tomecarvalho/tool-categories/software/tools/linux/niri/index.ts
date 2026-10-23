@@ -1,6 +1,6 @@
-import type { Tool } from "../../../../../../../../types/data/tools/Tool";
-import { Content as DescriptionEn } from "./niri.description.en.md";
-import { Content as DescriptionPt } from "./niri.description.pt.md";
+import type { Tool } from "../../../../../../../../../types/data/tools/Tool";
+import { Content as DescriptionEn } from "./description.en.md";
+import { Content as DescriptionPt } from "./description.pt.md";
 
 const niri = {
   name: { en: "Niri", pt: "Niri" },

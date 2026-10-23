@@ -1,6 +1,6 @@
-import type { Tool } from "../../../../../../../../types/data/tools/Tool";
-import { Content as DescriptionEn } from "./fedora.description.en.md";
-import { Content as DescriptionPt } from "./fedora.description.pt.md";
+import type { Tool } from "../../../../../../../../../types/data/tools/Tool";
+import { Content as DescriptionEn } from "./description.en.md";
+import { Content as DescriptionPt } from "./description.pt.md";
 
 const fedora = {
   name: { en: "Fedora", pt: "Fedora" },
