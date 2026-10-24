@@ -1,7 +1,12 @@
 ---
 import type { Props as IndexPageProps } from "../components/IndexPage.astro";
 import IndexPage from "../components/IndexPage.astro";
-import { translate, useTranslations } from "../i18n/utils";
+import {
+  getLocale,
+  toLocalePath,
+  translate,
+  useTranslations,
+} from "../i18n/utils";
 import { exploreRoutesArray } from "../routes/nav-routes";
 import siteConfig from "../site/config";
 
@@ -14,12 +19,19 @@ const text: IndexPageProps["text"] = {
   name: siteConfig.name,
   role: t(siteConfig.intro.role),
   location: t(siteConfig.intro.location),
-  description: t(siteConfig.intro.description),
+  description: translate(siteConfig.intro.description, currentLocale),
   explore: t("index.titles.explore"),
 } as const;
 
 const exploreRoutes: IndexPageProps["exploreRoutes"] = exploreRoutesArray.map(
-  (route) => translate(route, currentLocale),
+  (route) => {
+    const translatedRoute = translate(route, currentLocale);
+
+    return {
+      ...translatedRoute,
+      path: toLocalePath(getLocale(currentLocale), translatedRoute.path),
+    };
+  },
 );
 ---
 
