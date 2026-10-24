@@ -1,0 +1,6 @@
+dictionaries = [
+    "en_us",
+    "en_gb",
+    "pt_pt",
+]
+words = ["Desenvolvedor"]
