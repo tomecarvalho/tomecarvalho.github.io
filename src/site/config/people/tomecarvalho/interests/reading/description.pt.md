@@ -1,1 +1,1 @@
-Já gostava de ler em pequeno, mas é um hobby que só retomei alguns anos atrás quando comprei um e-reader, graças à sua conveniência. Agora é uma parte obrigatória da rotina. Também tem feito maravilhas para o meu sono: nada me adormece mais rápido do que ler na cama.
+Já gostava de ler em pequeno, mas é um hobby que só retomei alguns anos atrás quando comprei um e-reader, graças à sua conveniência. Agora é uma parte obrigatória da rotina, sobretudo porque me dá algo que fazer antes de dormir que não seja _screen time_ – ótimo para a higiene do sono.

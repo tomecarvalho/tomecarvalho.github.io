@@ -1,3 +1,3 @@
-O gaming é a minha paixão mais antiga — jogo desde a minha infância, e não espero parar
+O gaming é um hobby que tenho desde a minha infância.
 
-Já passei muito tempo nos mundos e narrativas imersivas de jogos single-player, partidas intensas de multiplayer competitivo, e a brincar em jogos sandbox. Hoje, é o primeiro tipo que constitui a maior parte do meu tempo de jogo — a interatividade encontrada nos jogos mantém-se fascinante como sempre, mesmo que não seja o passatempo mais barato.
+Já joguei um pouco de tudo, desde jogos multiplayer competitivos até sandbox, mas hoje fico principalmente por títulos single-player. Inclino-me para RPGs de ação, especialmente os da FromSoftware – o Bloodborne é o meu GOAT.

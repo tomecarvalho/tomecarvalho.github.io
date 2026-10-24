@@ -3,4 +3,8 @@ dictionaries = [
     "en_gb",
     "pt_pt",
 ]
-words = ["Desenvolvedor"]
+words = [
+    "Bloodborne",
+    "Desenvolvedor",
+    "Soulsborne",
+]

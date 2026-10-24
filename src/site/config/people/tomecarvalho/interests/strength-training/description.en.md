@@ -1,9 +1,5 @@
-I started strength training in 2023, and my only regret is that I didn't start sooner. I signed up for health, and then discovered it's based on routine (I'm a creature of habit) and there's a lot to learn about the science behind it – it shares a surprising similarity with grinding stats and optimising builds in video games.
+I started training in 2023, and I wish I'd started sooner. Obvious health and aesthetic benefits aside, I really enjoy the routine of it. In addition, there's actually a lot to learn about physiology and exercise science that can be applied to training.
 
-> My split's Full Body – I train Full Body every other day, so every 48 h. I do one set per exercise, but I do multiple exercises per muscle – and that is the key.
->
-> — <cite>[Keenan Malloy](https://vm.tiktok.com/ZGdxJRTtG/)</cite>
+My training split of choice is Full Body Every Other Day, with a single session containing all my exercises; it allows me to efficiently train every muscle and region with 3.5x/week frequency. I do a single set per exercise, and favour the 5–8 repetition range with 0–2 in reserve.
 
-My main goal is to efficiently build muscle and, by extension, strength. I pick stable exercises that allow for long-term progressive overload for each trained muscle group, based on its main joint actions. I do the same Full Body session every other day and focus on beating the logbook. My favourite rep range is 4–8 at 0–2 reps in reserve, which I use for double progression.
-
-I use [Tracked](https://www.tracked.gg/) to track my training and nutrition. It's really feature rich and the free version is as generous as it gets. Also, the developer is passionate and very receptive to feedback.
+I use [Tracked](https://www.tracked.gg/) to track my training and nutrition. It's really feature rich and the free version is the most generous there is.
